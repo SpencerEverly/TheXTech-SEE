@@ -663,7 +663,7 @@ void PlayerHurt(const int A)
 
                 if(p.State > 1)
                 {
-                    if(p.State == 2)
+                    if(p.State <= 2)
                     {
                         PlaySound(SFX_PlayerShrink);
                         p.StateNPC = 0;
@@ -6051,7 +6051,7 @@ void PlayerEffects(const int A)
 
             if(warp_dir_enter == 3)
             {
-                p.Location.Y += 1;
+                p.Location.Y += 2.2;
                 p.Location.X = warp_enter.X + warp_enter.Width / 2.0 - p.Location.Width / 2.0;
 
                 sign = (warp_enter.Y + warp_enter.Height) > p.Location.Y ? +1.0 : -1.0;
@@ -6080,7 +6080,7 @@ void PlayerEffects(const int A)
             }
             else if(warp_dir_enter == 1)
             {
-                p.Location.Y -= 1;
+                p.Location.Y -= 2.2;
                 p.Location.X = warp_enter.X + warp_enter.Width / 2.0 - p.Location.Width / 2.0;
 
                 sign = (p.Location.Y + p.Location.Height) > warp_enter.Y ? +1.0 : -1.0;
@@ -6527,7 +6527,7 @@ void PlayerEffects(const int A)
             }
             else if(warp_dir_exit == LevelDoor::EXIT_DOWN)
             {
-                p.Location.Y += 1;
+                p.Location.Y += 2.2;
 
                 if(p.Location.Y >= warp_exit.Y)
                     p.Effect2 = 3;
@@ -6544,7 +6544,7 @@ void PlayerEffects(const int A)
             }
             else if(warp_dir_exit == LevelDoor::EXIT_UP)
             {
-                p.Location.Y -= 1;
+                p.Location.Y -= 2.2;
 
                 if(p.Location.Y + p.Location.Height <= warp_exit.Y + warp_exit.Height)
                     p.Effect2 = 3;
