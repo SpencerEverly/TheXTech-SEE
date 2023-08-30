@@ -28,6 +28,10 @@ void SetupPlayers();
 // Public Sub UpdatePlayer() 'This is the main sub for the players
 // This is the main sub for the players
 void UpdatePlayer();
+// Better Physics for players
+void UpdatePlayerPhysics();
+// True if the player is touching the ground, else it's false
+bool PlayerGroundTouching(const int A);
 // Public Sub PlayerHurt(A As Integer) 'Player got hurt
 // Player got hurt
 void PlayerHurt(const int A);
