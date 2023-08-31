@@ -599,28 +599,38 @@ void UpdatePlayer()
                     Player[A].CanFly2 = false;
                     Player[A].RunCount = 0;
                     Player[A].SpinJump = false;
+                    
                     if(Player[A].Controls.Left)
+                    {
                         if(!Player[A].Controls.Run)
                             Player[A].Location.SpeedX = -1.5;
                         else
                             Player[A].Location.SpeedX = -3.0;
+                    }
                     else if(Player[A].Controls.Right)
+                    {
                         if(!Player[A].Controls.Run)
                             Player[A].Location.SpeedX = 1.5;
                         else
                             Player[A].Location.SpeedX = 3.0;
+                    }
                     else
                         Player[A].Location.SpeedX = 0;
+                    
                     if(Player[A].Controls.Up && Player[A].Vine > 2)
+                    {
                         if(!Player[A].Controls.Run)
                             Player[A].Location.SpeedY = -2;
                         else
                             Player[A].Location.SpeedY = -3.5;
+                    }
                     else if(Player[A].Controls.Down)
+                    {
                         if(!Player[A].Controls.Run)
                             Player[A].Location.SpeedY = 3;
                         else
                             Player[A].Location.SpeedY = 4.5;
+                    }
                     else
                         Player[A].Location.SpeedY = 0;
 
@@ -4616,8 +4626,10 @@ void UpdatePlayerPhysics() //Basically playerPhysicsPatch.lua by Emral, now on T
             if((!PlayerGroundTouching(A) && Player[A].Duck))
             {
                 int mod = 1;
+                
                 if(!PlayerGroundTouching(A))
                     mod = 2;
+                
                 if(Player[A].Controls.Right)
                 {
                     if(Player[A].Location.SpeedX < 0)
@@ -4630,7 +4642,9 @@ void UpdatePlayerPhysics() //Basically playerPhysicsPatch.lua by Emral, now on T
                 }
                 else
                     Player[A].Location.SpeedX = Player[A].Location.SpeedX * 0.98;
+                
                 int xSpeedDiff = Player[A].Location.SpeedX * Player[A].lastXSpeed;
+                
                 if(std::abs(Player[A].Location.SpeedX) < 2 && std::abs(Player[A].Location.SpeedX) > 0.1 && mathSign(Player[A].Location.SpeedX * xSpeedDiff) == 1 && std::abs(xSpeedDiff) < 0.2)
                 {
                     Player[A].Location.SpeedX = Player[A].Location.SpeedX - xSpeedDiff;
