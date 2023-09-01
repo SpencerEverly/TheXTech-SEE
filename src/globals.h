@@ -622,7 +622,7 @@ struct Player_t
     int MountOffsetY = 0;
 //    MountFrame As Integer 'GFX frame for the player's mount
     int MountFrame = 0;
-//    State As Integer '1 for small mario, 2 for super, 3 for fire, 4 for racoon, 5 for tanooki, 6 for hammer, 7 for ice, 8 for bubble
+//    State As Integer '1 for small, 2 for super, 3 for fire, 4 for racoon, 5 for tanooki, 6 for hammer, 7 for ice, 8 for bubble, 9 for frog
     int State = 0;
 //    Frame As Integer
     int Frame = 0;
@@ -727,6 +727,10 @@ struct Player_t
     int previousPowerup = 0;
 //    Used for better player physics
     int lastXSpeed = 0;
+//    Whenever the player has a Starman or not.
+    bool Starman = false;
+//    The time the player has until the Starman runs out.
+    int StarmanLength = 0;
 //End Type
 };
 
@@ -2321,6 +2325,8 @@ extern int BattleOutro;
 extern std::string LevelName;
 //Public Const curRelease As Integer = 64
 const int curRelease = 64;
+//Public chosenStarman As Bool
+extern bool chosenStarman;
 
 //EXTRA: Language
 extern std::string CurrentLanguage;

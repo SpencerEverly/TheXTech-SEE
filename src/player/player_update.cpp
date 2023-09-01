@@ -51,8 +51,6 @@
 
 void UpdatePlayer()
 {
-    UpdatePlayerPhysics();
-    
     // int A = 0;
     int B = 0;
     float C = 0;
@@ -114,6 +112,7 @@ void UpdatePlayer()
 
     StealBonus(); // allows a dead player to come back to life by using a 1-up
     ClownCar(); // updates players in the clown car
+    UpdatePlayerPhysics(); // updates player physics to be better
 
     // online stuff
 //    if(nPlay.Online == true)
@@ -161,6 +160,33 @@ void UpdatePlayer()
 //            if(Player[A].Dead == true)
 //                nPlay.Player[A - 1].Controls = blankControls;
 //        }
+        
+        if(Player[A].Starman)
+        {
+            if(Player[A].StarmanLength > 0)
+            {
+                if(Player[A].StarmanLength == 769)
+                {
+                    StopMusic();
+                    StartMusic(-2);
+                }
+                Player[A].StarmanLength--;
+            }
+            
+            //if(Player[A].StarmanLength == 167)
+                //PlayExtSoundNoMenu(AppPath + "sound/starman/starman-running-out.ogg");
+            
+            if(Player[A].StarmanLength == 64)
+            {
+                FadeOutMusic(1100);
+            }
+            if(Player[A].StarmanLength <= 1)
+            {
+                StartMusic(Player[A].Section);
+                Player[A].Starman = false;
+            }
+        }
+        
         // reset variables from the previous player
         DontResetGrabTime = false;
 //        oldGrab = Player[A].HoldingNPC; // SET BUT NOT UNUSED

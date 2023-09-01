@@ -542,6 +542,8 @@ std::string LevelName;
 std::string CurrentLanguage;
 std::string CurrentLangDialect;
 
+bool chosenStarman = true;
+
 //void DoEvents()
 //{
 //    g_events->doEvents();

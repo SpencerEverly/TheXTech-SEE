@@ -224,6 +224,7 @@ void UnloadCustomSound();
 void PreloadExtSound(const std::string &path);
 void UnloadExtSounds();
 void PlayExtSound(const std::string &path, int loops = 0, int volume = 128);
+void PlayExtSoundNoMenu(const std::string &path, int loops = 0, int volume = 128);
 void StopExtSound(const std::string &path);
 void StopAllExtSounds();
 void StopAllSounds();

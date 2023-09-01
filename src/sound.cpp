@@ -742,6 +742,20 @@ void StartMusic(int A, int fadeInMs)
         }
         curMusic = -1;
     }
+    else if(A == -2) // Starman Music
+    {
+        StopMusic();
+        if(chosenStarman) {
+            pLogDebug("Starting special music [starmusic1]");
+            PlayMusic("starmusic1", fadeInMs);
+            musicName = "starmusic1";
+        } else {
+            pLogDebug("Starting special music [starmusic2]");
+            PlayMusic("starmusic2", fadeInMs);
+            musicName = "starmusic2";
+        }
+        curMusic = -2;
+    }
     else if(PSwitchTime == 0 && PSwitchStop == 0) // level music
     {
         StopMusic();
@@ -920,6 +934,10 @@ static void loadMusicIni(SoundScope root, const std::string &path, bool isLoadin
             alias = "stmusic";
         else if(i == 3)
             alias = "tmusic";
+        else if(i == 4)
+            alias = "starmusic1";
+        else if(i == 5)
+            alias = "starmusic2";
         std::string group = fmt::format_ne("special-music-{0}", i);
         AddMusic(root, musicSetup, alias, group, 64);
     }
@@ -1355,6 +1373,44 @@ void PlayExtSound(const std::string &path, int loops, int volume)
     int play_ch = -1;
 
     if(noSound)
+        return;
+
+    auto f = extSfx.find(path);
+    if(f == extSfx.end())
+    {
+        auto *ch = Mix_LoadWAV(path.c_str());
+        if(!ch)
+        {
+            pLogWarning("Can't load custom sound: %s", Mix_GetError());
+            return;
+        }
+
+        extSfx.insert({path, ch});
+        play_ch = Mix_PlayChannelVol(-1, ch, loops, volume);
+    }
+    else
+        play_ch = Mix_PlayChannelVol(-1, f->second, loops, volume);
+
+    if(play_ch >= 0)
+    {
+        SDL_AtomicSet(&extSfxBusy, 1);
+        // Never re-use the same channel!
+        SDL_assert_release(extSfxPlaying.find(play_ch) == extSfxPlaying.end());
+        extSfxPlaying.insert({play_ch, path});
+        SDL_AtomicSet(&extSfxBusy, 0);
+    }
+    else
+        pLogWarning("Can't play custom sound %s: %s", Mix_GetError());
+}
+
+void PlayExtSoundNoMenu(const std::string &path, int loops, int volume)
+{
+    int play_ch = -1;
+
+    if(noSound)
+        return;
+    
+    if(GameMenu || GameOutro) // || A == 26 || A == 27 || A == 29)
         return;
 
     auto f = extSfx.find(path);
