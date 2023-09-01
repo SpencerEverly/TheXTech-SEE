@@ -4403,7 +4403,7 @@ void PowerUps(const int A)
                         NPC[numNPCs].TimeLeft = 100;
                         NPC[numNPCs].CantHurt = 100;
                         NPC[numNPCs].CantHurtPlayer = A;
-                        NPC[numNPCs].Special = 300;
+                        NPC[numNPCs].Special = 120;
 
                         if((p.Character == 3 || p.Character == 4) && p.Mount == 0 && p.Controls.AltRun) // peach holds fireballs
                         {
