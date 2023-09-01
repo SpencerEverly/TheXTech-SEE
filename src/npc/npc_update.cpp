@@ -1128,6 +1128,29 @@ void UpdateNPCs()
                 NPC[A].Location.Y += -NPC[A].Location.Height / 2.0;
                 NPCQueues::Unchecked.push_back(A);
             }
+            
+            //**BUBBLE FLOWER NPC**
+            /*if(NPC[A].Type == NPCID_BUBBLE_PROJECTILE)
+            {
+                for(int B : treeNPCQuery(NPC[A].Location, SORTMODE_ID))
+                {
+                    if(B != A && NPC[B].Active && NPC[B].Type != NPCID_COIN_S3 || NPC[B].Type != NPCID_COIN_S4 || NPC[B].Type != NPCID_COIN_S1 || NPC[B].Type != NPCID_RED_COIN || NPC[B].Type != NPCID_COIN_S2 || NPC[B].Type != NPCID_COIN_5 || NPC[B].Type != NPCID_RING)
+                    {
+                        if(CheckCollision(NPC[A].Location, NPC[B].Location))
+                        {
+                            NPC[A].Special2++;
+                            NPC[B].Location.X = NPC[A].Location.X;
+                            NPC[B].Location.Y = NPC[A].Location.Y;
+                            if(NPC[A].Special2 > 35)
+                            {
+                                PlaySound(SFX_Coin);
+                                NPC[B].Type == NPCID_COIN_S1;
+                                NPC[A].Special2 = 0;
+                            }
+                        }
+                    }
+                }
+            }*/
 
             if(NPC[A].Text != STRINGINDEX_NONE)
             {

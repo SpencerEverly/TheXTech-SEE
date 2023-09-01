@@ -950,6 +950,13 @@ void NPCSpecial(int A)
         {
             npc.Location.SpeedX = 0;
         }
+        if(npc.Special2 > 0)
+        {
+            if(npc.Special2 == 1)
+            {
+                PlaySound(SFX_Grab);
+            }
+        }
     }
     else if(npc.Type == NPCID_ITEM_BUBBLE) // bubble
     {

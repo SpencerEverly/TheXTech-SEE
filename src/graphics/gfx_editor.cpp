@@ -430,7 +430,7 @@ void DrawEditorLevel(int Z)
 
                 if(p.Character < 1 || p.Character > 5)
                     p.Character = A;
-                if(p.State < 1 || p.State > 7)
+                if(p.State < 1 || p.State > 8)
                     p.State = 2;
 
                 p.Direction = 1;

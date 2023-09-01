@@ -1376,7 +1376,7 @@ void RenderGL::renderTexture(double xDstD, double yDstD, double wDstD, double hD
     SDL_assert_release(tx.d.texture_id);
 
 #ifdef MUTABLE_PARTICLES_DEMO
-    if(&tx >= &GFXMario[1] && &tx <= &GFXMario[7])
+    if(&tx >= &GFXMario[1] && &tx <= &GFXMario[8])
     {
         if(s_sparkle)
             spawnParticle(*s_sparkle, xDstD - vScreen[1].X, yDstD - vScreen[1].Y, ParticleVertexAttrs_t());

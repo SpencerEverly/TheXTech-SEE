@@ -7342,8 +7342,8 @@ void PlayerEffects(const int A)
                 p.State = 2;
                 if(p.Mount == 0)
                 {
-                    p.Location.X += -Physics.PlayerWidth[p.Character][2] * 0.5 + Physics.PlayerWidth[p.Character][1] * 0.5;
-                    p.Location.Y += -Physics.PlayerHeight[p.Character][2] + Physics.PlayerHeight[p.Character][1];
+                    p.Location.X += -Physics.PlayerWidth[p.Character][8] * 0.5 + Physics.PlayerWidth[p.Character][1] * 0.5;
+                    p.Location.Y += -Physics.PlayerHeight[p.Character][8] + Physics.PlayerHeight[p.Character][1];
                     p.Location.Width = Physics.PlayerWidth[p.Character][p.State];
                     p.Location.Height = Physics.PlayerHeight[p.Character][p.State];
                 }
@@ -7353,7 +7353,7 @@ void PlayerEffects(const int A)
                 }
                 else if(p.Character == 2 && p.Mount != 2)
                 {
-                    p.Location.Y += -Physics.PlayerHeight[2][2] + Physics.PlayerHeight[1][2];
+                    p.Location.Y += -Physics.PlayerHeight[2][8] + Physics.PlayerHeight[1][2];
                     p.Location.Height = Physics.PlayerHeight[p.Character][p.State];
                 }
             }
