@@ -357,6 +357,16 @@ enum NPCID
 
     NPCID_CHAR3_HEAVY = 291,
     NPCID_CHAR4_HEAVY = 292,
+    
+    
+    
+    
+    
+    //SMBX+ NPCs
+    NPCID_STARMAN_SMW = 293,
+    NPCID_STARMAN_SMB3 = 294,
+    NPCID_BUBBLE_PROJECTILE = 295,
+    NPCID_BUBBLE_POWER_S3 = 296
 };
 
 

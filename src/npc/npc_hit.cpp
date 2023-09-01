@@ -537,6 +537,15 @@ void NPCHit(int A, int B, int C)
             }
         }
     }
+    // Bubble Projectile
+    else if(NPC[A].Type == NPCID_BUBBLE_PROJECTILE)
+    {
+        if(B == 1) //Stomped on by the player
+        {
+            PlaySound(SFX_Bubble);
+            NPC[A].Killed = B;
+        }
+    }
     // Goomba / Nekkid Koopa
     else if(NPC[A].Type == NPCID_FODDER_S3 || NPC[A].Type == NPCID_RED_FODDER || NPC[A].Type == NPCID_FODDER_S5 || NPC[A].Type == NPCID_UNDER_FODDER ||
             NPC[A].Type == NPCID_EXT_TURTLE || NPC[A].Type == NPCID_YELSWITCH_FODDER || NPC[A].Type == NPCID_BLUSWITCH_FODDER || NPC[A].Type == NPCID_GRNSWITCH_FODDER ||

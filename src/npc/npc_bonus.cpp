@@ -430,6 +430,43 @@ void TouchBonus(int A, int B)
             if(NPC[B].Effect != 2)
                 s_PowerupScore(B);
         }
+        else if(NPC[B].Type == NPCID_BUBBLE_POWER_S3) // Bonus is a bubble flower
+        {
+            if(Player[A].Character == 3 || Player[A].Character == 4 || Player[A].Character == 5)
+            {
+                Player[A].Hearts += 1;
+                if(Player[A].Hearts > 3)
+                    Player[A].Hearts = 3;
+            }
+
+            UpdatePlayerBonus(A, NPC[B].Type);
+            Player[A].StateNPC = NPC[B].Type;
+            if(Player[A].State != 8)
+            {
+                RumbleForPowerup(A);
+                Player[A].Frame = 1;
+                Player[A].Effect = 42;
+                if(Player[A].Mount > 0)
+                    UnDuck(Player[A]);
+                if(Player[A].Character == 5)
+                    PlaySound(SFX_HeroItem);
+                else
+                    PlaySound(SFX_PlayerGrow);
+            }
+            else
+            {
+                if(Player[A].Character == 5)
+                    PlaySound(SFX_HeroHeart);
+                else
+                {
+                    if(doPlayGrowWithGotItem())
+                        PlaySound(SFX_PlayerGrow);
+                    PlaySound(SFX_GotItem);
+                }
+            }
+            if(NPC[B].Effect != 2)
+                s_PowerupScore(B);
+        }
         else if(NPC[B].Type == NPCID_LEAF_POWER) // Bonus is a leaf
         {
             UpdatePlayerBonus(A, NPC[B].Type);

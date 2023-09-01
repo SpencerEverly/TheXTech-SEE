@@ -2013,6 +2013,29 @@ void SetupVars()
     NPCFrameOffsetY[282] = 4;
     NPCNoClipping[282] = true;
     NPCJumpHurt[282] = true;
+    
+    
+    
+    
+    
+    //SMBX+ NPCs go below
+    
+    //*BUBBLE PROJECTILE*
+    NPCWidth[295] = 48;
+    NPCHeight[295] = 48;
+    NPCWidthGFX[295] = 64;
+    NPCHeightGFX[295] = 64;
+    NPCFrameOffsetY[295] = 8;
+    NPCWontHurt[295] = true;
+    NPCNoGravity[295] = true;
+    
+    //*BUBBLE FLOWER*
+    NPCWidth[296] = 32;
+    NPCHeight[296] = 32;
+    NPCFrameOffsetY[296] = 2;
+    NPCIsABonus[296] = true;
+    
+    
 
     For(A, 1, maxBlockType)
     {

@@ -111,7 +111,7 @@ const int maxBackgrounds = 4000;
 const int maxBackgrounds = 8000;
 #endif
 //Public Const maxPlayerFrames As Integer = 750 'Maximum number of player frames
-const int maxPlayerFrames = 750;
+const int maxPlayerFrames = 1000;
 //Public Const maxBlockType As Integer = 700 'Maximum number of block types
 const int maxBlockType = 700;
 //Public Const maxBackgroundType As Integer = 200 'Maximum number of background types
@@ -135,7 +135,7 @@ const int numBackground2 = 100;
 //Public Const numCharacters As Integer = 5 'Maximum number of player characters
 const int numCharacters = 5;
 //Public Const numStates As Integer = 7   'Maximum number of player states
-const int numStates = 7;
+const int numStates = 8;
 //Public Const maxWater As Integer = 1000
 const int maxWater = 1000;
 //Public Const maxWorldLevels As Integer = 400   'Maximum number of levels

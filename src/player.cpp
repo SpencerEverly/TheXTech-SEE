@@ -601,7 +601,7 @@ void PlayerHurt(const int A)
             {
                 if(p.Character == 3 || p.Character == 4)
                 {
-                    if(p.Hearts == 3 && (p.State == 2 || p.State == 4 || p.State == 5 || p.State == 6))
+                    if(p.Hearts == 3 && (p.State == 2 || p.State == 4 || p.State == 5 || p.State == 6 || p.State == 8))
                     {
                         p.State = 2;
                         p.Immune = 150;
@@ -1613,7 +1613,7 @@ void PlayerFrame(Player_t &p)
                     p.Frame = 6;
             }
         }
-        else if(p.FrameCount >= 100 && p.FrameCount <= 118 && (p.State == 3 || p.State == 6 || p.State == 7)) // Fire Mario and Luigi
+        else if(p.FrameCount >= 100 && p.FrameCount <= 118 && (p.State == 3 || p.State == 6 || p.State == 7 || p.State == 8)) // Fire Mario and Luigi
         {
             if(p.Duck)
             {
@@ -4369,6 +4369,85 @@ void PowerUps(const int A)
                                 NPC[numNPCs].Location.SpeedX = 5 * p.Direction + (p.Location.SpeedX / 3.5) + NPC[p.StandingOnNPC].Location.SpeedX / 3.5;
                             PlaySound(SFX_Fireball);
                         }
+                    }
+                }
+            }
+        }
+        //Bubble Mario & Luigi
+        if(!p.Slide && p.Vine == 0 && (p.State == 8) && !p.Duck && p.Mount != 2 && p.Mount != 3 && p.HoldingNPC <= 0 && p.Character != 5)
+        {
+            if(((p.Controls.Run && !p.SpinJump) || (p.SpinJump && p.Direction != p.SpinFireDir)) && p.FireBallCD <= 0)
+            {
+                if((p.RunRelease || p.SpinJump) || (FlameThrower && p.HoldingNPC <= 0))
+                {
+                    if(p.SpinJump)
+                        p.SpinFireDir = p.Direction;
+
+                    if(numNPCs < maxNPCs - 100)
+                    {
+//                        if(nPlay.Online && A - 1 == nPlay.MySlot)
+//                            Netplay::sendData Netplay::PutPlayerControls(nPlay.MySlot) + "1f" + std::to_string(A) + "|" + p.FireBallCD - 1;
+                        if(!p.SpinJump)
+                            p.FrameCount = 110;
+
+                        numNPCs++;
+                        NPC[numNPCs] = NPC_t();
+                        if(ShadowMode)
+                            NPC[numNPCs].Shadow = true;
+                        NPC[numNPCs].Type = NPCID_BUBBLE_PROJECTILE;
+                        NPC[numNPCs].Location.Height = NPCHeight[NPC[numNPCs].Type];
+                        NPC[numNPCs].Location.Width = NPCWidth[NPC[numNPCs].Type];
+                        NPC[numNPCs].Location.X = p.Location.X + Physics.PlayerGrabSpotX[p.Character][p.State] * p.Direction + 4;
+                        NPC[numNPCs].Location.Y = p.Location.Y + Physics.PlayerGrabSpotY[p.Character][p.State] - 30;
+                        NPC[numNPCs].Active = true;
+                        NPC[numNPCs].TimeLeft = 100;
+                        NPC[numNPCs].CantHurt = 100;
+                        NPC[numNPCs].CantHurtPlayer = A;
+                        NPC[numNPCs].Special = 300;
+
+                        if((p.Character == 3 || p.Character == 4) && p.Mount == 0 && p.Controls.AltRun) // peach holds fireballs
+                        {
+                            p.HoldingNPC = numNPCs;
+                            NPC[numNPCs].HoldingPlayer = A;
+                        }
+
+                        if(Maths::iRound(NPC[numNPCs].Special) == 2)
+                            NPC[numNPCs].Frame = 4;
+                        if(Maths::iRound(NPC[numNPCs].Special) == 3)
+                            NPC[numNPCs].Frame = 8;
+                        if(Maths::iRound(NPC[numNPCs].Special) == 4)
+                            NPC[numNPCs].Frame = 12;
+
+                        syncLayers_NPC(numNPCs);
+                        CheckSectionNPC(numNPCs);
+                        p.FireBallCD = 30;
+                        if(p.Character == 2)
+                            p.FireBallCD = 35;
+                        if(p.Character == 3)
+                            p.FireBallCD = 40;
+                        if(p.Character == 4)
+                            p.FireBallCD = 25;
+
+                        NPC[numNPCs].Location.SpeedX = 5 * p.Direction + (p.Location.SpeedX / 3.5);
+                        NPC[numNPCs].Location.SpeedY = 5;
+
+                        if(p.Controls.Up)
+                        {
+                            if(p.StandingOnNPC != 0)
+                                NPC[numNPCs].Location.SpeedY = -8 + NPC[p.StandingOnNPC].Location.SpeedY * 0.1;
+                            else
+                                NPC[numNPCs].Location.SpeedY = -8 + p.Location.SpeedY * 0.1;
+                            NPC[numNPCs].Location.SpeedX = NPC[numNPCs].Location.SpeedX * 0.9;
+                        }
+                        if(FlameThrower)
+                        {
+                            NPC[numNPCs].Location.SpeedX = NPC[numNPCs].Location.SpeedX * 1.5;
+                            NPC[numNPCs].Location.SpeedY = NPC[numNPCs].Location.SpeedY * 1.5;
+                        }
+                        if(p.StandingOnNPC != 0)
+                            NPC[numNPCs].Location.SpeedX = 5 * p.Direction + (p.Location.SpeedX / 3.5) + NPC[p.StandingOnNPC].Location.SpeedX / 3.5;
+                        PlaySound(SFX_HeroStab);
+                        NPC[numNPCs].Location.SpeedX = NPC[numNPCs].Location.SpeedX * 0.8;
                     }
                 }
             }
@@ -7239,6 +7318,55 @@ void PlayerEffects(const int A)
         {
             if(p.State == 2)
                 p.State = 7;
+            p.Immune += 50;
+            p.Immune2 = true;
+            p.Effect = 0;
+            p.Effect2 = 0;
+            p.StandUp = true;
+        }
+    }
+    else if(p.Effect == 42) // Player got bubble flower
+    {
+        if(p.Duck && p.Character != 5)
+        {
+            UnDuck(Player[A]);
+            p.Frame = 1;
+        }
+
+        p.Effect2 += 1;
+
+        if(fEqual(p.Effect2 / 5, std::floor(p.Effect2 / 5.0)))
+        {
+            if(p.State == 1 && p.Character != 5)
+            {
+                p.State = 2;
+                if(p.Mount == 0)
+                {
+                    p.Location.X += -Physics.PlayerWidth[p.Character][2] * 0.5 + Physics.PlayerWidth[p.Character][1] * 0.5;
+                    p.Location.Y += -Physics.PlayerHeight[p.Character][2] + Physics.PlayerHeight[p.Character][1];
+                    p.Location.Width = Physics.PlayerWidth[p.Character][p.State];
+                    p.Location.Height = Physics.PlayerHeight[p.Character][p.State];
+                }
+                else if(p.Mount == 3)
+                {
+                    YoshiHeight(A);
+                }
+                else if(p.Character == 2 && p.Mount != 2)
+                {
+                    p.Location.Y += -Physics.PlayerHeight[2][2] + Physics.PlayerHeight[1][2];
+                    p.Location.Height = Physics.PlayerHeight[p.Character][p.State];
+                }
+            }
+            else if(p.State != 8)
+                p.State = 8;
+            else
+                p.State = 2;
+        }
+
+        if(p.Effect2 >= 50)
+        {
+            if(p.State == 2)
+                p.State = 8;
             p.Immune += 50;
             p.Immune2 = true;
             p.Effect = 0;

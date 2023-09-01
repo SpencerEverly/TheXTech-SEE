@@ -106,7 +106,7 @@ static void updateIntroLevelActivity()
 
         if(p.HoldingNPC ==0)
         {
-            if((p.State == 3 || p.State == 6 || p.State == 7) && iRand(100) >= 90)
+            if((p.State == 3 || p.State == 6 || p.State == 7 || p.State == 8) && iRand(100) >= 90)
             {
                 if(p.FireBallCD == 0 && !p.RunRelease)
                     p.Controls.Run = false;

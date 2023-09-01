@@ -938,6 +938,15 @@ void NPCSpecial(int A)
             npc.Location.SpeedX = Physics.NPCWalkingOnSpeed * npc.Direction;
         }
     }
+    else if(npc.Type == NPCID_BUBBLE_PROJECTILE) // bubble projectile
+    {
+        if(npc.Special > 0)
+        {
+            npc.Special--;
+            npc.Location.SpeedX = 1.5 * npc.Direction;
+            npc.Location.SpeedY = 0;
+        }
+    }
     else if(npc.Type == NPCID_ITEM_BUBBLE) // bubble
     {
         if(fiEqual(npc.Special, 287))

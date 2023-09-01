@@ -622,7 +622,7 @@ struct Player_t
     int MountOffsetY = 0;
 //    MountFrame As Integer 'GFX frame for the player's mount
     int MountFrame = 0;
-//    State As Integer '1 for small mario, 2 for super, 3 for fire, 4 for racoon, 5 for tanooki, 6 for hammer
+//    State As Integer '1 for small mario, 2 for super, 3 for fire, 4 for racoon, 5 for tanooki, 6 for hammer, 7 for ice, 8 for bubble
     int State = 0;
 //    Frame As Integer
     int Frame = 0;

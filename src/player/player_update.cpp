@@ -1920,7 +1920,7 @@ void UpdatePlayer()
                         {
                             TailSwipe(A, true, true);
                             PlaySound(SFX_HeroStab);
-                            if((Player[A].State == 3 || Player[A].State == 7 || Player[A].State == 6) && Player[A].FireBallCD2 == 0)
+                            if((Player[A].State == 3 || Player[A].State == 7 || Player[A].State == 8 || Player[A].State == 6) && Player[A].FireBallCD2 == 0)
                             {
                                 Player[A].FireBallCD2 = 40;
                                 if(Player[A].State == 6)
@@ -1942,6 +1942,8 @@ void UpdatePlayer()
                                     NPC[numNPCs].Type = NPCID_PLR_ICEBALL;
                                 if(Player[A].State == 6)
                                     NPC[numNPCs].Type = NPCID_SWORDBEAM;
+                                if(Player[A].State == 8)
+                                    NPC[numNPCs].Type = NPCID_BUBBLE_PROJECTILE;
                                 NPC[numNPCs].Projectile = true;
                                 NPC[numNPCs].Location.Height = NPCHeight[NPC[numNPCs].Type];
                                 NPC[numNPCs].Location.Width = NPCWidth[NPC[numNPCs].Type];
@@ -1970,9 +1972,12 @@ void UpdatePlayer()
                                     NPC[numNPCs].Frame = 16;
                                 NPC[numNPCs].WallDeath = 5;
                                 NPC[numNPCs].Location.SpeedY = 0;
-                                NPC[numNPCs].Location.SpeedX = 5 * Player[A].Direction + (Player[A].Location.SpeedX / 3);
+                                if(Player[A].State == 3 || Player[A].State == 7)
+                                    NPC[numNPCs].Location.SpeedX = 5 * Player[A].Direction + (Player[A].Location.SpeedX / 3);
                                 if(Player[A].State == 6)
                                     NPC[numNPCs].Location.SpeedX = 9 * Player[A].Direction + (Player[A].Location.SpeedX / 3);
+                                if(Player[A].State == 8)
+                                    NPC[numNPCs].Location.SpeedX = 1.5 * Player[A].Direction + (Player[A].Location.SpeedX / 3);
                                 if(Player[A].StandingOnNPC != 0)
                                     NPC[numNPCs].Location.Y += -Player[A].Location.SpeedY;
                                 syncLayers_NPC(numNPCs);

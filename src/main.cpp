@@ -168,8 +168,8 @@ static void strToPlayerSetup(int player, const std::string &setupString)
 
     if(p.State < 1)
         p.State = 1;
-    if(p.State > 7)
-        p.State = 7;
+    if(p.State > 8)
+        p.State = 8;
 
 
     switch(p.Mount)
