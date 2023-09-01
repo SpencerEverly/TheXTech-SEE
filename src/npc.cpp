@@ -946,6 +946,10 @@ void NPCSpecial(int A)
             npc.Location.SpeedX = 1.5 * npc.Direction;
             npc.Location.SpeedY = 0;
         }
+        else if(npc.Special == 0)
+        {
+            npc.Location.SpeedX = 0;
+        }
     }
     else if(npc.Type == NPCID_ITEM_BUBBLE) // bubble
     {
