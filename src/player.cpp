@@ -2224,6 +2224,8 @@ void UpdatePlayerBonus(const int A, const int B)
                 else
                     p.HeldBonus = 264;
             }
+            if(p.State == 8 || p.Effect == 42)
+                p.HeldBonus = 296;
         }
     }
 
