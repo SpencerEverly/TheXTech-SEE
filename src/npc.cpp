@@ -38,6 +38,7 @@
 #include "core/events.h"
 #include "npc_id.h"
 #include "eff_id.h"
+#include "math_functions.h"
 #include "layers.h"
 
 #include "npc/npc_queues.h"
@@ -943,7 +944,18 @@ void NPCSpecial(int A)
         if(npc.Special > 0)
         {
             npc.Special--;
-            npc.Location.SpeedX = 1.5 * npc.Direction;
+            if(npc.Special >= 65)
+            {
+                npc.Location.SpeedX = 1.5 * npc.Direction;
+            }
+            else if(npc.Special == 64)
+            {
+                npc.Special3 = 1.5;
+            }
+            else if(npc.Special < 64)
+            {
+                npc.Location.SpeedX = mathEaseOutQuad(npc.Special3) * npc.Direction;
+            }
             npc.Location.SpeedY = 0;
         }
         else if(npc.Special == 0)
@@ -956,6 +968,10 @@ void NPCSpecial(int A)
             {
                 PlaySound(SFX_Grab);
             }
+        }
+        if(npc.Special3 > 0)
+        {
+            npc.Special3 = npc.Special3 - 0.02;
         }
     }
     else if(npc.Type == NPCID_ITEM_BUBBLE) // bubble

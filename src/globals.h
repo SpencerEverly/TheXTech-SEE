@@ -1460,6 +1460,8 @@ extern RangeArrI<bool, 0, maxNPCType, false> NPCIsAParaTroopa;
 extern RangeArrI<bool, 0, maxNPCType, false> NPCIsCheep;
 //Public NPCJumpHurt(0 To maxNPCType) As Boolean 'Hurts the player even if it jumps on the NPC
 extern RangeArrI<bool, 0, maxNPCType, false> NPCJumpHurt;
+//Public NPCNoBubbleTransform(0 To maxNPCType) As Boolean 'If true, bubble powerups won't transform an NPC to a coin
+extern RangeArrI<bool, 0, maxNPCType, false> NPCNoBubbleTransform;
 //Public NPCNoClipping(0 To maxNPCType) As Boolean 'NPC can go through blocks
 extern RangeArrI<bool, 0, maxNPCType, false> NPCNoClipping;
 //Public NPCScore(0 To maxNPCType) As Integer 'NPC score value

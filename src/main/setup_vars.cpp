@@ -2014,11 +2014,107 @@ void SetupVars()
     NPCNoClipping[282] = true;
     NPCJumpHurt[282] = true;
     
-    
+    NPCNoBubbleTransform[197] = true;
+    NPCNoBubbleTransform[192] = true;
+
+    NPCNoBubbleTransform[267] = true;
+    NPCNoBubbleTransform[268] = true;
+    NPCNoBubbleTransform[269] = true;
+    NPCNoBubbleTransform[275] = true;
+    NPCNoBubbleTransform[280] = true;
+    NPCNoBubbleTransform[281] = true;
+    NPCNoBubbleTransform[282] = true;
+    NPCNoBubbleTransform[15] = true;
+    NPCNoBubbleTransform[18] = true;
+    NPCNoBubbleTransform[26] = true;
+    NPCNoBubbleTransform[30] = true;
+    NPCNoBubbleTransform[31] = true;
+    NPCNoBubbleTransform[32] = true;
+    NPCNoBubbleTransform[35] = true;
+    NPCNoBubbleTransform[37] = true;
+    NPCNoBubbleTransform[38] = true;
+    NPCNoBubbleTransform[39] = true;
+    NPCNoBubbleTransform[40] = true;
+    NPCNoBubbleTransform[42] = true;
+    NPCNoBubbleTransform[43] = true;
+    NPCNoBubbleTransform[44] = true;
+    NPCNoBubbleTransform[45] = true;
+    NPCNoBubbleTransform[46] = true;
+    NPCNoBubbleTransform[56] = true;
+    For(A, 57, 70)
+    {
+        NPCNoBubbleTransform[A] = true;
+    }
+    NPCNoBubbleTransform[75] = true;
+    For(A, 78, 88)
+    {
+        NPCNoBubbleTransform[A] = true;
+    }
+    NPCNoBubbleTransform[91] = true;
+    NPCNoBubbleTransform[92] = true;
+    NPCNoBubbleTransform[94] = true;
+    For(A, 95, 108)
+    {
+        NPCNoBubbleTransform[A] = true;
+    }
+    NPCNoBubbleTransform[133] = true;
+    NPCNoBubbleTransform[134] = true;
+    For(A, 138, 160)
+    {
+        NPCNoBubbleTransform[A] = true;
+    }
+    NPCNoBubbleTransform[171] = true;
+    NPCNoBubbleTransform[178] = true;
+    NPCNoBubbleTransform[179] = true;
+    NPCNoBubbleTransform[180] = true;
+    NPCNoBubbleTransform[181] = true;
+    NPCNoBubbleTransform[190] = true;
+    NPCNoBubbleTransform[191] = true;
+    NPCNoBubbleTransform[192] = true;
+    NPCNoBubbleTransform[193] = true;
+    NPCNoBubbleTransform[195] = true;
+    NPCNoBubbleTransform[199] = true;
+    NPCNoBubbleTransform[200] = true;
+    NPCNoBubbleTransform[201] = true;
+    NPCNoBubbleTransform[208] = true;
+    NPCNoBubbleTransform[209] = true;
+    NPCNoBubbleTransform[210] = true;
+    For(A, 211, 228)
+    {
+        NPCNoBubbleTransform[A] = true;
+    }
+    NPCNoBubbleTransform[237] = true;
+    NPCNoBubbleTransform[238] = true;
+    NPCNoBubbleTransform[239] = true;
+    NPCNoBubbleTransform[241] = true;
+    NPCNoBubbleTransform[246] = true;
+    NPCNoBubbleTransform[254] = true;
+    NPCNoBubbleTransform[255] = true;
+    NPCNoBubbleTransform[256] = true;
+    NPCNoBubbleTransform[257] = true;
+    NPCNoBubbleTransform[259] = true;
+    NPCNoBubbleTransform[260] = true;
+    NPCNoBubbleTransform[262] = true;
+    NPCNoBubbleTransform[251] = true;
+    NPCNoBubbleTransform[252] = true;
+    NPCNoBubbleTransform[253] = true;
+    NPCNoBubbleTransform[258] = true;
+    NPCNoBubbleTransform[33] = true;
+    NPCNoBubbleTransform[274] = true;
+    NPCNoBubbleTransform[278] = true;
+    NPCNoBubbleTransform[279] = true;
+    NPCNoBubbleTransform[293] = true;
+    NPCNoBubbleTransform[294] = true;
+    NPCNoBubbleTransform[295] = true;
+    NPCNoBubbleTransform[296] = true;
+
+
     
     
     
     //SMBX+ NPCs go below
+    //*STARMAN (SMW)*
+    
     
     //*BUBBLE PROJECTILE*
     NPCWidth[295] = 48;
@@ -2028,6 +2124,8 @@ void SetupVars()
     NPCFrameOffsetY[295] = 8;
     NPCWontHurt[295] = true;
     NPCNoGravity[295] = true;
+    NPCNoIceBall[295] = true;
+    NPCNoClipping[295] = true;
     
     //*BUBBLE FLOWER*
     NPCWidth[296] = 32;

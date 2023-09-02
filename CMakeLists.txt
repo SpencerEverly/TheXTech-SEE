@@ -617,6 +617,7 @@ set(THEXTECH_SRC
     src/frame_timer.cpp
     src/global_dirs.cpp
     src/global_strings.cpp
+    src/math_functions.cpp
     src/main/world_loop.cpp
     src/main/world_file.cpp
     src/main/game_info.cpp
