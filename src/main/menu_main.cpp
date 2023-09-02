@@ -683,8 +683,8 @@ bool mainMenuUpdate()
                             menuLen = 18 * (int)g_mainMenu.mainMultiplayerGame.size() - 2;
                         else if(!g_gameInfo.disableBattleMode && A == i++)
                             menuLen = 18 * (int)g_mainMenu.mainBattleGame.size();
-                        else if(g_config.enable_editor && A == i++)
-                            menuLen = 18 * (int)g_mainMenu.mainEditor.size();
+                        //else if(g_config.enable_editor && A == i++)
+                            //menuLen = 18 * (int)g_mainMenu.mainEditor.size();
                         else if(A == i++)
                             menuLen = 18 * (int)g_mainMenu.mainOptions.size();
                         else if(A == i++)
@@ -714,8 +714,8 @@ bool mainMenuUpdate()
                     quitKeyPos ++;
                 if(!g_gameInfo.disableBattleMode)
                     quitKeyPos ++;
-                if(g_config.enable_editor)
-                    quitKeyPos ++;
+                //if(g_config.enable_editor)
+                    //quitKeyPos ++;
 
                 if(MenuCursor != quitKeyPos)
                 {
@@ -779,7 +779,7 @@ bool mainMenuUpdate()
 #endif
                     MenuCursor = 0;
                 }
-                else if(g_config.enable_editor && MenuCursor == i++)
+                /*else if(g_config.enable_editor && MenuCursor == i++)
                 {
                     if(ScreenW < 640 || ScreenH < 480)
                     {
@@ -815,7 +815,7 @@ bool mainMenuUpdate()
                         SDL_DetachThread(loadingThread);
 #endif
                     }
-                }
+                }*/
                 else if(MenuCursor == i++)
                 {
                     PlaySoundMenu(SFX_Do);
@@ -846,8 +846,8 @@ bool mainMenuUpdate()
                 quitKeyPos ++;
             if(!g_gameInfo.disableBattleMode)
                 quitKeyPos ++;
-            if(g_config.enable_editor)
-                quitKeyPos ++;
+            //if(g_config.enable_editor)
+                //quitKeyPos ++;
 
             if(MenuCursor > quitKeyPos)
                 MenuCursor = 0;
@@ -1562,8 +1562,8 @@ bool mainMenuUpdate()
                         optionsIndex++;
                     if(!g_gameInfo.disableBattleMode)
                         optionsIndex++;
-                    if(g_config.enable_editor)
-                        optionsIndex++;
+                    //if(g_config.enable_editor)
+                        //optionsIndex++;
                     MenuMode = MENU_MAIN;
                     MenuCursor = optionsIndex;
                     MenuCursorCanMove = false;
@@ -1902,8 +1902,8 @@ void mainMenuDraw()
             SuperPrint(g_mainMenu.mainMultiplayerGame, 3, MenuX, MenuY+30*(i++));
         if(!g_gameInfo.disableBattleMode)
             SuperPrint(g_mainMenu.mainBattleGame, 3, MenuX, MenuY+30*(i++));
-        if(g_config.enable_editor)
-            SuperPrint(g_mainMenu.mainEditor, 3, MenuX, MenuY+30*(i++));
+        //if(g_config.enable_editor)
+            //SuperPrint(g_mainMenu.mainEditor, 3, MenuX, MenuY+30*(i++));
         SuperPrint(g_mainMenu.mainOptions, 3, MenuX, MenuY+30*(i++));
         SuperPrint(g_mainMenu.mainExit, 3, MenuX, MenuY+30*(i++));
         XRender::renderTexture(MenuX - 20, MenuY + (MenuCursor * 30), 16, 16, GFX.MCursor[0], 0, 0);
