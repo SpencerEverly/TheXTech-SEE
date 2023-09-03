@@ -166,7 +166,7 @@ option(ENABLE_ANTICHEAT_TRAP "Enable anti-cheating trap for the \"redigitiscool\
 option(ENABLE_OLD_CREDITS "Use original Redigit's credits without changes" OFF)
 option(ENABLE_LOGGING "Enable debug logging written into a file (may not work on some platfors)" ON)
 
-option(THEXTECH_ENABLE_LUA "Enable lua scripting support" OFF)
+option(THEXTECH_ENABLE_LUA "Enable lua scripting support" ON)
 option(THEXTECH_ENABLE_LUNA_AUTOCODE "Enable LunaDLL Autocode scripting support" ON)
 
 option(THEXTECH_ENABLE_EDITOR "Enable runtime support for editor features" ON)
@@ -911,6 +911,14 @@ else()
     list(APPEND THEXTECH_SRC src/core/language/language_dummy.cpp)
 endif()
 
+if(NOT LUA_FOUND AND NOT LUA51_FOUND)
+    find_package(Lua51 REQUIRED)
+    set(LUA_INCLUDE_DIRS "${LUA_INCLUDE_DIR}")
+endif()
+
+include_directories(
+    ${LUA_INCLUDE_DIRS}
+)
 
 # Add heads into the list
 file(GLOB THEXTECH_HEADS_SRC
@@ -922,6 +930,7 @@ file(GLOB THEXTECH_HEADS_SRC
     lib/tclap/*.h
     lib/fmt/*.h
     lib/json/*.hpp
+    lib/lua5.1/*.hpp
     src/*.h
     src/*.hpp
     src/script/*.h

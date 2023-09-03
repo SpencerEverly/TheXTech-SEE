@@ -49,6 +49,10 @@
 
 #include "editor.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 namespace PauseScreen
 {
 
@@ -190,6 +194,11 @@ static bool s_Quit()
     XRender::repaint();
     StopMusic();
     XEvents::doEvents();
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_quit();
+    xtech_lua_init("GameMenu", "");
+#endif
 
     return true;
 }

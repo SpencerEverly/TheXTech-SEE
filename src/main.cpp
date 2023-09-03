@@ -701,23 +701,17 @@ int main(int argc, char**argv)
     }
 #endif
 
-#ifdef ENABLE_XTECH_LUA
-    if(!xtech_lua_init())
-        return 1;
-#endif
-
     Controls::Init();
 
     int ret = GameMain(setup);
 
-#ifdef ENABLE_XTECH_LUA
-    if(!xtech_lua_quit())
-        ret = 1;
-#endif
-
     Controls::Quit();
 
     g_frmMain.freeSystem();
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_quit();
+#endif
 
 #ifdef __EMSCRIPTEN__
     AppPathManager::syncFs();

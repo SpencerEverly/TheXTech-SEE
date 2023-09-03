@@ -807,6 +807,10 @@ int GameMain(const CmdLineSetup_t &setup)
                 if(Events[A].AutoStart)
                     ProcEvent(A, 0, true);
             }
+            
+#ifdef ENABLE_XTECH_LUA
+            xtech_lua_init("GameMenu", introPath);
+#endif
 
             // Main menu loop
             runFrameLoop(&MenuLoop, nullptr, []()->bool{ return GameMenu;});
@@ -1294,6 +1298,9 @@ void KillIt()
     lunaReset();
     QuitMixerX();
     UnloadGFX();
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_quit();
+#endif
     XWindow::showCursor(1);
 }
 
@@ -1339,6 +1346,11 @@ void NextLevel()
             GameIsActive = false; // Quit game
         }
     }
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_quit();
+    xtech_lua_init("GameMenu", "");
+#endif
 }
 
 // macros mainly used for end of level stuffs. takes over the players controls
@@ -2005,6 +2017,15 @@ void StartEpisode()
         }
         GameThing(1000, 3);
     }
+    
+    //Just to be safe
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_quit();
+    if(!StartLevel.empty())
+        xtech_lua_init(SelectWorld[selWorld].WorldPath, StartLevel);
+    else
+        xtech_lua_init(SelectWorld[selWorld].WorldPath, "");
+#endif
 }
 
 void StartBattleMode()
@@ -2094,4 +2115,9 @@ void StartBattleMode()
     BattleIntro = 150;
     BattleWinner = 0;
     BattleOutro = 0;
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_quit();
+    xtech_lua_init(SelectBattle[selWorld].WorldPath, SelectBattle[selWorld].WorldFile);
+#endif
 }
