@@ -114,7 +114,7 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
     xtech_lua_bindAll();
     
     bool errLapi = false;
-    int lapierrcode = luaL_loadbuffer(L, scriptToLoad.c_str(), scriptToLoad.length(), "=main.lua") || lua_pcall(L, 0, LUA_MULTRET, 0);
+    int lapierrcode = luaL_loadbuffer(L, dataFromFile.c_str(), dataFromFile.length(), "=main.lua") || lua_pcall(L, 0, LUA_MULTRET, 0);
     if(!(lapierrcode == 0)){
         object error_msg(from_stack(L, -1));
         XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_ERROR, "Error", object_cast<const char*>(error_msg));
@@ -155,9 +155,16 @@ void xtech_lua_bindAll()
                 def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
                 //SFX
                 def("SfxPlay", (void(*)(int, int, int))&PlaySound),
-                def("SfxPlay", (void(*)(std::string, int, int))&PlayExtSoundNoMenu),
+                def("SfxPlay", (void(*)(int, int))&PlaySound),
+                def("SfxPlay", (void(*)(int))&PlaySound),
+                def("SfxPlay", (void(*)(const std::string&, int, int))&PlayExtSoundNoMenu),
+                def("SfxPlay", (void(*)(const std::string&, int))&PlayExtSoundNoMenu),
+                def("SfxPlay", (void(*)(const std::string&))&PlayExtSoundNoMenu),
                 def("SfxPlayMenu", (void(*)(int, int))&PlaySoundMenu),
-                def("SfxPlayMenu", (void(*)(std::string, int, int))&PlayExtSound)
+                def("SfxPlayMenu", (void(*)(int))&PlaySoundMenu),
+                def("SfxPlayMenu", (void(*)(const std::string&, int, int))&PlayExtSound),
+                def("SfxPlayMenu", (void(*)(const std::string&, int))&PlayExtSound),
+                def("SfxPlayMenu", (void(*)(const std::string&))&PlayExtSound)
             ]
         ];
 }
@@ -165,6 +172,5 @@ void xtech_lua_bindAll()
 bool xtech_lua_quit()
 {
     lua_close(L);
-    L = NULL;
     return true;
 }
