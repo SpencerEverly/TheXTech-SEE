@@ -48,47 +48,73 @@ std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::
     return std::regex_replace( in, std::regex(from), to );
 }
 
+bool xtech_lua_readFile(std::string content, std::string path, std::string errMsg)
+{
+    // Opens the script.
+    std::ifstream theFile(path, std::ios::binary| std::ios::in);
+    if(!theFile.is_open()){
+        theFile.close();
+        if(!errMsg.empty())
+            XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_ERROR, "Error", errMsg);
+        return false;
+    }
+    
+    content = std::string((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
+    return true;
+}
+
 bool xtech_lua_init(std::string codePath, std::string levelPath)
 {
+    //Open up a new Lua State
     L = luaL_newstate();
-    luaL_openlibs(L);
+    
+    //Open all luabind functions
     luabind::open(L);
+    
+    //Open up "safe" standard lua libraries
+    lua_pushcfunction(L, luaopen_base);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_math);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_string);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_table);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_debug);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_os);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_package);
+    lua_call(L,0,0);
+    lua_pushcfunction(L, luaopen_io);
+    lua_call(L,0,0);
+    
+    //Remove unsafe apis
+    {
+        object _G = globals(L);
+        object osTable = _G["os"];
+        osTable["execute"] = object();
+        osTable["exit"] = object();
+        //osTable["getenv"] = object();
+        //osTable["remove"] = object();
+        //osTable["rename"] = object();
+        osTable["setlocal"] = object();
+        osTable["tmpname"] = object();
+    }
     
     std::string scriptToLoad = xtech_lua_getLuaLibsPath();
     std::string dataFromFile;
     
-    DirListCI LuaDir;
-    
-    LuaDir.setCurDir(AppPath2 + "scripts\\base\\engine\\");
-    dataFromFile = LuaDir.resolveFileCaseExistsAbs("main.lua");
-    if(dataFromFile.empty())
+    if(!xtech_lua_readFile(dataFromFile, scriptToLoad, "\"scripts\\base\\engine\\main.lua\" is required.\nBe sure you installed everything correctly!"));
     {
-        XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_ERROR, "Error", "\"scripts\\base\\engine\\main.lua\" is required.\nBe sure you installed everything correctly!");
         xtech_lua_quit();
         return false;
     }
     
-    // Opens 'foo.txt'.
-    std::ifstream is(scriptToLoad);
-    std::string finalLuaCode;
-
-    // Sets position to the end of the file.
-    is.seekg(0, std::ios::end);
-
-    // Reserves memory for the file.
-    finalLuaCode.reserve(is.tellg());
-
-    // Sets position to the start of the file.
-    is.seekg(0, std::ios::beg);
-
-    // Sets contents of 'finalLuaCode' to all characters in the file.
-    finalLuaCode.assign(std::istreambuf_iterator<char>(is),
-      std::istreambuf_iterator<char>());
-    
     xtech_lua_bindAll();
     
     bool errLapi = false;
-    int lapierrcode = luaL_loadbuffer(L, finalLuaCode.c_str(), finalLuaCode.length(), "=main.lua") || lua_pcall(L, 0, LUA_MULTRET, 0);
+    int lapierrcode = luaL_loadbuffer(L, scriptToLoad.c_str(), scriptToLoad.length(), "=main.lua") || lua_pcall(L, 0, LUA_MULTRET, 0);
     if(!(lapierrcode == 0)){
         object error_msg(from_stack(L, -1));
         XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_ERROR, "Error", object_cast<const char*>(error_msg));
@@ -124,14 +150,14 @@ void xtech_lua_bindAll()
             namespace_("Audio")[
                 //Music
                 def("MusicChange", (void(*)(int, int, int))&xtech_lua_MusicChange),
-                def("MusicChange", (void(*)(int, const std::string&, int))&xtech_lua_MusicChange),
+                def("MusicChange", (void(*)(int, std::string, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, int))&xtech_lua_MusicChange),
-                def("MusicChange", (void(*)(int, const std::string&))&xtech_lua_MusicChange),
+                def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
                 //SFX
                 def("SfxPlay", (void(*)(int, int, int))&PlaySound),
-                def("SfxPlay", (void(*)(const std::string&, int, int))&PlayExtSoundNoMenu),
+                def("SfxPlay", (void(*)(std::string, int, int))&PlayExtSoundNoMenu),
                 def("SfxPlayMenu", (void(*)(int, int))&PlaySoundMenu),
-                def("SfxPlayMenu", (void(*)(const std::string&, int, int))&PlayExtSound)
+                def("SfxPlayMenu", (void(*)(std::string, int, int))&PlayExtSound)
             ]
         ];
 }

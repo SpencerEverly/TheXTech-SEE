@@ -59,8 +59,8 @@ void initGameInfo()
     g_gameInfo.title = "Super Mario Bros. X";
     g_gameInfo.titleWindow = "Super Mario Bros. X - Version 1.3 - www.SuperMarioBrothers.org";
 #   else
-    g_gameInfo.title = "TheXTech Engine";
-    g_gameInfo.titleWindow = fmt::format_ne("TheXTech v{0}, #{1}", V_LATEST_STABLE, V_BUILD_VER);
+    g_gameInfo.title = "Super X+";
+    g_gameInfo.titleWindow = fmt::format_ne("Super X+ v{0}", V_LATEST_STABLE);
 #   endif
 #endif /* CUSTOM_GAME_NAME_TITLE */
 

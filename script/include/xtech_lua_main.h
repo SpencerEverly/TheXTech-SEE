@@ -24,6 +24,7 @@ extern std::string AppPath2;
 extern bool xtech_lua_is_function(lua_State *luaState, const char *fname);
 extern void xtech_lua_showMessageBox(std::string message);
 extern std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to);
+bool xtech_lua_readFile(std::string content, std::string path, std::string errMsg);
 
 extern bool xtech_lua_init(std::string codePath, std::string levelPath);
 extern void xtech_lua_bindAll();

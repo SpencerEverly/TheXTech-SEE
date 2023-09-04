@@ -15,7 +15,7 @@ void xtech_lua_MusicChange(int sectionID, int musicID, int fadeIn)
     }
 }
 
-void xtech_lua_MusicChange(int sectionID, const std::string& musicFile, int fadeIn)
+void xtech_lua_MusicChange(int sectionID, std::string musicFile, int fadeIn)
 {
     if(musicFile.empty())
     {
@@ -30,8 +30,8 @@ void xtech_lua_MusicChange(int sectionID, const std::string& musicFile, int fade
     else
     {
         StopMusic();
-        bgMusic[sectionID] = 24;
         CustomMusic[sectionID] = musicFile;
+        bgMusic[sectionID] = 24;
         StartMusic(sectionID, fadeIn);
     }
 }
@@ -41,7 +41,7 @@ void xtech_lua_MusicChange(int sectionID, int musicID)
     xtech_lua_MusicChange(sectionID, musicID, 0);
 }
 
-void xtech_lua_MusicChange(int sectionID, const std::string& musicFile)
+void xtech_lua_MusicChange(int sectionID, std::string musicFile)
 {
     xtech_lua_MusicChange(sectionID, musicFile, 0);
 }
