@@ -124,14 +124,14 @@ void xtech_lua_bindAll()
             namespace_("Audio")[
                 //Music
                 def("MusicChange", (void(*)(int, int, int))&xtech_lua_MusicChange),
-                def("MusicChange", (void(*)(int, std::string, int))&xtech_lua_MusicChange),
+                def("MusicChange", (void(*)(int, const std::string&, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, int))&xtech_lua_MusicChange),
-                def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
+                def("MusicChange", (void(*)(int, const std::string&))&xtech_lua_MusicChange),
                 //SFX
                 def("SfxPlay", (void(*)(int, int, int))&PlaySound),
-                def("SfxPlay", (void(*)(std::string, int, int))&PlayExtSoundNoMenu),
+                def("SfxPlay", (void(*)(const std::string&, int, int))&PlayExtSoundNoMenu),
                 def("SfxPlayMenu", (void(*)(int, int))&PlaySoundMenu),
-                def("SfxPlayMenu", (void(*)(std::string, int, int))&PlayExtSound)
+                def("SfxPlayMenu", (void(*)(const std::string&, int, int))&PlayExtSound)
             ]
         ];
 }
