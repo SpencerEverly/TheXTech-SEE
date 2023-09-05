@@ -1956,7 +1956,7 @@ void UpdatePlayer()
                                     PlaySound(SFX_HeroSwordBeam);
                                 else if(Player[A].State == 7)
                                     PlaySound(SFX_HeroIce);
-                                else
+                                else if(Player[A].State == 3)
                                     PlaySound(SFX_HeroFireRod);
 
                                 numNPCs++;
@@ -1969,7 +1969,10 @@ void UpdatePlayer()
                                 if(Player[A].State == 6)
                                     NPC[numNPCs].Type = NPCID_SWORDBEAM;
                                 if(Player[A].State == 8)
+                                {
                                     NPC[numNPCs].Type = NPCID_BUBBLE_PROJECTILE;
+                                    NPC[numNPCs].Special4 = 30;
+                                }
                                 NPC[numNPCs].Projectile = true;
                                 NPC[numNPCs].Location.Height = NPCHeight[NPC[numNPCs].Type];
                                 NPC[numNPCs].Location.Width = NPCWidth[NPC[numNPCs].Type];

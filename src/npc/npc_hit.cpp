@@ -60,6 +60,7 @@ void NPCHit(int A, int B, int C)
     // B = 8      Stomped by Boot
     // B = 9      Fell of a cliff
     // B = 10     Link stab
+    // B = 11     Bubble projectile collision
     // Frost Bolt check
     if(B == 3 && NPC[A].Type != NPCID_ICE_CUBE && NPC[A].Type != NPCID_PLR_ICEBALL)
     {
@@ -543,7 +544,13 @@ void NPCHit(int A, int B, int C)
         if(B == 1) //Stomped on by the player
         {
             PlaySound(SFX_Bubble);
-            NPC[A].Killed = B;
+            NPC[A].Killed = 1;
+        }
+        if(B == 11)
+        {
+            NewEffect(EFFID_BUBBLE_POP, NPC[A].Location);
+            PlaySound(SFX_Bubble);
+            NPC[A].Killed = 9;
         }
     }
     // Goomba / Nekkid Koopa

@@ -210,6 +210,35 @@ int FindCollision(const Location_t &Loc1, const Location_t &Loc2)
     return tempFindCollision;
 }
 
+// Whats side the collision happened for bubble projectiles
+int FindCollisionBubbleProjectile(const Location_t &Loc1, const Location_t &Loc2)
+{
+    int tempFindCollision = COLLISION_NONE;
+
+    if(Loc1.Y + Loc1.Height - Loc1.SpeedY <= Loc2.Y - Loc2.SpeedY)
+    {
+        tempFindCollision = COLLISION_TOP;
+    }
+    else if(Loc1.X - Loc1.SpeedX >= Loc2.X + Loc2.Width - Loc2.SpeedX - 20)
+    {
+        tempFindCollision = COLLISION_RIGHT;
+    }
+    else if(Loc1.X + Loc1.Width - Loc1.SpeedX <= Loc2.X - Loc2.SpeedX + 20)
+    {
+        tempFindCollision = COLLISION_LEFT;
+    }
+    else if(Loc1.Y - Loc1.SpeedY > Loc2.Y + Loc2.Height - Loc2.SpeedY - 0.1)
+    {
+        tempFindCollision = COLLISION_BOTTOM;
+    }
+    else
+    {
+        tempFindCollision = COLLISION_CENTER;
+    }
+
+    return tempFindCollision;
+}
+
 // Whats side the collision happened for belts
 int FindCollisionBelt(const Location_t &Loc1, const Location_t &Loc2, float BeltSpeed)
 {

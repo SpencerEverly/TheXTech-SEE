@@ -4397,9 +4397,12 @@ void PowerUps(const int A)
                         if(ShadowMode)
                             NPC[numNPCs].Shadow = true;
                         NPC[numNPCs].Type = NPCID_BUBBLE_PROJECTILE;
+                        NPC[numNPCs].Special4 = 30;
                         NPC[numNPCs].Location.Height = NPCHeight[NPC[numNPCs].Type];
                         NPC[numNPCs].Location.Width = NPCWidth[NPC[numNPCs].Type];
                         NPC[numNPCs].Location.X = p.Location.X + Physics.PlayerGrabSpotX[p.Character][p.State] * p.Direction + 4;
+                        if(p.Direction == -1)
+                            NPC[numNPCs].Location.X = (NPC[numNPCs].Location.X - 20);
                         NPC[numNPCs].Location.Y = p.Location.Y + Physics.PlayerGrabSpotY[p.Character][p.State] - 30;
                         NPC[numNPCs].Active = true;
                         NPC[numNPCs].TimeLeft = 100;

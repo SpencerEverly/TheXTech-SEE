@@ -1145,6 +1145,11 @@ void UpdateNPCs()
                             {
                                 PlaySound(SFX_Coin);
                                 NPC[B].Type = NPCID_COIN_S1;
+                                NPC[B].Special = 0;
+                                NPC[B].Special2 = 0;
+                                NPC[B].Special3 = 0;
+                                NPC[B].Special4 = 0;
+                                NPC[B].Special5 = 0;
                                 NPC[B].Location.SpeedX = 0;
                                 NPC[B].Location.SpeedY = 0;
                                 NPC[A].Special2 = -1;

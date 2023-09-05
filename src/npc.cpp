@@ -973,6 +973,10 @@ void NPCSpecial(int A)
         {
             npc.Special3 = npc.Special3 - 0.021;
         }
+        if(npc.Special4 > 0)
+        {
+            npc.Special4--;
+        }
     }
     else if(npc.Type == NPCID_ITEM_BUBBLE) // bubble
     {

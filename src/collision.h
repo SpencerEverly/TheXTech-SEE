@@ -56,6 +56,9 @@ bool WarpCollision(const Location_t &Loc1, const SpeedlessLocation_t &entrance, 
 // Public Function FindCollision(Loc1 As Location, Loc2 As Location) As Integer 'Whats side the collision happened
 // Whats side the collision happened
 int FindCollision(const Location_t &Loc1, const Location_t &Loc2);
+// Public Function FindCollisionBubbleProjectile(Loc1 As Location, Loc2 As Location) As Integer 'Whats side the collision happened for bubble projectiles
+// Whats side the collision happened for bubble projectiles
+int FindCollisionBubbleProjectile(const Location_t &Loc1, const Location_t &Loc2);
 // Public Function FindCollisionBelt(Loc1 As Location, Loc2 As Location, BeltSpeed As Single) As Integer  'Whats side the collision happened for belts
 // Whats side the collision happened for belts
 int FindCollisionBelt(const Location_t &Loc1, const Location_t &Loc2, float BeltSpeed);
