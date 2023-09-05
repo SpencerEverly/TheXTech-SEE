@@ -2107,6 +2107,9 @@ void SetupVars()
     NPCNoBubbleTransform[294] = true;
     NPCNoBubbleTransform[295] = true;
     NPCNoBubbleTransform[296] = true;
+    NPCNoBubbleTransform[138] = true;
+    NPCNoBubbleTransform[10] = true;
+    NPCNoBubbleTransform[103] = true;
 
 
     
@@ -2217,7 +2220,6 @@ void SetupVars()
     BlockSlope[637] = 1;
     BlockSlope[638] = 1;
     BlockWidth[638] = 64;
-
 
     For(A, 137, 146)
     {
@@ -2646,6 +2648,19 @@ void SetupVars()
     {
         BlockKills[A] = true;
     }
+    
+    
+    
+    
+    //**SMBX+ BLOCKS GO BELOW**
+    //Semi-solid slope (Left)
+    BlockSlope[639] = -1;
+    BlockWidth[639] = 32;
+    BlockHeight[639] = 32;
+    BlockOnlyHitspot1[639] = true;
+    
+    
+    
     BackgroundHasNoMask[187] = true;
     BackgroundHasNoMask[188] = true;
     BackgroundHasNoMask[189] = true;

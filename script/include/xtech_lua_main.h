@@ -19,7 +19,7 @@
 #define LUAHELPER_DEF_CONST(luabindObj, defName) luabindObj [ #defName ] = defName
 
 extern lua_State* L;
-extern std::string AppPath2;
+extern bool isLuaActive;
 
 extern bool xtech_lua_is_function(lua_State *luaState, const char *fname);
 extern void xtech_lua_showMessageBox(std::string message);

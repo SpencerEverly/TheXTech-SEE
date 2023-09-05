@@ -18,11 +18,11 @@ lua_State* L;
 
 using namespace luabind;
 
-std::string AppPath2 = xtech_lua_replaceStringValue(AppPath, "/", "\\");
+bool isLuaActive = false;
 
 std::string xtech_lua_getLuaLibsPath()
 {
-    std::string lapi = AppPath2 + "scripts\\base\\engine\\main.lua";
+    std::string lapi = AppPath + "scripts/base/engine/main.lua";
     return lapi;
 }
 
@@ -102,10 +102,9 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
         osTable["tmpname"] = object();
     }
     
-    std::string scriptToLoad = xtech_lua_getLuaLibsPath();
     std::string dataFromFile;
     
-    if(!xtech_lua_readFile(dataFromFile, scriptToLoad, "\"scripts\\base\\engine\\main.lua\" is required.\nBe sure you installed everything correctly!"))
+    if(!xtech_lua_readFile(dataFromFile, xtech_lua_getLuaLibsPath(), "scripts/base/engine/main.lua is required.\nBe sure you installed everything correctly!"))
     {
         xtech_lua_quit();
         return false;
@@ -133,6 +132,7 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
         callLuaFunction(L, initName, codePath, levelPath);
     }
     
+    isLuaActive = true;
     return true;
 }
 
@@ -141,7 +141,7 @@ void xtech_lua_bindAll()
     module(L)
         [
             namespace_("Native")[
-                def("getSMBXPath", (std::string(*)())&AppPath2)
+                def("getSMBXPath", (std::string(*)())&AppPath)
             ],
             namespace_("Text")[
                 def("windowDebug", (void(*)(std::string))&xtech_lua_showMessageBox),
@@ -153,16 +153,31 @@ void xtech_lua_bindAll()
                 def("MusicChange", (void(*)(int, std::string, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
+                
+                def("MusicGetCustomMusic", (std::string(*)(int))&xtech_lua_getCustomMusic),
+                def("MusicGetMusicID", (double(*)(int))&xtech_lua_getMusicID),
+                
                 //SFX
-                def("SfxPlay", (void(*)(int, int, int))&PlaySound),
-                def("SfxPlay", (void(*)(const std::string&, int, int))&xtech_lua_playSFX)
+                def("SfxPlay", (void(*)(int, int, int))&xtech_lua_playSFX),
+                def("SfxPlay", (void(*)(int, int))&xtech_lua_playSFX),
+                def("SfxPlay", (void(*)(int))&xtech_lua_playSFX),
+                def("SfxPlay", (void(*)(const std::string&, int, int))&xtech_lua_playSFX),
+                def("SfxPlay", (void(*)(const std::string&, int))&xtech_lua_playSFX),
+                def("SfxPlay", (void(*)(const std::string&))&xtech_lua_playSFX)
             ]
         ];
 }
 
 bool xtech_lua_quit()
 {
-    lua_close(L);
-    L = NULL;
-    return true;
+    if(isLuaActive)
+    {
+        lua_close(L);
+        L = NULL;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

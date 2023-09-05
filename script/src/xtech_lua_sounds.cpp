@@ -60,3 +60,29 @@ void xtech_lua_playSFX(const std::string &soundFile)
 {
     PlayExtSoundNoMenu(soundFile, 0, 128);
 }
+
+void xtech_lua_playSFX(int soundID, int loops, int volume)
+{
+    PlaySound(soundID, loops, volume);
+}
+
+void xtech_lua_playSFX(int soundID, int loops)
+{
+    PlaySound(soundID, loops, 128);
+}
+
+void xtech_lua_playSFX(int soundID)
+{
+    PlaySound(soundID, 0, 128);
+}
+
+std::string xtech_lua_getCustomMusic(int sectionID)
+{
+    std::string musicUsed = CustomMusic[sectionID];
+    return musicUsed;
+}
+
+double xtech_lua_getMusicID(int sectionID)
+{
+    return (double)bgMusic[sectionID];
+}

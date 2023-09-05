@@ -385,6 +385,9 @@ int GameMain(const CmdLineSetup_t &setup)
             OpenLevel(FullFileName);
             editorScreen.ResetCursor();
             EditorBackup();
+#ifdef ENABLE_XTECH_LUA
+            xtech_lua_init(FullFileName, "");
+#endif
         }
         else if(is_world)
         {
@@ -637,6 +640,10 @@ int GameMain(const CmdLineSetup_t &setup)
             }
 
             lunaLoad();
+            
+#ifdef ENABLE_XTECH_LUA
+            xtech_lua_init(outroPath, "");
+#endif
 
             clearScreenFaders();
 
