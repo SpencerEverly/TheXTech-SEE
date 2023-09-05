@@ -809,7 +809,7 @@ int GameMain(const CmdLineSetup_t &setup)
             }
             
 #ifdef ENABLE_XTECH_LUA
-            xtech_lua_init("GameMenu", introPath);
+            xtech_lua_init(introPath, "");
 #endif
 
             // Main menu loop
@@ -1346,11 +1346,6 @@ void NextLevel()
             GameIsActive = false; // Quit game
         }
     }
-    
-#ifdef ENABLE_XTECH_LUA
-    xtech_lua_quit();
-    xtech_lua_init("GameMenu", "");
-#endif
 }
 
 // macros mainly used for end of level stuffs. takes over the players controls

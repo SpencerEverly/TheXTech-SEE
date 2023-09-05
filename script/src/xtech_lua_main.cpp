@@ -105,7 +105,7 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
     std::string scriptToLoad = xtech_lua_getLuaLibsPath();
     std::string dataFromFile;
     
-    if(!xtech_lua_readFile(dataFromFile, scriptToLoad, "\"scripts\\base\\engine\\main.lua\" is required.\nBe sure you installed everything correctly!"));
+    if(!xtech_lua_readFile(dataFromFile, scriptToLoad, "\"scripts\\base\\engine\\main.lua\" is required.\nBe sure you installed everything correctly!"))
     {
         xtech_lua_quit();
         return false;
@@ -155,16 +155,7 @@ void xtech_lua_bindAll()
                 def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
                 //SFX
                 def("SfxPlay", (void(*)(int, int, int))&PlaySound),
-                def("SfxPlay", (void(*)(int, int))&PlaySound),
-                def("SfxPlay", (void(*)(int))&PlaySound),
-                def("SfxPlay", (void(*)(const std::string&, int, int))&PlayExtSoundNoMenu),
-                def("SfxPlay", (void(*)(const std::string&, int))&PlayExtSoundNoMenu),
-                def("SfxPlay", (void(*)(const std::string&))&PlayExtSoundNoMenu),
-                def("SfxPlayMenu", (void(*)(int, int))&PlaySoundMenu),
-                def("SfxPlayMenu", (void(*)(int))&PlaySoundMenu),
-                def("SfxPlayMenu", (void(*)(const std::string&, int, int))&PlayExtSound),
-                def("SfxPlayMenu", (void(*)(const std::string&, int))&PlayExtSound),
-                def("SfxPlayMenu", (void(*)(const std::string&))&PlayExtSound)
+                def("SfxPlay", (void(*)(const std::string&, int, int))&xtech_lua_playSFX)
             ]
         ];
 }
@@ -172,5 +163,6 @@ void xtech_lua_bindAll()
 bool xtech_lua_quit()
 {
     lua_close(L);
+    L = NULL;
     return true;
 }

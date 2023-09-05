@@ -48,15 +48,15 @@ void xtech_lua_MusicChange(int sectionID, std::string musicFile)
 
 void xtech_lua_playSFX(const std::string &soundFile, int loops, int volume)
 {
-    PlayExtSound(soundFile, loops, volume);
+    PlayExtSoundNoMenu(soundFile, loops, volume);
 }
 
 void xtech_lua_playSFX(const std::string &soundFile, int loops)
 {
-    PlayExtSound(soundFile, loops);
+    PlayExtSoundNoMenu(soundFile, loops, 128);
 }
 
 void xtech_lua_playSFX(const std::string &soundFile)
 {
-    PlayExtSound(soundFile);
+    PlayExtSoundNoMenu(soundFile, 0, 128);
 }
