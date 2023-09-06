@@ -7,6 +7,7 @@
 #include "../../src/global_dirs.h"
 #include "../../src/sound.h"
 #include "../../src/main/cheat_code.h"
+#include "../../src/game_main.h"
 
 #include <utility>
 #include <string>
@@ -49,6 +50,16 @@ void xtech_lua_setCheatBuffer(const std::string &cheatBuffer)
 {
     cheats_clearBuffer();
     cheats_setBuffer(cheatBuffer);
+}
+
+void xtech_lua_openPauseMenu(int plr)
+{
+    PauseGame(PauseCode::PauseScreen, plr);
+}
+
+void xtech_lua_openPauseMenu()
+{
+    PauseGame(PauseCode::PauseScreen, 1);
 }
 
 std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to)
@@ -188,7 +199,12 @@ void xtech_lua_bindAll()
             ],
             namespace_("Misc")[
                 def("cheatBuffer", (std::string(*)())&cheats_get),
-                def("cheatBuffer", (void(*)(const std::string&))&xtech_lua_setCheatBuffer)
+                def("cheatBuffer", (void(*)(const std::string&))&xtech_lua_setCheatBuffer),
+                
+                def("openPauseMenu", (void(*)(int))&xtech_lua_openPauseMenu),
+                def("openPauseMenu", (void(*)())&xtech_lua_openPauseMenu),
+                def("saveGame", (void(*)())&SaveGame)
+                
             ]
         ];
 }

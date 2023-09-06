@@ -25,6 +25,8 @@ extern bool isLuaActive;
 extern bool xtech_lua_is_function(lua_State *luaState, const char *fname);
 extern void xtech_lua_showMessageBox(std::string message);
 extern void xtech_lua_setCheatBuffer(std::string cheatBuffer);
+extern void xtech_lua_openPauseMenu(int plr);
+extern void xtech_lua_openPauseMenu();
 
 extern std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to);
 bool xtech_lua_readFile(std::string content, std::string path, std::string errMsg);
