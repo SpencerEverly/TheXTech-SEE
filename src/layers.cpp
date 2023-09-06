@@ -20,6 +20,10 @@
 
 #include <set>
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "sdl_proxy/sdl_stdinc.h"
 #include "globals.h"
 #include "layers.h"
@@ -1022,6 +1026,9 @@ void ProcEvent(eventindex_t index, int whichPlayer, bool NoEffect)
                         resetFrameTimer();
                     }
                 }
+#ifdef ENABLE_XTECH_LUA
+                xtech_lua_callLuaFunction(L, "__callEvent", "onEvent", evt.Name);
+#endif
             }
 
             for(auto &l : evt.HideLayer)

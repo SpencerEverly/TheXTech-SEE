@@ -3014,7 +3014,7 @@ void zTestLevel(bool magicHand, bool interProcess)
     OptCursorSync();
     
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_init(FullFileName, "");
+    xtech_lua_init();
     xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
 #endif
 }

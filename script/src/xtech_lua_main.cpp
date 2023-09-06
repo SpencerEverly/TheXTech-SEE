@@ -90,7 +90,49 @@ std::string xtech_lua_readScriptFile()
     return content;
 }
 
-bool xtech_lua_init(std::string codePath, std::string levelPath)
+std::string xtech_lua_episodePath()
+{
+    if(FileNamePath != "")
+        return FileNamePath;
+    else
+        return "SMBX2";
+}
+
+std::string xtech_lua_levelFolderPath()
+{
+    if(FileNamePath != "")
+    {
+        return FileNamePath + FileName + "/";
+    }
+    else
+        return "SMBX2";
+}
+
+std::string xtech_lua_levelFilename()
+{
+    if(FileNameFull != "")
+        return FileNameFull;
+    else
+        return "SMBX2";
+}
+
+std::string xtech_lua_levelName()
+{
+    if(FileName != "")
+        return FileName;
+    else
+        return "SMBX2";
+}
+
+std::string xtech_lua_worldFilename()
+{
+    if(FileNameWorld != "")
+        return FileNameWorld;
+    else
+        return "SMBX2";
+}
+
+bool xtech_lua_init()
 {
     //Just to be safe
     xtech_lua_quit();
@@ -159,7 +201,7 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
     const char* initName = "__onInit";
     if (xtech_lua_is_function(L, initName))
     {
-        xtech_lua_callLuaFunction(L, initName, codePath, levelPath);
+        xtech_lua_callLuaFunction(L, initName);
     }
     
     isLuaActive = true;
@@ -203,8 +245,17 @@ void xtech_lua_bindAll()
                 
                 def("openPauseMenu", (void(*)(int))&xtech_lua_openPauseMenu),
                 def("openPauseMenu", (void(*)())&xtech_lua_openPauseMenu),
-                def("saveGame", (void(*)())&SaveGame)
+                def("saveGame", (void(*)())&SaveGame),
                 
+                def("episodePath", (std::string(*)())&xtech_lua_episodePath)
+            ],
+            namespace_("Level")[
+                def("folderPath", (std::string(*)())&xtech_lua_levelFolderPath),
+                def("filename", (std::string(*)())&xtech_lua_levelFilename),
+                def("name", (std::string(*)())&xtech_lua_levelName)
+            ],
+            namespace_("World")[
+                def("filename", (std::string(*)())&xtech_lua_worldFilename)
             ]
         ];
 }

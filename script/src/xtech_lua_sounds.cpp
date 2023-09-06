@@ -1,12 +1,15 @@
 #include "../../src/sound.h"
 #include "../../src/globals.h"
 #include "../../src/global_dirs.h"
+#include "../../src/game_main.h"
 
 void xtech_lua_MusicChange(int sectionID, int musicID, int fadeIn)
 {
     if((LevelSelect || WorldEditor) && !GameMenu && !GameOutro) // music on the world map
     {
-        
+        StopMusic();
+        curWorldMusic = musicID;
+        StartMusic(curWorldMusic, fadeIn);
     }
     else
     {
@@ -25,7 +28,10 @@ void xtech_lua_MusicChange(int sectionID, std::string musicFile, int fadeIn)
     }
     if((LevelSelect || WorldEditor) && !GameMenu && !GameOutro) // music on the world map
     {
-        
+        StopMusic();
+        curWorldMusicFile = musicFile;
+        curWorldMusic = 18;
+        StartMusic(curWorldMusic, fadeIn);
     }
     else
     {

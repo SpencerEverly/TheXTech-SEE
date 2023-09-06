@@ -18,6 +18,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "../globals.h"
 #include "../game_main.h"
 #include "../compat.h"
@@ -295,6 +299,10 @@ void SaveGame()
     speedRun_saveStats();
 
     AppPathManager::syncFs();
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_callLuaFunction(L, "__callEvent", "onSaveGame");
+#endif
 }
 
 void LoadGame()

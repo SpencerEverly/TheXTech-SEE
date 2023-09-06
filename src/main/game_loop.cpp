@@ -135,7 +135,10 @@ void GameLoop()
     lunaLoop();
 
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
+    if(GamePaused == PauseCode::None)
+        xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
+    
+    xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
 #endif
 
     g_microStats.start_task(MicroStats::Controls);
@@ -322,11 +325,11 @@ void GameLoop()
 
 void MessageScreen_Init()
 {
-    SoundPause[SFX_Message] = 0;
-    PlaySound(SFX_Message);
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_callLuaFunction(L, "__callEvent", "onMessageBox", MessageText);
 #endif
+    SoundPause[SFX_Message] = 0;
+    PlaySound(SFX_Message);
     MenuCursorCanMove = false;
     BuildUTF8CharMap(MessageText, MessageTextMap);
 }
