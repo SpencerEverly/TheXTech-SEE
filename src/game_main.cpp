@@ -371,8 +371,15 @@ int GameMain(const CmdLineSetup_t &setup)
             BattleMode = false;
             BattleIntro = 0;
         }
-        GodMode = setup.testGodMode;
-        GrabAll = setup.testGrabAll;
+
+        if(!is_world)
+        {
+            GodMode = setup.testGodMode;
+            GrabAll = setup.testGrabAll;
+
+            if(GodMode || GrabAll)
+                Cheater = true;
+        }
 
         editorScreen.ResetCursor();
 
@@ -1977,9 +1984,9 @@ void StartEpisode()
     {
         For(A, 1, numWorldPaths)
         {
-            SpeedlessLocation_t tempLocation = WorldPath[A].Location;
+            TinyLocation_t tempLocation = WorldPath[A].Location;
             {
-                SpeedlessLocation_t &l = tempLocation;
+                TinyLocation_t &l = tempLocation;
                 l.X += 4;
                 l.Y += 4;
                 l.Width -= 8;
