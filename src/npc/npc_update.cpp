@@ -1134,17 +1134,20 @@ void UpdateNPCs()
             {
                 for(int B : treeNPCQuery(NPC[A].Location, SORTMODE_NONE))
                 {
-                    if(A != B && NPC[B].Active && (!NPCNoBubbleTransform[NPC[B].Type]))
+                    if(A != B && NPC[B].Active && NPC[B].Killed == 0 && (!NPCNoBubbleTransform[NPC[B].Type]))
                     {
                         if(CheckCollision(NPC[A].Location, NPC[B].Location))
                         {
                             NPC[A].Special2++;
                             NPC[B].Location.X = (NPC[A].Location.X + 8);
                             NPC[B].Location.Y = (NPC[A].Location.Y + 8);
+                            NPC[B].Immune = 5;
                             if(NPC[A].Special2 > 35)
                             {
                                 PlaySound(SFX_Coin);
                                 NPC[B].Type = NPCID_COIN_S1;
+                                NPC[B].Location.Width = NPCWidth[NPCID_COIN_S1];
+                                NPC[B].Location.Height = NPCHeight[NPCID_COIN_S1];
                                 NPC[B].Special = 0;
                                 NPC[B].Special2 = 0;
                                 NPC[B].Special3 = 0;
