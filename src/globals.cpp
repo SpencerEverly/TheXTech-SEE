@@ -543,6 +543,7 @@ std::string CurrentLanguage;
 std::string CurrentLangDialect;
 
 bool chosenStarman = true;
+bool isOverworld = false;
 
 //void DoEvents()
 //{

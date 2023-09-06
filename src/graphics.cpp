@@ -28,6 +28,10 @@
 #include "core/render.h"
 #include "core/events.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "pseudo_vb.h"
 
 #include <Utils/maths.h>

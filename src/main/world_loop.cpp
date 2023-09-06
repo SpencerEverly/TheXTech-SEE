@@ -188,6 +188,11 @@ void WorldLoop()
     int B = 0;
     bool allowFastMove = (g_config.worldMapFastMove || g_config.worldMapFastMove) && g_speedRunnerMode < SPEEDRUN_MODE_2;
     
+    if((LevelSelect || WorldEditor) && !GameMenu && !GameOutro) // music on the world map
+        isOverworld = true;
+    else
+        isOverworld = false;
+    
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
         xtech_lua_callLuaFunction(L, "__callEvent", "onTick");

@@ -46,6 +46,10 @@
 #include "../core/render.h"
 #include "../script/luna/luna.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "effect.h"
 #include "npc_id.h"
 #include "eff_id.h"
@@ -2414,6 +2418,13 @@ void UpdateGraphics(bool skipRepaint)
         TextEntryScreen::Render();
 
     XRender::offsetViewportIgnore(false);
+    
+#ifdef ENABLE_XTECH_LUA
+    if(GamePaused == PauseCode::None)
+        xtech_lua_callLuaFunction(L, "__callEvent", "onTickPaint");
+    
+    xtech_lua_callLuaFunction(L, "__callEvent", "onDrawPaint");
+#endif
 
     if(!skipRepaint)
         XRender::repaint();

@@ -23,6 +23,7 @@ set(LIB_XTECHLUA_SRCS
     src/xtech_lua_main.cpp
     src/xtech_lua_sounds.cpp
     src/xtech_lua_graphics.cpp
+    src/xtech_lua_misc.cpp
 )
 
 add_library(XTechLua STATIC

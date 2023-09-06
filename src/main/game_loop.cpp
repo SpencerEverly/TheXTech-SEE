@@ -133,6 +133,11 @@ void GameLoop()
 {
     g_microStats.start_task(MicroStats::Script);
     lunaLoop();
+    
+    if((LevelSelect || WorldEditor) && !GameMenu && !GameOutro) // music on the world map
+        isOverworld = true;
+    else
+        isOverworld = false;
 
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)

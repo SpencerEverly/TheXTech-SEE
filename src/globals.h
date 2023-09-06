@@ -2334,4 +2334,7 @@ extern bool chosenStarman;
 extern std::string CurrentLanguage;
 extern std::string CurrentLangDialect;
 
+//isOverworld setting
+extern bool isOverworld;
+
 #endif // GLOBALS_H

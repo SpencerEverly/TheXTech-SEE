@@ -1,6 +1,7 @@
 #include "xtech_lua_main.h"
 #include "xtech_lua_sounds.h"
 #include "xtech_lua_graphics.h"
+#include "xtech_lua_misc.h"
 #include "../../src/player.h"
 #include "../../src/npc.h"
 #include "../../src/globals.h"
@@ -14,6 +15,7 @@
 #include <regex>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 
 #include "../../src/core/msgbox.h"
 
@@ -25,7 +27,7 @@ bool isLuaActive = false;
 
 std::string xtech_lua_getLuaLibsPath()
 {
-    std::string lapi = AppPath + "scripts/base/engine/main.lua";
+    std::string lapi = AppPath + "lua/scripts/base/engine/main.lua";
     return lapi;
 }
 
@@ -39,34 +41,6 @@ bool xtech_lua_is_function(lua_State *luaState, const char *fname)
         }
     }
     return false;
-}
-
-void xtech_lua_showMessageBox(std::string message)
-{
-    XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_INFORMATION, "Debug", message);
-}
-
-void xtech_lua_showMessageBoxInGame(std::string message)
-{
-    MessageText.clear();
-    MessageText = message;
-    PauseGame(PauseCode::Message, 0);
-}
-
-void xtech_lua_setCheatBuffer(const std::string &cheatBuffer)
-{
-    cheats_clearBuffer();
-    cheats_setBuffer(cheatBuffer);
-}
-
-void xtech_lua_openPauseMenu(int plr)
-{
-    PauseGame(PauseCode::PauseScreen, plr);
-}
-
-void xtech_lua_openPauseMenu()
-{
-    PauseGame(PauseCode::PauseScreen, 0);
 }
 
 std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to)
@@ -95,48 +69,6 @@ std::string xtech_lua_readScriptFile()
     std::ifstream theFile(xtech_lua_getLuaLibsPath(), std::ios::binary| std::ios::in);
     std::string content = std::string((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
     return content;
-}
-
-std::string xtech_lua_episodePath()
-{
-    if(FileNamePath != "")
-        return FileNamePath;
-    else
-        return "SMBX2";
-}
-
-std::string xtech_lua_levelFolderPath()
-{
-    if(FileNamePath != "")
-    {
-        return FileNamePath + FileName + "/";
-    }
-    else
-        return "SMBX2";
-}
-
-std::string xtech_lua_levelFilename()
-{
-    if(FileNameFull != "")
-        return FileNameFull;
-    else
-        return "SMBX2";
-}
-
-std::string xtech_lua_levelName()
-{
-    if(FileName != "")
-        return FileName;
-    else
-        return "SMBX2";
-}
-
-std::string xtech_lua_worldFilename()
-{
-    if(FileNameWorld != "")
-        return FileNameWorld;
-    else
-        return "SMBX2";
 }
 
 bool xtech_lua_init()
@@ -220,7 +152,8 @@ void xtech_lua_bindAll()
     module(L)
         [
             namespace_("Native")[
-                def("getSMBXPath", (std::string(*)())&AppPath)
+                def("getSMBXPath", (std::string(*)())&AppPath),
+                def("isOverworld", (bool(*)())&isOverworld)
             ],
             namespace_("Text")[
                 def("print", (void(*)(const std::string&, float, float))&xtech_lua_textPrint),
@@ -248,7 +181,7 @@ void xtech_lua_bindAll()
                 def("SfxPlay", (void(*)(const std::string&))&xtech_lua_playSFX)
             ],
             namespace_("Misc")[
-                def("cheatBuffer", (std::string(*)())&cheats_get),
+                def("cheatBuffer", (std::string(*)())&xtech_lua_getCheatBuffer),
                 def("cheatBuffer", (void(*)(const std::string&))&xtech_lua_setCheatBuffer),
                 
                 def("openPauseMenu", (void(*)(int))&xtech_lua_openPauseMenu),
