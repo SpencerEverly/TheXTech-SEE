@@ -1026,9 +1026,6 @@ void ProcEvent(eventindex_t index, int whichPlayer, bool NoEffect)
                         resetFrameTimer();
                     }
                 }
-#ifdef ENABLE_XTECH_LUA
-                xtech_lua_callLuaFunction(L, "__callEvent", "onEvent", evt.Name);
-#endif
             }
 
             for(auto &l : evt.HideLayer)
@@ -1231,6 +1228,9 @@ void ProcEvent(eventindex_t index, int whichPlayer, bool NoEffect)
                     newEventPlayer[newEventNum] = static_cast<uint8_t>(whichPlayer);
                 }
             }
+#ifdef ENABLE_XTECH_LUA
+            xtech_lua_callLuaFunction(L, "__callEvent", "onEvent", evt.Name);
+#endif
         }
     }
 }

@@ -223,8 +223,8 @@ void xtech_lua_bindAll()
                 def("getSMBXPath", (std::string(*)())&AppPath)
             ],
             namespace_("Text")[
-                def("print", (void(*)(const char*, float, float))&xtech_lua_textPrint),
-                def("printWP", (void(*)(const char*, float, float, float))&xtech_lua_textPrintWP),
+                def("print", (void(*)(const std::string&, float, float))&xtech_lua_textPrint),
+                def("printWP", (void(*)(const std::string&, float, float, float))&xtech_lua_textPrintWP),
                 def("windowDebug", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("showMessageBox", (void(*)(std::string))&xtech_lua_showMessageBoxInGame)
