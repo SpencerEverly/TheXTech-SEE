@@ -640,6 +640,7 @@ int GameMain(const CmdLineSetup_t &setup)
             
 #ifdef ENABLE_XTECH_LUA
             xtech_lua_init(outroPath, "");
+            xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
 #endif
 
             clearScreenFaders();
@@ -805,6 +806,7 @@ int GameMain(const CmdLineSetup_t &setup)
             
 #ifdef ENABLE_XTECH_LUA
             xtech_lua_init(introPath, "");
+            xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
 #endif
 
             delayedMusicStart(); // Allow music being started
@@ -1128,6 +1130,7 @@ int GameMain(const CmdLineSetup_t &setup)
                 
 #ifdef ENABLE_XTECH_LUA
                 xtech_lua_init(FullFileName, "");
+                xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
 #endif
 
                 lunaLoad();
@@ -2109,5 +2112,6 @@ void StartBattleMode()
     
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init(SelectBattle[selWorld].WorldPath, SelectBattle[selWorld].WorldFile);
+    xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
 #endif
 }

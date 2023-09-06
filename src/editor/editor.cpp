@@ -3015,6 +3015,7 @@ void zTestLevel(bool magicHand, bool interProcess)
     
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init(FullFileName, "");
+    xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
 #endif
 }
 

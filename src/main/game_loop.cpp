@@ -135,7 +135,7 @@ void GameLoop()
     lunaLoop();
 
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaFunction(L, "onTick");
+    xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
 #endif
 
     g_microStats.start_task(MicroStats::Controls);
@@ -324,6 +324,9 @@ void MessageScreen_Init()
 {
     SoundPause[SFX_Message] = 0;
     PlaySound(SFX_Message);
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_callLuaFunction(L, "__callEvent", "onMessageBox", MessageText);
+#endif
     MenuCursorCanMove = false;
     BuildUTF8CharMap(MessageText, MessageTextMap);
 }
@@ -396,7 +399,12 @@ int PauseGame(PauseCode code, int plr)
     if(code == PauseCode::Message)
         MessageScreen_Init();
     else if(code == PauseCode::PauseScreen)
+    {
         PauseScreen::Init(plr, SharedControls.LegacyPause);
+#ifdef ENABLE_XTECH_LUA
+        xtech_lua_callLuaFunction(L, "__callEvent", "onPause");
+#endif
+    }
     else if(code == PauseCode::DropAdd)
     {
         ConnectScreen::DropAdd_Start();

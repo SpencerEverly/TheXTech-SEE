@@ -6,6 +6,7 @@
 #include "../../src/globals.h"
 #include "../../src/global_dirs.h"
 #include "../../src/sound.h"
+#include "../../src/main/cheat_code.h"
 
 #include <utility>
 #include <string>
@@ -42,6 +43,12 @@ bool xtech_lua_is_function(lua_State *luaState, const char *fname)
 void xtech_lua_showMessageBox(std::string message)
 {
     XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_INFORMATION, "Debug", message);
+}
+
+void xtech_lua_setCheatBuffer(const std::string &cheatBuffer)
+{
+    cheats_clearBuffer();
+    cheats_setBuffer(cheatBuffer);
 }
 
 std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to)
@@ -135,7 +142,6 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
     
     if(errLapi)
     {
-        xtech_lua_quit();
         return false;
     }
     
@@ -179,6 +185,10 @@ void xtech_lua_bindAll()
                 def("SfxPlay", (void(*)(const std::string&, int, int))&xtech_lua_playSFX),
                 def("SfxPlay", (void(*)(const std::string&, int))&xtech_lua_playSFX),
                 def("SfxPlay", (void(*)(const std::string&))&xtech_lua_playSFX)
+            ],
+            namespace_("Misc")[
+                def("cheatBuffer", (std::string(*)())&cheats_get),
+                def("cheatBuffer", (void(*)(const std::string&))&xtech_lua_setCheatBuffer)
             ]
         ];
 }
