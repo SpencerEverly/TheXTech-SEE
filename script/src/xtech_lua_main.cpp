@@ -46,6 +46,13 @@ void xtech_lua_showMessageBox(std::string message)
     XMsgBox::simpleMsgBox(XMsgBox::MESSAGEBOX_INFORMATION, "Debug", message);
 }
 
+void xtech_lua_showMessageBoxInGame(std::string message)
+{
+    MessageText.clear();
+    MessageText = message;
+    PauseGame(PauseCode::Message, 0);
+}
+
 void xtech_lua_setCheatBuffer(const std::string &cheatBuffer)
 {
     cheats_clearBuffer();
@@ -59,7 +66,7 @@ void xtech_lua_openPauseMenu(int plr)
 
 void xtech_lua_openPauseMenu()
 {
-    PauseGame(PauseCode::PauseScreen, 1);
+    PauseGame(PauseCode::PauseScreen, 0);
 }
 
 std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to)
@@ -219,7 +226,8 @@ void xtech_lua_bindAll()
                 def("print", (void(*)(const char*, float, float))&xtech_lua_textPrint),
                 def("printWP", (void(*)(const char*, float, float, float))&xtech_lua_textPrintWP),
                 def("windowDebug", (void(*)(std::string))&xtech_lua_showMessageBox),
-                def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox)
+                def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox),
+                def("showMessageBox", (std::string(*)())&xtech_lua_showMessageBoxInGame)
             ],
             namespace_("Audio")[
                 //Music
