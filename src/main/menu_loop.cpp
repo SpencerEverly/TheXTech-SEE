@@ -24,6 +24,10 @@
 #include <PGE_File_Formats/file_formats.h>
 #include <fmt_format_ne.h>
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "../globals.h"
 #include "../game_main.h"
 #include "../sound.h"
@@ -523,7 +527,14 @@ void MenuLoop()
         return;
 
     Integrator::sync();
-
+    
+#ifdef ENABLE_XTECH_LUA
+    if(GamePaused == PauseCode::None)
+        xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
+    
+    xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
+#endif
+    
     if(!g_gameInfo.introDeadMode)
         updateIntroLevelActivity();
     else

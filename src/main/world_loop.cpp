@@ -44,6 +44,10 @@
 
 #include "global_dirs.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 //! Holds the screen overlay for the world map
 ScreenFader g_worldScreenFader;
 
@@ -183,6 +187,13 @@ void WorldLoop()
     int A = 0;
     int B = 0;
     bool allowFastMove = (g_config.worldMapFastMove || g_config.worldMapFastMove) && g_speedRunnerMode < SPEEDRUN_MODE_2;
+    
+#ifdef ENABLE_XTECH_LUA
+    if(GamePaused == PauseCode::None)
+        xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
+    
+    xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
+#endif
 
     if(SingleCoop > 0)
         SingleCoop = 1;

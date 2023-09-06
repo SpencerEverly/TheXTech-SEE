@@ -227,7 +227,7 @@ void xtech_lua_bindAll()
                 def("printWP", (void(*)(const char*, float, float, float))&xtech_lua_textPrintWP),
                 def("windowDebug", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox),
-                def("showMessageBox", (std::string(*)())&xtech_lua_showMessageBoxInGame)
+                def("showMessageBox", (void(*)())&xtech_lua_showMessageBoxInGame)
             ],
             namespace_("Audio")[
                 //Music
