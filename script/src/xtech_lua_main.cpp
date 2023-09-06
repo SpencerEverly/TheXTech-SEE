@@ -1,5 +1,6 @@
 #include "xtech_lua_main.h"
 #include "xtech_lua_sounds.h"
+#include "xtech_lua_graphics.h"
 #include "../../src/player.h"
 #include "../../src/npc.h"
 #include "../../src/globals.h"
@@ -63,8 +64,19 @@ bool xtech_lua_readFile(std::string content, std::string path, std::string errMs
     return true;
 }
 
+std::string xtech_lua_readScriptFile()
+{
+    // Opens the script.
+    std::ifstream theFile(xtech_lua_getLuaLibsPath(), std::ios::binary| std::ios::in);
+    std::string content = std::string((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
+    return content;
+}
+
 bool xtech_lua_init(std::string codePath, std::string levelPath)
 {
+    //Just to be safe
+    xtech_lua_quit();
+    
     //Open up a new Lua State
     L = luaL_newstate();
     
@@ -104,12 +116,13 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
     
     std::string dataFromFile;
     
-    if(!xtech_lua_readFile(dataFromFile, xtech_lua_getLuaLibsPath(), "scripts/base/engine/main.lua is required.\nBe sure you installed everything correctly!"))
+    if(!xtech_lua_readFile(dataFromFile, xtech_lua_getLuaLibsPath(), "\"scripts/base/engine/main.lua\" is required.\nBe sure you installed everything correctly!"))
     {
         xtech_lua_quit();
         return false;
     }
     
+    dataFromFile = xtech_lua_readScriptFile();
     xtech_lua_bindAll();
     
     bool errLapi = false;
@@ -129,7 +142,7 @@ bool xtech_lua_init(std::string codePath, std::string levelPath)
     const char* initName = "__onInit";
     if (xtech_lua_is_function(L, initName))
     {
-        callLuaFunction(L, initName, codePath, levelPath);
+        xtech_lua_callLuaFunction(L, initName, codePath, levelPath);
     }
     
     isLuaActive = true;
@@ -144,14 +157,16 @@ void xtech_lua_bindAll()
                 def("getSMBXPath", (std::string(*)())&AppPath)
             ],
             namespace_("Text")[
+                def("print", (void(*)(const char*, float, float))&xtech_lua_textPrint),
+                def("printWP", (void(*)(const char*, float, float, float))&xtech_lua_textPrintWP),
                 def("windowDebug", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox)
             ],
             namespace_("Audio")[
                 //Music
                 def("MusicChange", (void(*)(int, int, int))&xtech_lua_MusicChange),
-                def("MusicChange", (void(*)(int, std::string, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, int))&xtech_lua_MusicChange),
+                def("MusicChange", (void(*)(int, std::string, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
                 
                 def("MusicGetCustomMusic", (std::string(*)(int))&xtech_lua_getCustomMusic),

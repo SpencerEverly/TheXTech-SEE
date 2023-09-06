@@ -28,6 +28,10 @@
 #include <pge_delay.h>
 #include <fmt_format_ne.h>
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "globals.h"
 #include "config.h"
 #include "editor.h"
@@ -3008,6 +3012,10 @@ void zTestLevel(bool magicHand, bool interProcess)
     optCursor.current = OptCursor_t::LVL_SELECT;
     EditorCursor.Mode = OptCursor_t::LVL_SELECT;
     OptCursorSync();
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_init(FullFileName, "");
+#endif
 }
 
 void MouseMove(float X, float Y, bool /*nCur*/)

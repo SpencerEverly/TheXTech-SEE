@@ -385,9 +385,6 @@ int GameMain(const CmdLineSetup_t &setup)
             OpenLevel(FullFileName);
             editorScreen.ResetCursor();
             EditorBackup();
-#ifdef ENABLE_XTECH_LUA
-            xtech_lua_init(FullFileName, "");
-#endif
         }
         else if(is_world)
         {
@@ -805,6 +802,10 @@ int GameMain(const CmdLineSetup_t &setup)
             speedRun_resetTotal();
 
             lunaLoad();
+            
+#ifdef ENABLE_XTECH_LUA
+            xtech_lua_init(introPath, "");
+#endif
 
             delayedMusicStart(); // Allow music being started
 
@@ -814,10 +815,6 @@ int GameMain(const CmdLineSetup_t &setup)
                 if(Events[A].AutoStart)
                     ProcEvent(A, 0, true);
             }
-            
-#ifdef ENABLE_XTECH_LUA
-            xtech_lua_init(introPath, "");
-#endif
 
             // Main menu loop
             runFrameLoop(&MenuLoop, nullptr, []()->bool{ return GameMenu;});
@@ -1128,6 +1125,10 @@ int GameMain(const CmdLineSetup_t &setup)
                 clearScreenFaders(); // Reset all faders
                 if(g_config.EnableInterLevelFade)
                     g_levelScreenFader.setupFader(2, 65, 0, ScreenFader::S_FADE);
+                
+#ifdef ENABLE_XTECH_LUA
+                xtech_lua_init(FullFileName, "");
+#endif
 
                 lunaLoad();
 
@@ -1305,9 +1306,6 @@ void KillIt()
     lunaReset();
     QuitMixerX();
     UnloadGFX();
-#ifdef ENABLE_XTECH_LUA
-    xtech_lua_quit();
-#endif
     XWindow::showCursor(1);
 }
 
@@ -2019,15 +2017,6 @@ void StartEpisode()
         }
         GameThing(1000, 3);
     }
-    
-    //Just to be safe
-#ifdef ENABLE_XTECH_LUA
-    xtech_lua_quit();
-    if(!StartLevel.empty())
-        xtech_lua_init(SelectWorld[selWorld].WorldPath, StartLevel);
-    else
-        xtech_lua_init(SelectWorld[selWorld].WorldPath, "");
-#endif
 }
 
 void StartBattleMode()
@@ -2119,7 +2108,6 @@ void StartBattleMode()
     BattleOutro = 0;
     
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_quit();
     xtech_lua_init(SelectBattle[selWorld].WorldPath, SelectBattle[selWorld].WorldFile);
 #endif
 }

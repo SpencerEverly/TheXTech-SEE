@@ -52,6 +52,10 @@
 #include "screen_prompt.h"
 #include "script/luna/luna.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "../pseudo_vb.h"
 
 PauseCode GamePaused = PauseCode::None;
@@ -129,6 +133,10 @@ void GameLoop()
 {
     g_microStats.start_task(MicroStats::Script);
     lunaLoop();
+
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_callLuaFunction(L, "onTick");
+#endif
 
     g_microStats.start_task(MicroStats::Controls);
 

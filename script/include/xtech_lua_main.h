@@ -8,6 +8,7 @@
 #include <luabind/detail/call_function.hpp>
 
 #include <utility>
+#include <string>
 
 #include <DirManager/dirman.h>
 #include <Utils/files.h>
@@ -25,13 +26,14 @@ extern bool xtech_lua_is_function(lua_State *luaState, const char *fname);
 extern void xtech_lua_showMessageBox(std::string message);
 extern std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to);
 bool xtech_lua_readFile(std::string content, std::string path, std::string errMsg);
+std::string xtech_lua_readScriptFile();
 
 extern bool xtech_lua_init(std::string codePath, std::string levelPath);
 extern void xtech_lua_bindAll();
 extern bool xtech_lua_quit();
 
 template<typename... Args>
-bool callLuaFunction(Args... args){
+extern bool xtech_lua_callLuaFunction(Args... args){
     bool err = false;
     try
     {
