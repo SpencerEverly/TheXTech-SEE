@@ -167,6 +167,8 @@ const int maxTiles = 20000;
 //Public Const maxScenes As Integer = 5000
 const int maxScenes = 5000;
 
+const int maxLuaDrawnImages = 999999;
+
 // moved to "screen.h"
 //Public Const ScreenW As Integer = 800  'Game Screen Width
 // const int ScreenW = 800;

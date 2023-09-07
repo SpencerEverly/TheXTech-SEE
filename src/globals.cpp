@@ -377,6 +377,10 @@ bool LoadingInProcess = false;
 int LoadCoins = 0;
 float LoadCoinsT = 0.0f;
 
+RangeArr<StdPicture, 1, maxLuaDrawnImages> GFXLuaBMP;
+RangeArrI<int, 1, maxLuaDrawnImages, 0> GFXLuaWidth;
+RangeArrI<int, 1, maxLuaDrawnImages, 0> GFXLuaHeight;
+
 RangeArrI<bool, 1, maxBlockType, false> GFXBlockCustom;
 //RangeArrI<long, 1, maxBlockType, 0> GFXBlock;
 //RangeArrI<long, 1, maxBlockType, 0> GFXBlockMask;

@@ -40,6 +40,10 @@
 
 #include "control/controls_strings.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include <Logger/logger.h>
 
 namespace Controls
@@ -1110,10 +1114,18 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
     int KeyCode = evt.keysym.scancode;
 
     bool ctrlF = ((evt.keysym.mod & KMOD_CTRL) != 0 && evt.keysym.scancode == SDL_SCANCODE_F);
+    bool ctrlV = ((evt.keysym.mod & KMOD_CTRL) != 0 && evt.keysym.scancode == SDL_SCANCODE_V);
     bool altEnter = ((evt.keysym.mod & KMOD_ALT) != 0 && (evt.keysym.scancode == SDL_SCANCODE_RETURN || evt.keysym.scancode == SDL_SCANCODE_KP_ENTER));
 
     if(ctrlF || altEnter)
         g_hotkeysPressed[Hotkeys::Buttons::Fullscreen] = 0;
+
+#ifdef ENABLE_XTECH_LUA
+    if(ctrlV)
+    {
+        
+    }
+#endif
 
     bool use_defaults = false;
 
@@ -1301,6 +1313,11 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
         CheatCode(' ');
         break;
     }
+    
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_callLuaFunction(L, "__callEvent", "onKeyboardPress", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
+    xtech_lua_callLuaFunction(L, "__callEvent", "onKeyboardPressDirect", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
+#endif
 
     return true;
 }

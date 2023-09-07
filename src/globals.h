@@ -2015,6 +2015,12 @@ extern int LoadCoins;
 extern float LoadCoinsT;
 
 //'Game Graphics
+
+extern RangeArr<StdPicture, 1, maxLuaDrawnImages> GFXLuaBMP;
+extern RangeArrI<int, 1, maxLuaDrawnImages, 0> GFXLuaWidth;
+extern RangeArrI<int, 1, maxLuaDrawnImages, 0> GFXLuaHeight;
+
+
 //Public GFXBlockCustom(1 To maxBlockType) As Boolean
 extern RangeArrI<bool, 1, maxBlockType, false> GFXBlockCustom;
 //Public GFXBlock(1 To maxBlockType) As Long

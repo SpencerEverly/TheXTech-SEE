@@ -162,6 +162,18 @@ void xtech_lua_bindAll()
                 def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("showMessageBox", (void(*)(std::string))&xtech_lua_showMessageBoxInGame)
             ],
+            namespace_("Graphics")[
+                def("loadImage", (void(*)(std::string, std::string, int))&xtech_lua_graphics_loadImage),
+                def("drawImage", (void(*)(int, double, double))&xtech_lua_graphics_drawImage),
+                def("drawImage", (void(*)(int, double, double, double, double))&xtech_lua_graphics_drawImage),
+                def("drawImage", (void(*)(int, double, double, double, double, int, int))&xtech_lua_graphics_drawImage),
+                def("drawImage", (void(*)(int, double, double, double, double, double))&xtech_lua_graphics_drawImage),
+                def("drawImage", (void(*)(int, double, double, double, double, int, int, double))&xtech_lua_graphics_drawImage),
+                def("drawRectangle", (void(*)(int, int, int, int, float, float, float, float, bool))&xtech_lua_graphics_drawRectangle),
+                def("drawRectangle", (void(*)(int, int, int, int, float, float, float, bool))&xtech_lua_graphics_drawRectangle),
+                def("drawScreen", (void(*)(float, float, float, float, bool))&xtech_lua_graphics_drawScreen),
+                def("drawScreen", (void(*)(float, float, float, bool))&xtech_lua_graphics_drawScreen)
+            ],
             namespace_("Audio")[
                 //Music
                 def("MusicChange", (void(*)(int, int, int))&xtech_lua_MusicChange),
