@@ -1229,7 +1229,7 @@ void ProcEvent(eventindex_t index, int whichPlayer, bool NoEffect)
                 }
             }
 #ifdef ENABLE_XTECH_LUA
-            xtech_lua_callLuaFunction(L, "__callEvent", "onEvent", evt.Name);
+            xtech_lua_callLuaEvent("onEvent", evt.Name);
 #endif
         }
     }

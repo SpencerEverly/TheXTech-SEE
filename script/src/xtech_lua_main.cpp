@@ -2,6 +2,7 @@
 #include "xtech_lua_sounds.h"
 #include "xtech_lua_graphics.h"
 #include "xtech_lua_misc.h"
+#include "xtech_lua_mem.h"
 #include "../../src/player.h"
 #include "../../src/npc.h"
 #include "../../src/globals.h"

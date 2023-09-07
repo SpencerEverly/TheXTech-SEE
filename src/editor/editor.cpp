@@ -2820,8 +2820,7 @@ void KillWarp(int A)
 void zTestLevel(bool magicHand, bool interProcess)
 {
 #ifdef ENABLE_XTECH_LUA
-    if(isLuaActive)
-        xtech_lua_callLuaFunction(L, "__callEvent", "onExit");
+    xtech_lua_callLuaEvent("onExit");
 #endif
     
     int A = 0;
@@ -3020,7 +3019,7 @@ void zTestLevel(bool magicHand, bool interProcess)
     
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init();
-    xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+    xtech_lua_callLuaEvent("onStart");
 #endif
 }
 

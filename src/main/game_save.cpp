@@ -301,7 +301,7 @@ void SaveGame()
     AppPathManager::syncFs();
     
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaFunction(L, "__callEvent", "onSaveGame");
+    xtech_lua_callLuaEvent("onSaveGame");
 #endif
 }
 

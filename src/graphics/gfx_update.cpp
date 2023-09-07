@@ -2421,9 +2421,9 @@ void UpdateGraphics(bool skipRepaint)
     
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
-        xtech_lua_callLuaFunction(L, "__callEvent", "onTickPaint");
+        xtech_lua_callLuaEvent("onTickPaint");
     
-    xtech_lua_callLuaFunction(L, "__callEvent", "onDrawPaint");
+    xtech_lua_callLuaEvent("onDrawPaint");
 #endif
 
     if(!skipRepaint)

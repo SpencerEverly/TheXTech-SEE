@@ -33,6 +33,15 @@ extern void xtech_lua_bindAll();
 extern bool xtech_lua_quit();
 
 template<typename... Args>
+extern void xtech_lua_callLuaEvent(std::string eventName, Args... args)
+{
+    if(isLuaActive)
+    {
+        xtech_lua_callLuaFunction(L, "__callEvent", eventName, args...);
+    }
+}
+
+template<typename... Args>
 extern bool xtech_lua_callLuaFunction(Args... args){
     bool err = false;
     try

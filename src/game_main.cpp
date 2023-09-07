@@ -647,7 +647,7 @@ int GameMain(const CmdLineSetup_t &setup)
             
 #ifdef ENABLE_XTECH_LUA
             xtech_lua_init();
-            xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+            xtech_lua_callLuaEvent("onStart");
 #endif
 
             clearScreenFaders();
@@ -813,7 +813,7 @@ int GameMain(const CmdLineSetup_t &setup)
             
 #ifdef ENABLE_XTECH_LUA
             xtech_lua_init();
-            xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+            xtech_lua_callLuaEvent("onStart");
 #endif
 
             delayedMusicStart(); // Allow music being started
@@ -1137,7 +1137,7 @@ int GameMain(const CmdLineSetup_t &setup)
                 
 #ifdef ENABLE_XTECH_LUA
                 xtech_lua_init();
-                xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+                xtech_lua_callLuaEvent("onStart");
 #endif
 
                 lunaLoad();
@@ -1363,7 +1363,7 @@ void NextLevel()
     }
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init();
-    xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+    xtech_lua_callLuaEvent("onStart");
 #endif
 }
 
@@ -2123,6 +2123,6 @@ void StartBattleMode()
     
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init();
-    xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+    xtech_lua_callLuaEvent("onStart");
 #endif
 }

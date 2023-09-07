@@ -1315,8 +1315,8 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
     }
     
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaFunction(L, "__callEvent", "onKeyboardPress", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
-    xtech_lua_callLuaFunction(L, "__callEvent", "onKeyboardPressDirect", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
+    xtech_lua_callLuaEvent("onKeyboardPress", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
+    xtech_lua_callLuaEvent("onKeyboardPressDirect", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
 #endif
 
     return true;

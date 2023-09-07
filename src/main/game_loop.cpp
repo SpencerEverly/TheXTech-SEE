@@ -141,9 +141,9 @@ void GameLoop()
 
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
-        xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
+        xtech_lua_callLuaEvent("onTick");
     
-    xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
+    xtech_lua_callLuaEvent("onDraw");
 #endif
 
     g_microStats.start_task(MicroStats::Controls);
@@ -192,15 +192,13 @@ void GameLoop()
     if(EndLevel)
     {
 #ifdef ENABLE_XTECH_LUA
-        if(isLuaActive)
-            xtech_lua_callLuaFunction(L, "__callEvent", "onExit");
+        xtech_lua_callLuaEvent("onExit");
 #endif
         
         if(LevelBeatCode > 0)
         {
 #ifdef ENABLE_XTECH_LUA
-            if(isLuaActive)
-                xtech_lua_callLuaFunction(L, "__callEvent", "onExitLevel", LevelBeatCode);
+            xtech_lua_callLuaEvent("onExitLevel", LevelBeatCode);
 #endif
             if(Checkpoint == FullFileName)
             {
@@ -340,7 +338,7 @@ void GameLoop()
 void MessageScreen_Init()
 {
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaFunction(L, "__callEvent", "onMessageBox", MessageText);
+    xtech_lua_callLuaEvent("onMessageBox", MessageText);
 #endif
     SoundPause[SFX_Message] = 0;
     PlaySound(SFX_Message);
@@ -419,7 +417,7 @@ int PauseGame(PauseCode code, int plr)
     {
         PauseScreen::Init(plr, SharedControls.LegacyPause);
 #ifdef ENABLE_XTECH_LUA
-        xtech_lua_callLuaFunction(L, "__callEvent", "onPause");
+        xtech_lua_callLuaEvent("onPause");
 #endif
     }
     else if(code == PauseCode::DropAdd)
@@ -542,8 +540,8 @@ int PauseGame(PauseCode code, int plr)
             else if(GamePaused == PauseCode::Misc)
             {
 #ifdef ENABLE_XTECH_LUA
-                xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
-                xtech_lua_callLuaFunction(L, "__callEvent", "onDrawPaint");
+                xtech_lua_callLuaEvent("onDraw");
+                xtech_lua_callLuaEvent("onDrawPaint");
 #endif
             }
             else if(GamePaused == PauseCode::None)

@@ -195,9 +195,9 @@ void WorldLoop()
     
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
-        xtech_lua_callLuaFunction(L, "__callEvent", "onTick");
+        xtech_lua_callLuaEvent("onTick");
     
-    xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
+    xtech_lua_callLuaEvent("onDraw");
 #endif
 
     if(SingleCoop > 0)
