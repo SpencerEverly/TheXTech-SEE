@@ -168,6 +168,10 @@ void xtech_lua_bindAll()
                 def("MusicChange", (void(*)(int, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, std::string, int))&xtech_lua_MusicChange),
                 def("MusicChange", (void(*)(int, std::string))&xtech_lua_MusicChange),
+                def("MusicStop", (void(*)())&xtech_lua_audio_musicStop),
+                def("MusicVolume", (int(*)())&xtech_lua_audio_musicVolume),
+                def("MusicVolume", (void(*)(int))&xtech_lua_audio_musicVolume),
+                def("MusicFadeOut", (void(*)(int))&xtech_lua_audio_stopMusicFadeOut),
                 
                 def("MusicGetCustomMusic", (std::string(*)(int))&xtech_lua_getCustomMusic),
                 def("MusicGetMusicID", (double(*)(int))&xtech_lua_getMusicID),

@@ -13,5 +13,9 @@ void xtech_lua_playSFX(int soundID, int loops);
 void xtech_lua_playSFX(int soundID);
 std::string xtech_lua_getCustomMusic(int sectionID);
 double xtech_lua_getMusicID(int sectionID);
+int xtech_lua_audio_musicVolume();
+void xtech_lua_audio_musicVolume(int vlm);
+void xtech_lua_audio_musicStop();
+void xtech_lua_audio_stopMusicFadeOut(int ms);
 
 #endif // LUA_SOUNDS_HHH

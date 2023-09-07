@@ -3,6 +3,13 @@
 #include "../../src/global_dirs.h"
 #include "../../src/game_main.h"
 
+#include "sdl_proxy/sdl_stdinc.h"
+#include "sdl_proxy/sdl_atomic.h"
+#include "sdl_proxy/sdl_assert.h"
+#include "sdl_proxy/mixer.h"
+
+#include <SDL2/SDL_mixer_ext.h>
+
 void xtech_lua_MusicChange(int sectionID, int musicID, int fadeIn)
 {
     if((LevelSelect || WorldEditor) && !GameMenu && !GameOutro) // music on the world map
@@ -59,12 +66,12 @@ void xtech_lua_playSFX(const std::string &soundFile, int loops, int volume)
 
 void xtech_lua_playSFX(const std::string &soundFile, int loops)
 {
-    PlayExtSoundNoMenu(soundFile, loops, 128);
+    PlayExtSoundNoMenu(soundFile, loops);
 }
 
 void xtech_lua_playSFX(const std::string &soundFile)
 {
-    PlayExtSoundNoMenu(soundFile, 0, 128);
+    PlayExtSoundNoMenu(soundFile);
 }
 
 void xtech_lua_playSFX(int soundID, int loops, int volume)
@@ -74,12 +81,12 @@ void xtech_lua_playSFX(int soundID, int loops, int volume)
 
 void xtech_lua_playSFX(int soundID, int loops)
 {
-    PlaySound(soundID, loops, 128);
+    PlaySound(soundID, loops);
 }
 
 void xtech_lua_playSFX(int soundID)
 {
-    PlaySound(soundID, 0, 128);
+    PlaySound(soundID);
 }
 
 std::string xtech_lua_getCustomMusic(int sectionID)
@@ -91,4 +98,24 @@ std::string xtech_lua_getCustomMusic(int sectionID)
 double xtech_lua_getMusicID(int sectionID)
 {
     return (double)bgMusic[sectionID];
+}
+
+int xtech_lua_audio_musicVolume()
+{
+    return 64; //Mix_GetVolumeMusicStream(NULL);
+}
+
+void xtech_lua_audio_musicVolume(int vlm)
+{
+    Mix_VolumeMusic(vlm);
+}
+
+void xtech_lua_audio_musicStop()
+{
+    StopMusic();
+}
+
+void xtech_lua_audio_stopMusicFadeOut(int ms)
+{
+    FadeOutMusic(ms);
 }
