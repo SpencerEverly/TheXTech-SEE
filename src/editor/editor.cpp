@@ -2819,6 +2819,11 @@ void KillWarp(int A)
 
 void zTestLevel(bool magicHand, bool interProcess)
 {
+#ifdef ENABLE_XTECH_LUA
+    if(isLuaActive)
+        xtech_lua_callLuaFunction(L, "__callEvent", "onExit");
+#endif
+    
     int A = 0;
     Player_t blankPlayer;
     qScreen = false;

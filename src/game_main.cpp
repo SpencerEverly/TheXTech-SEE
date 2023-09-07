@@ -1361,6 +1361,10 @@ void NextLevel()
             GameIsActive = false; // Quit game
         }
     }
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_init();
+    xtech_lua_callLuaFunction(L, "__callEvent", "onStart");
+#endif
 }
 
 // macros mainly used for end of level stuffs. takes over the players controls

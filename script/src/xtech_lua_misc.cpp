@@ -130,7 +130,8 @@ void xtech_lua_exitGame()
 {
     LevelSelect = false;
     GameMenu = true;
-    MenuMode = 0;
+    MenuMode = MENU_MAIN;
+    MenuCursor = 0;
 }
 
 void xtech_lua_exitEngine()

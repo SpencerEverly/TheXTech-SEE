@@ -191,8 +191,17 @@ void GameLoop()
 
     if(EndLevel)
     {
+#ifdef ENABLE_XTECH_LUA
+        if(isLuaActive)
+            xtech_lua_callLuaFunction(L, "__callEvent", "onExit");
+#endif
+        
         if(LevelBeatCode > 0)
         {
+#ifdef ENABLE_XTECH_LUA
+            if(isLuaActive)
+                xtech_lua_callLuaFunction(L, "__callEvent", "onExitLevel", LevelBeatCode);
+#endif
             if(Checkpoint == FullFileName)
             {
                 pLogDebug("Clear check-points at GameLoop()");
