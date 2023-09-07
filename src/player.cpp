@@ -51,6 +51,10 @@
 #include "core/events.h"
 #include "compat.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "xtech_lua_main.h"
+#endif
+
 #include "npc/npc_queues.h"
 
 #include "controls.h"
@@ -468,6 +472,11 @@ void PlayerHurt(const int A)
 //        if(A == nPlay.MySlot + 1)
 //            Netplay::sendData Netplay::PutPlayerLoc(nPlay.MySlot) + "1a" + std::to_string(A) + "|" + p.State + LB;
 //    }
+
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_callLuaEvent("onPlayerHarm", A);
+#endif
+
     p.DoubleJump = false;
     p.GrabSpeed = 0;
     p.GrabTime = 0;
@@ -771,6 +780,10 @@ void PlayerDead(int A)
 //        if(A == nPlay.MySlot + 1)
 //            Netplay::sendData Netplay::PutPlayerLoc(nPlay.MySlot) + "1b" + std::to_string(A) + LB;
 //    }
+
+#ifdef ENABLE_XTECH_LUA
+    xtech_lua_callLuaEvent("onPlayerKill", A);
+#endif
 
     if(p.Character == 5)
         PlaySound(SFX_HeroDied);
