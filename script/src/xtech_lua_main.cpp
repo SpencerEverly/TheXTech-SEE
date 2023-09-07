@@ -190,7 +190,7 @@ void xtech_lua_bindAll()
                 def("saveGame", (void(*)(bool))&xtech_lua_saveGame),
                 def("exitGame", (void(*)())&xtech_lua_exitGame),
                 def("exitEngine", (void(*)())&xtech_lua_exitEngine),
-                def("loadEpisode", (bool(*)(std::string))&xtech_lua_loadEpisode),
+                
                 def("pause", (void(*)())&xtech_lua_pause),
                 def("pause", (void(*)(bool))&xtech_lua_pause),
                 def("unpause", (void(*)())&xtech_lua_unpause),

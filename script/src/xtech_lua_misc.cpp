@@ -11,6 +11,9 @@
 #include "../../src/game_main.h"
 #include "../../src/main/world_file.h"
 #include "../../src/main/menu_main.h"
+#include "../../src/controls.h"
+#include "../../src/main/screen_connect.h"
+#include "../../src/main/screen_quickreconnect.h"
 
 bool xtech_lua_pausedByLua = false;
 
@@ -133,24 +136,6 @@ void xtech_lua_exitGame()
 void xtech_lua_exitEngine()
 {
     KillIt();
-}
-
-bool xtech_lua_loadEpisode(std::string episodeName)
-{
-    int old_selWorld = selWorld;
-    for(int i = 0; i < SelectWorld.size(); i++)
-    {
-        selWorld++;
-        
-        if(SelectWorld[selWorld].WorldName == episodeName)
-            break;
-        else if(i >= SelectWorld.size() && SelectWorld[selWorld].WorldName != episodeName)
-            selWorld = old_selWorld;
-            return false;
-    }
-    
-    StartEpisode();
-    return true;
 }
 
 bool xtech_lua_misc_isPaused()
