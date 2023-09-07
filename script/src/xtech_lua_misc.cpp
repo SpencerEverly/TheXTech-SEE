@@ -4,9 +4,15 @@
 #include "../../src/npc.h"
 #include "../../src/globals.h"
 #include "../../src/global_dirs.h"
+#include "../../src/global_constants.h"
+#include "../../src/global_strings.h"
 #include "../../src/sound.h"
 #include "../../src/main/cheat_code.h"
 #include "../../src/game_main.h"
+#include "../../src/main/world_file.h"
+#include "../../src/main/menu_main.h"
+
+bool xtech_lua_pausedByLua = false;
 
 void xtech_lua_showMessageBox(std::string message)
 {
@@ -89,16 +95,19 @@ std::string xtech_lua_worldFilename()
 
 void xtech_lua_pause()
 {
+    xtech_lua_pausedByLua = true;
     PauseGame(PauseCode::Misc, 0);
 }
 
 void xtech_lua_pause(bool finishDrawing)
 {
+    xtech_lua_pausedByLua = true;
     GamePaused = PauseCode::Misc;
 }
 
 void xtech_lua_unpause()
 {
+    xtech_lua_pausedByLua = false;
     GamePaused = PauseCode::None;
 }
 
@@ -124,4 +133,38 @@ void xtech_lua_exitGame()
 void xtech_lua_exitEngine()
 {
     KillIt();
+}
+
+bool xtech_lua_loadEpisode(std::string episodeName)
+{
+    int old_selWorld = selWorld;
+    for(int i = 0; i < SelectWorld.size(); i++)
+    {
+        selWorld++;
+        
+        if(SelectWorld[selWorld].WorldName == episodeName)
+            break;
+        else if(i >= SelectWorld.size() && SelectWorld[selWorld].WorldName != episodeName)
+            selWorld = old_selWorld;
+            return false;
+    }
+    
+    StartEpisode();
+    return true;
+}
+
+bool xtech_lua_misc_isPaused()
+{
+    if(GamePaused == PauseCode::None)
+        return false;
+    else
+        return true;
+}
+
+bool xtech_lua_misc_isPausedByLua()
+{
+    if(!xtech_lua_pausedByLua)
+        return false;
+    else if(xtech_lua_pausedByLua)
+        return true;
 }

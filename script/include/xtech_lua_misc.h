@@ -1,6 +1,8 @@
 #ifndef LUA_MISC_HHH
 #define LUA_MISC_HHH
 
+extern bool xtech_lua_pausedByLua;
+
 extern void xtech_lua_showMessageBox(std::string message);
 
 extern void xtech_lua_showMessageBoxInGame(std::string message);
@@ -27,5 +29,9 @@ extern void xtech_lua_saveGame();
 extern void xtech_lua_saveGame(bool isCheater);
 extern void xtech_lua_exitGame();
 extern void xtech_lua_exitEngine();
+
+extern bool xtech_lua_loadEpisode(std::string episodeName);
+extern bool xtech_lua_misc_isPaused();
+extern bool xtech_lua_misc_isPausedByLua();
 
 #endif // LUA_MISC_HHH
