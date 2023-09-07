@@ -19,4 +19,13 @@ extern std::string xtech_lua_levelName();
 
 extern std::string xtech_lua_worldFilename();
 
+extern void xtech_lua_pause();
+extern void xtech_lua_pause(bool finishDrawing);
+extern void xtech_lua_unpause();
+
+extern void xtech_lua_saveGame();
+extern void xtech_lua_saveGame(bool isCheater);
+extern void xtech_lua_exitGame();
+extern void xtech_lua_exitEngine();
+
 #endif // LUA_MISC_HHH

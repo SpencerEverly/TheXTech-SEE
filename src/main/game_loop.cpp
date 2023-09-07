@@ -426,6 +426,10 @@ int PauseGame(PauseCode code, int plr)
     {
         // assume TextEntryScreen has already been inited through its Run function.
     }
+    else if(code == PauseCode::Misc)
+    {
+        
+    }
 
     PauseCode old_code = GamePaused;
     GamePaused = code;
@@ -525,6 +529,17 @@ int PauseGame(PauseCode code, int plr)
             {
                 if(TextEntryScreen::Logic())
                     break;
+            }
+            else if(GamePaused == PauseCode::Misc)
+            {
+#ifdef ENABLE_XTECH_LUA
+                xtech_lua_callLuaFunction(L, "__callEvent", "onDraw");
+                xtech_lua_callLuaFunction(L, "__callEvent", "onDrawPaint");
+#endif
+            }
+            else if(GamePaused == PauseCode::None)
+            {
+                break;
             }
 
             g_microStats.end_frame();

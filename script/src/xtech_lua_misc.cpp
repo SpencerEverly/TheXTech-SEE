@@ -86,3 +86,42 @@ std::string xtech_lua_worldFilename()
     else
         return "SMBX2";
 }
+
+void xtech_lua_pause()
+{
+    PauseGame(PauseCode::Misc, 0);
+}
+
+void xtech_lua_pause(bool finishDrawing)
+{
+    GamePaused = PauseCode::Misc;
+}
+
+void xtech_lua_unpause()
+{
+    GamePaused = PauseCode::None;
+}
+
+void xtech_lua_saveGame()
+{
+    SaveGame();
+}
+
+void xtech_lua_saveGame(bool isCheater)
+{
+    if(not isCheater)
+        Cheater = false;
+    SaveGame();
+}
+
+void xtech_lua_exitGame()
+{
+    LevelSelect = false;
+    GameMenu = true;
+    MenuMode = 0;
+}
+
+void xtech_lua_exitEngine()
+{
+    KillIt();
+}

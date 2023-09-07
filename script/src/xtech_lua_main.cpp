@@ -186,7 +186,14 @@ void xtech_lua_bindAll()
                 
                 def("openPauseMenu", (void(*)(int))&xtech_lua_openPauseMenu),
                 def("openPauseMenu", (void(*)())&xtech_lua_openPauseMenu),
-                def("saveGame", (void(*)())&SaveGame),
+                def("saveGame", (void(*)())&xtech_lua_saveGame),
+                def("saveGame", (void(*)(bool))&xtech_lua_saveGame),
+                def("exitGame", (void(*)())&xtech_lua_exitGame),
+                def("exitEngine", (void(*)())&xtech_lua_exitEngine),
+                
+                def("pause", (void(*)())&xtech_lua_pause),
+                def("pause", (void(*)(bool))&xtech_lua_pause),
+                def("unpause", (void(*)())&xtech_lua_unpause),
                 
                 def("episodePath", (std::string(*)())&xtech_lua_episodePath)
             ],
