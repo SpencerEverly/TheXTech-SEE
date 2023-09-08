@@ -1317,6 +1317,8 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
     
 #ifdef ENABLE_XTECH_LUA
     std::shared_ptr<Event> keyboardPressEvent = std::make_shared<Event>("onKeyboardPress", false);
+    keyboardPressEvent->setLoopable(false);
+    keyboardPressEvent->setDirectEventName("onKeyboardPress");
     xtech_lua_callLuaEvent(keyboardPressEvent, KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
 #endif
 

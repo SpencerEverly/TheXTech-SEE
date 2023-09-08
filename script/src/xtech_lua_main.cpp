@@ -212,6 +212,18 @@ void xtech_lua_bindAll()
             namespace_("PlayerLua")[
                 def("harm", (void(*)(int))&xtech_lua_player_harm),
                 def("kill", (void(*)(int))&xtech_lua_player_kill),
+                def("idx", (int(*)(int))&xtech_lua_player_getIdx),
+                
+                def("x", (double(*)(int))&xtech_lua_player_getX),
+                def("x", (void(*)(int, double))&xtech_lua_player_setX),
+                def("y", (double(*)(int))&xtech_lua_player_getY),
+                def("y", (void(*)(int, double))&xtech_lua_player_setY),
+                def("speedX", (double(*)(int))&xtech_lua_player_getSpeedX),
+                def("speedX", (void(*)(int, double))&xtech_lua_player_setSpeedX),
+                def("speedY", (double(*)(int))&xtech_lua_player_getSpeedY),
+                def("speedY", (void(*)(int, double))&xtech_lua_player_setSpeedY),
+                def("width", (double(*)(int))&xtech_lua_player_getWidth),
+                def("height", (double(*)(int))&xtech_lua_player_getHeight),
                 
                 def("doubleJump", (bool(*)(int))&xtech_lua_player_getDoubleJump),
                 def("doubleJump", (void(*)(int, bool))&xtech_lua_player_setDoubleJump),
@@ -226,7 +238,22 @@ void xtech_lua_bindAll()
                 def("quicksand", (void(*)(int, int))&xtech_lua_player_setQuicksand),
                 
                 def("bombs", (int(*)(int))&xtech_lua_player_getBombs),
-                def("bombs", (void(*)(int, int))&xtech_lua_player_setBombs)
+                def("bombs", (void(*)(int, int))&xtech_lua_player_setBombs),
+                
+                def("slippy", (bool(*)(int))&xtech_lua_player_getSlippy),
+                def("slippy", (void(*)(int, bool))&xtech_lua_player_setSlippy),
+                
+                def("fairy", (bool(*)(int))&xtech_lua_player_getFairy),
+                def("fairy", (void(*)(int, bool))&xtech_lua_player_setFairy),
+                
+                def("fairyCD", (int(*)(int))&xtech_lua_player_getFairyCD),
+                def("fairyCD", (void(*)(int, int))&xtech_lua_player_setFairyCD),
+                
+                def("fairyTime", (int(*)(int))&xtech_lua_player_getFairyTime),
+                def("fairyTime", (void(*)(int, int))&xtech_lua_player_setFairyTime),
+                
+                def("hasKey", (bool(*)(int))&xtech_lua_player_getHasKey),
+                def("hasKey", (void(*)(int, bool))&xtech_lua_player_setHasKey)
             ],
             
             namespace_("Misc")[
