@@ -352,21 +352,6 @@ void GameLoop()
 
 void MessageScreen_Init()
 {
-#ifdef ENABLE_XTECH_LUA
-    bool isCancelled = false;
-    
-    std::shared_ptr<Event> onMessageBoxEvent = std::make_shared<Event>("onMessageBox", false);
-    onMessageBoxEvent->setLoopable(false);
-    onMessageBoxEvent->setDirectEventName("onMessageBox");
-    xtech_lua_callLuaEvent(onMessageBoxEvent, MessageText);
-    
-    isCancelled = onMessageBoxEvent->native_cancelled();
-    if(isCancelled)
-    {
-        GamePaused = PauseCode::None;
-        return;
-    }
-#endif
     SoundPause[SFX_Message] = 0;
     PlaySound(SFX_Message);
     MenuCursorCanMove = false;
@@ -439,13 +424,30 @@ int PauseGame(PauseCode code, int plr)
     }
 
     if(code == PauseCode::Message)
+    {
+#ifdef ENABLE_XTECH_LUA
+        bool isCancelled = false;
+        
+        std::shared_ptr<Event> onMessageBoxEvent = std::make_shared<Event>("onMessageBox", true);
+        onMessageBoxEvent->setLoopable(false);
+        onMessageBoxEvent->setDirectEventName("onMessageBox");
+        xtech_lua_callLuaEvent(onMessageBoxEvent, MessageText);
+        
+        isCancelled = onMessageBoxEvent->native_cancelled();
+        if(isCancelled)
+        {
+            GamePaused = PauseCode::None;
+            return 0;
+        }
+#endif
         MessageScreen_Init();
+    }
     else if(code == PauseCode::PauseScreen)
     {
 #ifdef ENABLE_XTECH_LUA
         bool isCancelled = false;
     
-        std::shared_ptr<Event> onPauseEvent = std::make_shared<Event>("onPause", false);
+        std::shared_ptr<Event> onPauseEvent = std::make_shared<Event>("onPause", true);
         onPauseEvent->setLoopable(false);
         onPauseEvent->setDirectEventName("onPause");
         xtech_lua_callLuaEvent(onPauseEvent);
@@ -455,6 +457,7 @@ int PauseGame(PauseCode code, int plr)
         if(isCancelled)
         {
             GamePaused = PauseCode::None;
+            return 0;
         }
 #endif
         PauseScreen::Init(plr, SharedControls.LegacyPause);
