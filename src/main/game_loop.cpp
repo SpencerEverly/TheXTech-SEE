@@ -448,7 +448,7 @@ int PauseGame(PauseCode code, int plr)
         std::shared_ptr<Event> onPauseEvent = std::make_shared<Event>("onPause", false);
         onPauseEvent->setLoopable(false);
         onPauseEvent->setDirectEventName("onPause");
-        xtech_lua_callLuaEvent(onPauseEvent, MessageText);
+        xtech_lua_callLuaEvent(onPauseEvent);
         
         isCancelled = onPauseEvent->native_cancelled();
         
