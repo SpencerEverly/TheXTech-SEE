@@ -3,6 +3,7 @@
 #include "xtech_lua_graphics.h"
 #include "xtech_lua_misc.h"
 #include "xtech_lua_mem.h"
+#include "xtech_lua_player.h"
 
 #include "eventproxy/xtech_lua_eventproxy.h"
 
@@ -208,6 +209,26 @@ void xtech_lua_bindAll()
             .property("loopable", &Event::getLoopable, &Event::setLoopable)
             .property("directEventName", &Event::getDirectEventName, &Event::setDirectEventName),
             
+            namespace_("PlayerLua")[
+                def("harm", (void(*)(int))&xtech_lua_player_harm),
+                def("kill", (void(*)(int))&xtech_lua_player_kill),
+                
+                def("doubleJump", (bool(*)(int))&xtech_lua_player_getDoubleJump),
+                def("doubleJump", (void(*)(int, bool))&xtech_lua_player_setDoubleJump),
+                
+                def("flySparks", (bool(*)(int))&xtech_lua_player_getFlySparks),
+                def("flySparks", (void(*)(int, bool))&xtech_lua_player_setFlySparks),
+                
+                def("driving", (bool(*)(int))&xtech_lua_player_getDriving),
+                def("driving", (void(*)(int, bool))&xtech_lua_player_setDriving),
+                
+                def("quicksand", (int(*)(int))&xtech_lua_player_getQuicksand),
+                def("quicksand", (void(*)(int, int))&xtech_lua_player_setQuicksand),
+                
+                def("bombs", (int(*)(int))&xtech_lua_player_getBombs),
+                def("bombs", (void(*)(int, int))&xtech_lua_player_setBombs)
+            ],
+            
             namespace_("Misc")[
                 def("cheatBuffer", (std::string(*)())&xtech_lua_getCheatBuffer),
                 def("cheatBuffer", (void(*)(const std::string&))&xtech_lua_setCheatBuffer),
@@ -225,7 +246,10 @@ void xtech_lua_bindAll()
                 def("isPaused", (bool(*)())&xtech_lua_misc_isPaused),
                 def("isPausedByLua", (bool(*)())&xtech_lua_misc_isPausedByLua),
                 
-                def("episodePath", (std::string(*)())&xtech_lua_episodePath)
+                def("episodePath", (std::string(*)())&xtech_lua_episodePath),
+                
+                def("getScreenWidth", (int(*)())&xtech_lua_misc_getWindowWidth),
+                def("getScreenHeight", (int(*)())&xtech_lua_misc_getWindowHeight)
             ],
             namespace_("Level")[
                 def("folderPath", (std::string(*)())&xtech_lua_levelFolderPath),

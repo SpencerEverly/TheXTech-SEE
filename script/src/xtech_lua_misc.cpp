@@ -154,3 +154,13 @@ bool xtech_lua_misc_isPausedByLua()
     else if(xtech_lua_pausedByLua)
         return true;
 }
+
+int xtech_lua_misc_getWindowWidth()
+{
+    return ScreenW;
+}
+
+int xtech_lua_misc_getWindowHeight()
+{
+    return ScreenH;
+}
