@@ -7,6 +7,8 @@
 #include <luabind/class.hpp>
 #include <luabind/detail/call_function.hpp>
 
+#include "eventproxy/xtech_lua_eventproxy.h"
+
 #include <utility>
 #include <string>
 
@@ -33,11 +35,20 @@ extern void xtech_lua_bindAll();
 extern bool xtech_lua_quit();
 
 template<typename... Args>
-extern void xtech_lua_callLuaEvent(std::string eventName, Args... args)
+extern void xtech_lua_callSimpleLuaEvent(std::string e, Args... args)
 {
     if(isLuaActive)
     {
-        xtech_lua_callLuaFunction(L, "__callEvent", eventName, args...);
+        xtech_lua_callLuaFunction(L, "__callEvent", e, args...);
+    }
+}
+
+template<typename... Args>
+extern void xtech_lua_callLuaEvent(const std::shared_ptr<Event>& e, Args... args)
+{
+    if(isLuaActive)
+    {
+        xtech_lua_callLuaFunction(L, "__callEvent", e, args...);
     }
 }
 

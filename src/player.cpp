@@ -53,6 +53,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "npc/npc_queues.h"
@@ -474,7 +475,17 @@ void PlayerHurt(const int A)
 //    }
 
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaEvent("onPlayerHarm", A);
+    bool isCancelled = false;
+    
+    std::shared_ptr<Event> playerHarmEvent = std::make_shared<Event>("onPlayerHarm", true);
+    playerHarmEvent->setDirectEventName("onPlayerHarm");
+    playerHarmEvent->setLoopable(false);
+    xtech_lua_callLuaEvent(playerHarmEvent, A);
+    
+    isCancelled = playerHarmEvent->native_cancelled();
+    
+    if(isCancelled)
+        return;
 #endif
 
     p.DoubleJump = false;
@@ -782,7 +793,17 @@ void PlayerDead(int A)
 //    }
 
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaEvent("onPlayerKill", A);
+    bool isCancelled = false;
+    
+    std::shared_ptr<Event> playerKillEvent = std::make_shared<Event>("onPlayerKill", true);
+    playerKillEvent->setDirectEventName("onPlayerKill");
+    playerKillEvent->setLoopable(false);
+    xtech_lua_callLuaEvent(playerKillEvent, A);
+    
+    isCancelled = playerKillEvent->native_cancelled();
+    
+    if(isCancelled)
+        return;
 #endif
 
     if(p.Character == 5)

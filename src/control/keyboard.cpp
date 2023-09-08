@@ -42,6 +42,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include <Logger/logger.h>
@@ -1315,8 +1316,8 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
     }
     
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaEvent("onKeyboardPress", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
-    xtech_lua_callLuaEvent("onKeyboardPressDirect", KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
+    std::shared_ptr<Event> keyboardPressEvent = std::make_shared<Event>("onKeyboardPress", false);
+    xtech_lua_callLuaEvent(keyboardPressEvent, KeyCode, evt.repeat, SDL_GetScancodeName(KeyASCII));
 #endif
 
     return true;

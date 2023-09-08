@@ -22,6 +22,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "sdl_proxy/sdl_stdinc.h"
@@ -729,6 +730,20 @@ void ProcEvent(eventindex_t index, int whichPlayer, bool NoEffect)
     {
         auto &evt = Events[index];
         {
+            
+#ifdef ENABLE_XTECH_LUA
+            bool isCancelled = false;
+            
+            std::shared_ptr<Event> triggerEventData = std::make_shared<Event>("onEvent", true);
+            triggerEventData->setLoopable(false);
+            triggerEventData->setDirectEventName("onEventDirect");
+            xtech_lua_callLuaEvent(triggerEventData, evt.Name);
+            
+            isCancelled = triggerEventData->native_cancelled();
+            
+            if (isCancelled)
+                return;
+#endif
             recentlyTriggeredEvents.insert(index);
 
             if(g_compatibility.speedrun_stop_timer_by == Compatibility_t::SPEEDRUN_STOP_EVENT && equalCase(evt.Name.c_str(), g_compatibility.speedrun_stop_timer_at))
@@ -1228,9 +1243,6 @@ void ProcEvent(eventindex_t index, int whichPlayer, bool NoEffect)
                     newEventPlayer[newEventNum] = static_cast<uint8_t>(whichPlayer);
                 }
             }
-#ifdef ENABLE_XTECH_LUA
-            xtech_lua_callLuaEvent("onEvent", evt.Name);
-#endif
         }
     }
 }

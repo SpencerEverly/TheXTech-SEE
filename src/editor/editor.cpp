@@ -30,6 +30,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "globals.h"
@@ -2820,7 +2821,10 @@ void KillWarp(int A)
 void zTestLevel(bool magicHand, bool interProcess)
 {
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaEvent("onExit");
+    std::shared_ptr<Event> onExitEvent = std::make_shared<Event>("onExit", false);
+    onExitEvent->setLoopable(false);
+    onExitEvent->setDirectEventName("onExit");
+    xtech_lua_callLuaEvent(onExitEvent);
 #endif
     
     int A = 0;
@@ -3019,7 +3023,10 @@ void zTestLevel(bool magicHand, bool interProcess)
     
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init();
-    xtech_lua_callLuaEvent("onStart");
+    std::shared_ptr<Event> onStartEvent = std::make_shared<Event>("onStart", false);
+    onStartEvent->setLoopable(false);
+    onStartEvent->setDirectEventName("onStart");
+    xtech_lua_callLuaEvent(onStartEvent);
 #endif
 }
 

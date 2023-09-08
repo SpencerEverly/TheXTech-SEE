@@ -48,6 +48,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "effect.h"
@@ -2421,9 +2422,17 @@ void UpdateGraphics(bool skipRepaint)
     
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
-        xtech_lua_callLuaEvent("onTickPaint");
+    {
+        std::shared_ptr<Event> onTickPaintEvent = std::make_shared<Event>("onTickPaint", false);
+        onTickPaintEvent->setLoopable(false);
+        onTickPaintEvent->setDirectEventName("onTickPaint");
+        xtech_lua_callLuaEvent(onTickPaintEvent);
+    }
     
-    xtech_lua_callLuaEvent("onDrawPaint");
+    std::shared_ptr<Event> onDrawPaintEvent = std::make_shared<Event>("onDrawPaint", false);
+    onDrawPaintEvent->setLoopable(false);
+    onDrawPaintEvent->setDirectEventName("onDrawPaint");
+    xtech_lua_callLuaEvent(onDrawPaintEvent);
 #endif
 
     if(!skipRepaint)

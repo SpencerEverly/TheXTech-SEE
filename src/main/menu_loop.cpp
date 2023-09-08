@@ -26,6 +26,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "../globals.h"
@@ -530,9 +531,17 @@ void MenuLoop()
     
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
-        xtech_lua_callLuaEvent("onTick");
+    {
+        std::shared_ptr<Event> onTickEvent = std::make_shared<Event>("onTick", false);
+        onTickEvent->setLoopable(false);
+        onTickEvent->setDirectEventName("onTick");
+        xtech_lua_callLuaEvent(onTickEvent);
+    }
     
-    xtech_lua_callLuaEvent("onDraw");
+    std::shared_ptr<Event> onDrawEvent = std::make_shared<Event>("onDraw", false);
+    onDrawEvent->setLoopable(false);
+    onDrawEvent->setDirectEventName("onDraw");
+    xtech_lua_callLuaEvent(onDrawEvent);
 #endif
     
     if(!g_gameInfo.introDeadMode)

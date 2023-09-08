@@ -3,6 +3,9 @@
 #include "xtech_lua_graphics.h"
 #include "xtech_lua_misc.h"
 #include "xtech_lua_mem.h"
+
+#include "eventproxy/xtech_lua_eventproxy.h"
+
 #include "../../src/player.h"
 #include "../../src/npc.h"
 #include "../../src/globals.h"
@@ -197,6 +200,14 @@ void xtech_lua_bindAll()
                 def("SfxPlay", (void(*)(const std::string&, int))&xtech_lua_playSFX),
                 def("SfxPlay", (void(*)(const std::string&))&xtech_lua_playSFX)
             ],
+            
+            class_<Event>("Event")
+            .property("eventName", &Event::eventName)
+            .property("cancellable", &Event::isCancellable)
+            .property("cancelled", &Event::cancelled, &Event::setCancelled)
+            .property("loopable", &Event::getLoopable, &Event::setLoopable)
+            .property("directEventName", &Event::getDirectEventName, &Event::setDirectEventName),
+            
             namespace_("Misc")[
                 def("cheatBuffer", (std::string(*)())&xtech_lua_getCheatBuffer),
                 def("cheatBuffer", (void(*)(const std::string&))&xtech_lua_setCheatBuffer),

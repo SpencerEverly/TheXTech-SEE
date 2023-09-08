@@ -36,6 +36,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "sdl_proxy/sdl_timer.h"
@@ -647,7 +648,11 @@ int GameMain(const CmdLineSetup_t &setup)
             
 #ifdef ENABLE_XTECH_LUA
             xtech_lua_init();
-            xtech_lua_callLuaEvent("onStart");
+            
+            std::shared_ptr<Event> onStartEvent = std::make_shared<Event>("onStart", false);
+            onStartEvent->setLoopable(false);
+            onStartEvent->setDirectEventName("onStart");
+            xtech_lua_callLuaEvent(onStartEvent);
 #endif
 
             clearScreenFaders();
@@ -813,7 +818,11 @@ int GameMain(const CmdLineSetup_t &setup)
             
 #ifdef ENABLE_XTECH_LUA
             xtech_lua_init();
-            xtech_lua_callLuaEvent("onStart");
+            
+            std::shared_ptr<Event> onStartEvent2 = std::make_shared<Event>("onStart", false);
+            onStartEvent2->setLoopable(false);
+            onStartEvent2->setDirectEventName("onStart");
+            xtech_lua_callLuaEvent(onStartEvent2);
 #endif
 
             delayedMusicStart(); // Allow music being started
@@ -1137,7 +1146,10 @@ int GameMain(const CmdLineSetup_t &setup)
                 
 #ifdef ENABLE_XTECH_LUA
                 xtech_lua_init();
-                xtech_lua_callLuaEvent("onStart");
+                std::shared_ptr<Event> onStartEvent3 = std::make_shared<Event>("onStart", false);
+                onStartEvent3->setLoopable(false);
+                onStartEvent3->setDirectEventName("onStart");
+                xtech_lua_callLuaEvent(onStartEvent3);
 #endif
 
                 lunaLoad();
@@ -1363,7 +1375,10 @@ void NextLevel()
     }
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init();
-    xtech_lua_callLuaEvent("onStart");
+    std::shared_ptr<Event> onStartEvent4 = std::make_shared<Event>("onStart", false);
+    onStartEvent4->setLoopable(false);
+    onStartEvent4->setDirectEventName("onStart");
+    xtech_lua_callLuaEvent(onStartEvent4);
 #endif
 }
 
@@ -2123,6 +2138,10 @@ void StartBattleMode()
     
 #ifdef ENABLE_XTECH_LUA
     xtech_lua_init();
-    xtech_lua_callLuaEvent("onStart");
+    
+    std::shared_ptr<Event> onStartEvent5 = std::make_shared<Event>("onStart", false);
+    onStartEvent5->setLoopable(false);
+    onStartEvent5->setDirectEventName("onStart");
+    xtech_lua_callLuaEvent(onStartEvent5);
 #endif
 }

@@ -20,6 +20,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "../globals.h"
@@ -301,7 +302,10 @@ void SaveGame()
     AppPathManager::syncFs();
     
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaEvent("onSaveGame");
+    std::shared_ptr<Event> gameSaveEvent = std::make_shared<Event>("onSaveGame", false);
+    gameSaveEvent->setLoopable(false);
+    gameSaveEvent->setDirectEventName("onSaveGame");
+    xtech_lua_callLuaEvent(gameSaveEvent);
 #endif
 }
 

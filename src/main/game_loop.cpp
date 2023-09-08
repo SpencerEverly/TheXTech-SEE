@@ -54,6 +54,7 @@
 
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
+#include "eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "../pseudo_vb.h"
@@ -141,9 +142,17 @@ void GameLoop()
 
 #ifdef ENABLE_XTECH_LUA
     if(GamePaused == PauseCode::None)
-        xtech_lua_callLuaEvent("onTick");
+    {
+        std::shared_ptr<Event> onTickEvent = std::make_shared<Event>("onTick", false);
+        onTickEvent->setLoopable(false);
+        onTickEvent->setDirectEventName("onTick");
+        xtech_lua_callLuaEvent(onTickEvent);
+    }
     
-    xtech_lua_callLuaEvent("onDraw");
+    std::shared_ptr<Event> onDrawEvent = std::make_shared<Event>("onDraw", false);
+    onDrawEvent->setLoopable(false);
+    onDrawEvent->setDirectEventName("onDraw");
+    xtech_lua_callLuaEvent(onDrawEvent);
 #endif
 
     g_microStats.start_task(MicroStats::Controls);
@@ -192,13 +201,19 @@ void GameLoop()
     if(EndLevel)
     {
 #ifdef ENABLE_XTECH_LUA
-        xtech_lua_callLuaEvent("onExit");
+        std::shared_ptr<Event> onExitEvent = std::make_shared<Event>("onExit", false);
+        onExitEvent->setLoopable(false);
+        onExitEvent->setDirectEventName("onExit");
+        xtech_lua_callLuaEvent(onExitEvent);
 #endif
         
         if(LevelBeatCode > 0)
         {
 #ifdef ENABLE_XTECH_LUA
-            xtech_lua_callLuaEvent("onExitLevel", LevelBeatCode);
+            std::shared_ptr<Event> onExitLevelEvent = std::make_shared<Event>("onExitLevel", false);
+            onExitLevelEvent->setLoopable(false);
+            onExitLevelEvent->setDirectEventName("onExitLevel");
+            xtech_lua_callLuaEvent(onExitLevelEvent, LevelBeatCode);
 #endif
             if(Checkpoint == FullFileName)
             {
@@ -338,7 +353,19 @@ void GameLoop()
 void MessageScreen_Init()
 {
 #ifdef ENABLE_XTECH_LUA
-    xtech_lua_callLuaEvent("onMessageBox", MessageText);
+    bool isCancelled = false;
+    
+    std::shared_ptr<Event> onMessageBoxEvent = std::make_shared<Event>("onMessageBox", false);
+    onMessageBoxEvent->setLoopable(false);
+    onMessageBoxEvent->setDirectEventName("onMessageBox");
+    xtech_lua_callLuaEvent(onMessageBoxEvent, MessageText);
+    
+    isCancelled = onMessageBoxEvent->native_cancelled();
+    if(isCancelled)
+    {
+        GamePaused = PauseCode::None;
+        return;
+    }
 #endif
     SoundPause[SFX_Message] = 0;
     PlaySound(SFX_Message);
@@ -415,10 +442,22 @@ int PauseGame(PauseCode code, int plr)
         MessageScreen_Init();
     else if(code == PauseCode::PauseScreen)
     {
-        PauseScreen::Init(plr, SharedControls.LegacyPause);
 #ifdef ENABLE_XTECH_LUA
-        xtech_lua_callLuaEvent("onPause");
+        bool isCancelled = false;
+    
+        std::shared_ptr<Event> onPauseEvent = std::make_shared<Event>("onPause", false);
+        onPauseEvent->setLoopable(false);
+        onPauseEvent->setDirectEventName("onPause");
+        xtech_lua_callLuaEvent(onPauseEvent, MessageText);
+        
+        isCancelled = onPauseEvent->native_cancelled();
+        
+        if(isCancelled)
+        {
+            GamePaused = PauseCode::None;
+        }
 #endif
+        PauseScreen::Init(plr, SharedControls.LegacyPause);
     }
     else if(code == PauseCode::DropAdd)
     {
@@ -540,8 +579,15 @@ int PauseGame(PauseCode code, int plr)
             else if(GamePaused == PauseCode::Misc)
             {
 #ifdef ENABLE_XTECH_LUA
-                xtech_lua_callLuaEvent("onDraw");
-                xtech_lua_callLuaEvent("onDrawPaint");
+                std::shared_ptr<Event> onDrawPaintPauseEvent = std::make_shared<Event>("onDrawPaint", false);
+                onDrawPaintPauseEvent->setLoopable(false);
+                onDrawPaintPauseEvent->setDirectEventName("onDrawPaint");
+                xtech_lua_callLuaEvent(onDrawPaintPauseEvent);
+                
+                std::shared_ptr<Event> onDrawPauseEvent = std::make_shared<Event>("onDraw", false);
+                onDrawPauseEvent->setLoopable(false);
+                onDrawPauseEvent->setDirectEventName("onDraw");
+                xtech_lua_callLuaEvent(onDrawPauseEvent);
 #endif
             }
             else if(GamePaused == PauseCode::None)

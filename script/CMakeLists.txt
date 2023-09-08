@@ -25,6 +25,7 @@ set(LIB_XTECHLUA_SRCS
     src/xtech_lua_graphics.cpp
     src/xtech_lua_misc.cpp
     src/xtech_lua_mem.cpp
+    src/eventproxy/xtech_lua_eventproxy.cpp
 )
 
 add_library(XTechLua STATIC
