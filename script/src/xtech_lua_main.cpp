@@ -213,6 +213,7 @@ void xtech_lua_bindAll()
                 def("harm", (void(*)(int))&xtech_lua_player_harm),
                 def("kill", (void(*)(int))&xtech_lua_player_kill),
                 def("idx", (int(*)(int))&xtech_lua_player_getIdx),
+                def("count", (int(*)())&xtech_lua_player_getCount),
                 
                 def("x", (double(*)(int))&xtech_lua_player_getX),
                 def("x", (void(*)(int, double))&xtech_lua_player_setX),

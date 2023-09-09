@@ -7,7 +7,6 @@ on:
       - devel
       - versus-ci
       - versus-ci-ubuntu
-      - smbxplus
   pull_request:
     branches:
       - main

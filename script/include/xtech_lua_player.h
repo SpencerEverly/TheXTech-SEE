@@ -21,6 +21,7 @@ double xtech_lua_player_getSpeedY(int idx);
 void xtech_lua_player_setSpeedY(int idx, double value);
 double xtech_lua_player_getWidth(int idx);
 double xtech_lua_player_getHeight(int idx);
+int xtech_lua_player_getCount();
 
 bool xtech_lua_player_getDoubleJump(int idx);
 void xtech_lua_player_setDoubleJump(int idx, bool value);

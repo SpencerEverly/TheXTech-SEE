@@ -76,6 +76,13 @@ double xtech_lua_player_getHeight(int idx)
     return Player[idx].Location.Height;
 }
 
+int xtech_lua_player_getCount()
+{
+    if(numPlayers > 0)
+        return numPlayers;
+    else
+        return 0;
+}
 
 
 //Global memory values

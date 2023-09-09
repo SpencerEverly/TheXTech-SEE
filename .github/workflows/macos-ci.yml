@@ -6,7 +6,6 @@ on:
       - main
       - devel
       - versus-ci-macos
-      - smbxplus
   pull_request:
     branches:
       - main
