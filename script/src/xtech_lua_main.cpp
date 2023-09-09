@@ -14,6 +14,7 @@
 #include "../../src/sound.h"
 #include "../../src/main/cheat_code.h"
 #include "../../src/game_main.h"
+#include "../../src/script/luna/mememu.h"
 
 #include <utility>
 #include <string>
@@ -156,6 +157,10 @@ void xtech_lua_bindAll()
 {
     module(L)
         [
+            def("mem", (double(*)(size_t,FIELDTYPE))&GetMem),
+            def("mem", (void(*)(size_t,FIELDTYPE,double))&SetMem),
+            def("readmem", (double(*)(size_t,FIELDTYPE))&GetMem),
+            def("writemem", (void(*)(size_t,FIELDTYPE,double))&SetMem),
             namespace_("Native")[
                 def("getSMBXPath", (std::string(*)())&AppPath),
                 def("isOverworld", (bool(*)())&isOverworld)

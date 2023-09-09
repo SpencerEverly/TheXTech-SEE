@@ -34,15 +34,18 @@ struct NPC_t;
 void MemAssign(size_t address, double value, OPTYPE operation, FIELDTYPE ftype);
 bool CheckMem(size_t address, double value, COMPARETYPE ctype, FIELDTYPE ftype);
 double GetMem(size_t addr, FIELDTYPE ftype);
+void SetMem(size_t address, FIELDTYPE ftype, double value);
 
 // Player relative
 void MemAssign(Player_t *obj, size_t address, double value, OPTYPE operation, FIELDTYPE ftype);
 bool CheckMem(Player_t *obj, size_t offset, double value, COMPARETYPE ctype, FIELDTYPE ftype);
 double GetMem(Player_t *obj, size_t offset, FIELDTYPE ftype);
+void SetMem(Player_t *obj, size_t offset, FIELDTYPE ftype, double value);
 
 // NPC relative
 void MemAssign(NPC_t *obj, size_t address, double value, OPTYPE operation, FIELDTYPE ftype);
 bool CheckMem(NPC_t *obj, size_t offset, double value, COMPARETYPE ctype, FIELDTYPE ftype);
 double GetMem(NPC_t *obj, size_t offset, FIELDTYPE ftype);
+void SetMem(NPC_t *obj, size_t offset, FIELDTYPE ftype, double value);
 
 #endif // MEMEMU_H

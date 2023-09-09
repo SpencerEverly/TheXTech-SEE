@@ -1,7 +1,7 @@
 #ifndef LUA_MEM_HHH
 #define LUA_MEM_HHH
 
-enum FIELDTYPE
+/*enum FIELDTYPE_LUNALUA
 {
     FIELD_INVALID = 0,
     FIELD_BYTE = 1,
@@ -13,6 +13,6 @@ enum FIELDTYPE
     FIELD_BOOL = 7,
 
     FIELD_MAX = 7
-};
+};*/
 
 #endif // LUA_MEM_HHH

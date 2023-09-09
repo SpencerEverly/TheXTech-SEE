@@ -2098,6 +2098,19 @@ SDL_FORCE_INLINE void opXor(D &mem, size_t addr, double o2, FIELDTYPE ftype)
     mem.setValue(addr, static_cast<double>(res), ftype);
 }
 
+void SetMem(size_t address, FIELDTYPE ftype, double value)
+{
+    if(address < GM_BASE || address > GM_END)
+    {
+        pLogWarning("MemEmu: MemAssign Requested value of out-of-range global address: 0x%x", address);
+        return;
+    }
+
+    if(ftype == FT_INVALID)
+        return;
+    
+    s_emu.setValue(address, value, ftype);
+}
 
 void MemAssign(size_t address, double value, OPTYPE operation, FIELDTYPE ftype)
 {
@@ -2707,6 +2720,11 @@ bool CheckMem(Player_t *obj, size_t offset, double value, COMPARETYPE ctype, FIE
     return ChecmMemType(s_emuPlayer, obj, offset, value, ctype, ftype);
 }
 
+void SetMem(Player_t *obj, size_t offset, FIELDTYPE ftype, double value)
+{
+    s_emuPlayer.setValue(obj, offset, value, ftype);
+}
+
 double GetMem(Player_t *obj, size_t offset, FIELDTYPE ftype)
 {
 #ifdef DEBUG_MEMEMU_TRACE
@@ -2744,4 +2762,9 @@ double GetMem(NPC_t *obj, size_t offset, FIELDTYPE ftype)
 #else
     return s_emuNPC.getValue(obj, offset, ftype);
 #endif
+}
+
+void SetMem(NPC_t *obj, size_t offset, FIELDTYPE ftype, double value)
+{
+    s_emuNPC.setValue(obj, offset, value, ftype);
 }
