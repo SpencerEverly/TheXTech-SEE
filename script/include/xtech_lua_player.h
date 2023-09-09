@@ -20,7 +20,9 @@ void xtech_lua_player_setSpeedX(int idx, double value);
 double xtech_lua_player_getSpeedY(int idx);
 void xtech_lua_player_setSpeedY(int idx, double value);
 double xtech_lua_player_getWidth(int idx);
+void xtech_lua_player_setWidth(int idx, double value);
 double xtech_lua_player_getHeight(int idx);
+void xtech_lua_player_setHeight(int idx, double value);
 int xtech_lua_player_getCount();
 
 bool xtech_lua_player_getDoubleJump(int idx);
@@ -52,5 +54,20 @@ void xtech_lua_player_setFairyTime(int idx, int value);
 
 bool xtech_lua_player_getHasKey(int idx);
 void xtech_lua_player_setHasKey(int idx, bool value);
+
+int xtech_lua_player_getSwordPoke(int idx);
+void xtech_lua_player_setSwordPoke(int idx, int value);
+
+int xtech_lua_player_getHearts(int idx);
+void xtech_lua_player_setHearts(int idx, int value);
+
+bool xtech_lua_player_getCanFloat(int idx);
+void xtech_lua_player_setCanFloat(int idx, bool value);
+
+bool xtech_lua_player_getFloatRelease(int idx);
+void xtech_lua_player_setFloatRelease(int idx, bool value);
+
+int xtech_lua_player_getFloatTime(int idx);
+void xtech_lua_player_setFloatTime(int idx, int value);
 
 #endif

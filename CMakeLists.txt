@@ -912,9 +912,11 @@ else()
     list(APPEND THEXTECH_SRC src/core/language/language_dummy.cpp)
 endif()
 
-if(NOT LUA_FOUND AND NOT LUA51_FOUND)
-    find_package(Lua51 REQUIRED)
-    set(LUA_INCLUDE_DIRS "${LUA_INCLUDE_DIR}")
+if(THEXTECH_ENABLE_LUA)
+    if(NOT LUA_FOUND AND NOT LUA51_FOUND)
+        find_package(Lua51 REQUIRED)
+        set(LUA_INCLUDE_DIRS "${LUA_INCLUDE_DIR}")
+    endif()
 endif()
 
 include_directories(

@@ -209,7 +209,7 @@ void xtech_lua_bindAll()
             .property("loopable", &Event::getLoopable, &Event::setLoopable)
             .property("directEventName", &Event::getDirectEventName, &Event::setDirectEventName),
             
-            namespace_("PlayerLua")[
+            namespace_("Player")[
                 def("harm", (void(*)(int))&xtech_lua_player_harm),
                 def("kill", (void(*)(int))&xtech_lua_player_kill),
                 def("idx", (int(*)(int))&xtech_lua_player_getIdx),
@@ -224,7 +224,9 @@ void xtech_lua_bindAll()
                 def("speedY", (double(*)(int))&xtech_lua_player_getSpeedY),
                 def("speedY", (void(*)(int, double))&xtech_lua_player_setSpeedY),
                 def("width", (double(*)(int))&xtech_lua_player_getWidth),
+                def("width", (void(*)(int, double))&xtech_lua_player_setWidth),
                 def("height", (double(*)(int))&xtech_lua_player_getHeight),
+                def("height", (void(*)(int, double))&xtech_lua_player_setHeight),
                 
                 def("doubleJump", (bool(*)(int))&xtech_lua_player_getDoubleJump),
                 def("doubleJump", (void(*)(int, bool))&xtech_lua_player_setDoubleJump),
@@ -254,7 +256,22 @@ void xtech_lua_bindAll()
                 def("fairyTime", (void(*)(int, int))&xtech_lua_player_setFairyTime),
                 
                 def("hasKey", (bool(*)(int))&xtech_lua_player_getHasKey),
-                def("hasKey", (void(*)(int, bool))&xtech_lua_player_setHasKey)
+                def("hasKey", (void(*)(int, bool))&xtech_lua_player_setHasKey),
+                
+                def("swordPoke", (int(*)(int))&xtech_lua_player_getSwordPoke),
+                def("swordPoke", (void(*)(int, int))&xtech_lua_player_setSwordPoke),
+                
+                def("hearts", (int(*)(int))&xtech_lua_player_getHearts),
+                def("hearts", (void(*)(int, int))&xtech_lua_player_setHearts),
+                
+                def("canFloat", (bool(*)(int))&xtech_lua_player_getCanFloat),
+                def("canFloat", (void(*)(int, bool))&xtech_lua_player_setCanFloat),
+                
+                def("floatRelease", (bool(*)(int))&xtech_lua_player_getFloatRelease),
+                def("floatRelease", (void(*)(int, bool))&xtech_lua_player_setFloatRelease),
+                
+                def("floatTime", (int(*)(int))&xtech_lua_player_getFloatTime),
+                def("floatTime", (void(*)(int, int))&xtech_lua_player_setFloatTime)
             ],
             
             namespace_("Misc")[

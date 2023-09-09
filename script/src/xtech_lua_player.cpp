@@ -71,9 +71,19 @@ double xtech_lua_player_getWidth(int idx)
     return Player[idx].Location.Width;
 }
 
+void xtech_lua_player_setWidth(int idx, double value)
+{
+    Player[idx].Location.Width = value;
+}
+
 double xtech_lua_player_getHeight(int idx)
 {
     return Player[idx].Location.Height;
+}
+
+void xtech_lua_player_setHeight(int idx, double value)
+{
+    Player[idx].Location.Height = value;
 }
 
 int xtech_lua_player_getCount()
@@ -194,4 +204,59 @@ bool xtech_lua_player_getHasKey(int idx)
 void xtech_lua_player_setHasKey(int idx, bool value)
 {
     Player[idx].HasKey = value;
+}
+
+
+int xtech_lua_player_getSwordPoke(int idx)
+{
+    return Player[idx].SwordPoke;
+}
+
+void xtech_lua_player_setSwordPoke(int idx, int value)
+{
+    Player[idx].SwordPoke = value;
+}
+
+
+int xtech_lua_player_getHearts(int idx)
+{
+    return Player[idx].Hearts;
+}
+
+void xtech_lua_player_setHearts(int idx, int value)
+{
+    Player[idx].Hearts = value;
+}
+
+
+bool xtech_lua_player_getCanFloat(int idx)
+{
+    return Player[idx].CanFloat;
+}
+
+void xtech_lua_player_setCanFloat(int idx, bool value)
+{
+    Player[idx].CanFloat = value;
+}
+
+
+bool xtech_lua_player_getFloatRelease(int idx)
+{
+    return Player[idx].FloatRelease;
+}
+
+void xtech_lua_player_setFloatRelease(int idx, bool value)
+{
+    Player[idx].FloatRelease = value;
+}
+
+
+int xtech_lua_player_getFloatTime(int idx)
+{
+    return Player[idx].FloatTime;
+}
+
+void xtech_lua_player_setFloatTime(int idx, int value)
+{
+    Player[idx].FloatTime = value;
 }
