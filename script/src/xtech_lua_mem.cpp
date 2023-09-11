@@ -1,3 +1,6 @@
+#include "xtech_lua_mem.h"
+#include "../../src/script/luna/mememu.h"
+
 #include "sdl_proxy/sdl_stdinc.h"
 #include "sdl_proxy/sdl_assert.h"
 
@@ -5,3 +8,4 @@
 #include <functional>
 #include <type_traits>
 #include <limits>
+

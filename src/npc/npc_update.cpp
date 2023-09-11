@@ -1134,7 +1134,7 @@ void UpdateNPCs()
             {
                 for(int B : treeNPCQuery(NPC[A].Location, SORTMODE_NONE))
                 {
-                    if(A != B && NPC[B].Active && NPC[B].Killed == 0 && (!NPCNoBubbleTransform[NPC[B].Type]))
+                    if(A != B && NPC[B].Active && NPC[B].Killed == 0 && (!NPCNoBubbleTransform[NPC[B].Type] && !NPC[B].Generator && !NPC[B].Inert))
                     {
                         if(CheckCollision(NPC[A].Location, NPC[B].Location))
                         {

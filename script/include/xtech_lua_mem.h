@@ -1,7 +1,13 @@
 #ifndef LUA_MEM_HHH
 #define LUA_MEM_HHH
 
-/*enum FIELDTYPE_LUNALUA
+#include <lua.hpp>
+#include <luabind/luabind.hpp>
+#include <luabind/function.hpp>
+#include <luabind/class.hpp>
+#include <luabind/detail/call_function.hpp>
+
+enum FIELDTYPE_LUNALUA
 {
     FIELD_INVALID = 0,
     FIELD_BYTE = 1,
@@ -13,6 +19,6 @@
     FIELD_BOOL = 7,
 
     FIELD_MAX = 7
-};*/
+};
 
 #endif // LUA_MEM_HHH
