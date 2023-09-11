@@ -43,6 +43,7 @@
 #ifdef ENABLE_XTECH_LUA
 #include "xtech_lua_main.h"
 #include "eventproxy/xtech_lua_eventproxy.h"
+#include <SDL2/SDL_clipboard.h>
 #endif
 
 #include <Logger/logger.h>
@@ -1124,13 +1125,14 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
 #ifdef ENABLE_XTECH_LUA
     if(ctrlV)
     {
-        //std::string value;
-        /*clip::get_text(value);
-        
-        std::shared_ptr<Event> pasteTextEvent = std::make_shared<Event>("onPasteText", false);
-        pasteTextEvent->setLoopable(false);
-        pasteTextEvent->setDirectEventName("onPasteText");
-        xtech_lua_callLuaEvent(pasteTextEvent, value);*/
+        if(SDL_HasClipboardText())
+        {
+            const char *paste_text = SDL_GetClipboardText();
+            std::shared_ptr<Event> pasteTextEvent = std::make_shared<Event>("onPasteText", false);
+            pasteTextEvent->setLoopable(false);
+            pasteTextEvent->setDirectEventName("onPasteText");
+            xtech_lua_callLuaEvent(pasteTextEvent, paste_text);
+        }
     }
 #endif
 
