@@ -1913,6 +1913,8 @@ void SizableBlocks()
     BlockIsSizable[439] = true;
     BlockIsSizable[440] = true;
     BlockIsSizable[445] = true;
+    BlockIsSizable[700] = true;
+    BlockIsSizable[701] = true;
 }
 
 void StartEpisode()

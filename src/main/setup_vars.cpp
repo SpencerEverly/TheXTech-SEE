@@ -2658,6 +2658,47 @@ void SetupVars()
     BlockWidth[639] = 32;
     BlockHeight[639] = 32;
     BlockOnlyHitspot1[639] = true;
+    //Semi-solid slope (Right)
+    BlockSlope[640] = 1;
+    BlockWidth[640] = 32;
+    BlockHeight[640] = 32;
+    BlockOnlyHitspot1[640] = true;
+    //SMB3 Warp Pipe Directionals
+    For(A, 641, 645)
+    {
+        BlockWidth[A] = 64;
+        BlockHeight[A] = 64;
+    }
+    //Blocks 646-670
+    For(A, 646, 670)
+    {
+        BlockWidth[A] = 32;
+        BlockHeight[A] = 32;
+    }
+    //Semisolid Invisible block
+    BlockOnlyHitspot1[647] = true;
+    //SMB1 Castle Bricks
+    BlockWidth[671] = 96;
+    BlockHeight[671] = 96;
+    //Blocks 672-694
+    For(A, 672, 694)
+    {
+        BlockWidth[A] = 32;
+        BlockHeight[A] = 32;
+    }
+    For(A, 695, 697)
+    {
+        BlockWidth[A] = 64;
+    }
+    For(A, 698, 699)
+    {
+        BlockWidth[A] = 32;
+        BlockHeight[A] = 32;
+    }
+    //SMB3 Airship Window
+    BlockWidth[702] = 32;
+    BlockHeight[702] = 32;
+    
     
     
     
