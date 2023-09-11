@@ -2825,6 +2825,7 @@ void zTestLevel(bool magicHand, bool interProcess)
     onExitEvent->setLoopable(false);
     onExitEvent->setDirectEventName("onExit");
     xtech_lua_callLuaEvent(onExitEvent);
+    isPlayerEndCancelled = false;
 #endif
     
     int A = 0;

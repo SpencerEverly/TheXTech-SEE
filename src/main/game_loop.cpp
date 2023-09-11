@@ -205,6 +205,7 @@ void GameLoop()
         onExitEvent->setLoopable(false);
         onExitEvent->setDirectEventName("onExit");
         xtech_lua_callLuaEvent(onExitEvent);
+        isPlayerEndCancelled = false;
 #endif
         
         if(LevelBeatCode > 0)

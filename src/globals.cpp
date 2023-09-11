@@ -548,6 +548,7 @@ std::string CurrentLangDialect;
 
 bool chosenStarman = true;
 bool isOverworld = false;
+bool isPlayerEndCancelled = false;
 
 //void DoEvents()
 //{

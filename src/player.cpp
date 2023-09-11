@@ -892,6 +892,18 @@ void PlayerDead(int A)
 
 void KillPlayer(const int A)
 {
+#ifdef ENABLE_XTECH_LUA
+    std::shared_ptr<Event> playerKillEndEvent = std::make_shared<Event>("onPlayerKillEnd", true);
+    playerKillEndEvent->setDirectEventName("onPlayerKillEnd");
+    playerKillEndEvent->setLoopable(false);
+    xtech_lua_callLuaEvent(playerKillEndEvent, A);
+    
+    isPlayerEndCancelled = playerKillEndEvent->native_cancelled();
+    
+    if(isPlayerEndCancelled)
+        return;
+#endif
+    
     Location_t tempLocation;
     auto &p = Player[A];
 
@@ -1052,20 +1064,6 @@ void EveryonesDead()
 //    int A = 0; // UNUSED
     if(BattleMode)
         return;
-    
-#ifdef ENABLE_XTECH_LUA
-    bool isCancelled = false;
-    
-    std::shared_ptr<Event> playerKillEndEvent = std::make_shared<Event>("onPlayerKillEnd", true);
-    playerKillEndEvent->setDirectEventName("onPlayerKillEnd");
-    playerKillEndEvent->setLoopable(false);
-    xtech_lua_callLuaEvent(playerKillEndEvent);
-    
-    isCancelled = playerKillEndEvent->native_cancelled();
-    
-    if(isCancelled)
-        return;
-#endif
 
     StopMusic();
     LevelMacro = LEVELMACRO_OFF;

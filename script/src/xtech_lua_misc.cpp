@@ -153,6 +153,8 @@ bool xtech_lua_misc_isPausedByLua()
         return false;
     else if(xtech_lua_pausedByLua)
         return true;
+    
+    return false;
 }
 
 int xtech_lua_misc_getWindowWidth()
@@ -163,4 +165,40 @@ int xtech_lua_misc_getWindowWidth()
 int xtech_lua_misc_getWindowHeight()
 {
     return ScreenH;
+}
+
+void xtech_lua_level_exit()
+{
+    // in non-cheat variant, LevelMacroCounter is stuck at 0 if player never leaves section
+    bool possible_softlock = (LevelMacro == LEVELMACRO_CARD_ROULETTE_EXIT && LevelMacroCounter == 0);
+
+    if(LevelMacro != LEVELMACRO_OFF && !possible_softlock)
+        return;
+
+    LevelBeatCode = 0;
+    LevelMacro = LEVELMACRO_OFF;
+    LevelMacroCounter = 0;
+    EndLevel = true;
+}
+
+void xtech_lua_level_exit(int winType)
+{
+    // in non-cheat variant, LevelMacroCounter is stuck at 0 if player never leaves section
+    bool possible_softlock = (LevelMacro == LEVELMACRO_CARD_ROULETTE_EXIT && LevelMacroCounter == 0);
+
+    if(LevelMacro != LEVELMACRO_OFF && !possible_softlock)
+        return;
+
+    LevelBeatCode = winType;
+    LevelMacro = LEVELMACRO_OFF;
+    LevelMacroCounter = 0;
+    EndLevel = true;
+}
+
+bool xtech_lua_misc_inEditor()
+{
+    if((LevelEditor || WorldEditor) || TestLevel)
+        return true;
+    
+    return false;
 }

@@ -36,4 +36,9 @@ extern bool xtech_lua_misc_isPausedByLua();
 extern int xtech_lua_misc_getWindowWidth();
 extern int xtech_lua_misc_getWindowHeight();
 
+extern void xtech_lua_level_exit();
+extern void xtech_lua_level_exit(int winType);
+
+extern bool xtech_lua_misc_inEditor();
+
 #endif // LUA_MISC_HHH

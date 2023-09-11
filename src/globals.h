@@ -2335,6 +2335,8 @@ extern std::string LevelName;
 const int curRelease = 64;
 //Public chosenStarman As Bool
 extern bool chosenStarman;
+//Public isPlayerEndCancelled As Bool
+extern bool isPlayerEndCancelled;
 
 //EXTRA: Language
 extern std::string CurrentLanguage;

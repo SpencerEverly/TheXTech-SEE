@@ -299,12 +299,16 @@ void xtech_lua_bindAll()
                 def("episodePath", (std::string(*)())&xtech_lua_episodePath),
                 
                 def("getScreenWidth", (int(*)())&xtech_lua_misc_getWindowWidth),
-                def("getScreenHeight", (int(*)())&xtech_lua_misc_getWindowHeight)
+                def("getScreenHeight", (int(*)())&xtech_lua_misc_getWindowHeight),
+                
+                def("inEditor", (bool(*)())&xtech_lua_misc_inEditor)
             ],
             namespace_("Level")[
                 def("folderPath", (std::string(*)())&xtech_lua_levelFolderPath),
                 def("filename", (std::string(*)())&xtech_lua_levelFilename),
-                def("name", (std::string(*)())&xtech_lua_levelName)
+                def("name", (std::string(*)())&xtech_lua_levelName),
+                def("exit", (void(*)())&xtech_lua_level_exit),
+                def("exit", (void(*)(int))&xtech_lua_level_exit)
             ],
             namespace_("World")[
                 def("filename", (std::string(*)())&xtech_lua_worldFilename)
