@@ -7,6 +7,8 @@
 #include <luabind/class.hpp>
 #include <luabind/detail/call_function.hpp>
 
+#define COMBOOL(b) (b ? -1 : 0)
+
 enum FIELDTYPE_LUNALUA
 {
     FIELD_INVALID = 0,

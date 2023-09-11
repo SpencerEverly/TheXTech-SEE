@@ -1124,7 +1124,13 @@ bool InputMethodType_Keyboard::DefaultHotkey(const SDL_Event* ev)
 #ifdef ENABLE_XTECH_LUA
     if(ctrlV)
     {
+        //std::string value;
+        /*clip::get_text(value);
         
+        std::shared_ptr<Event> pasteTextEvent = std::make_shared<Event>("onPasteText", false);
+        pasteTextEvent->setLoopable(false);
+        pasteTextEvent->setDirectEventName("onPasteText");
+        xtech_lua_callLuaEvent(pasteTextEvent, value);*/
     }
 #endif
 

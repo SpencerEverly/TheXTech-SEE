@@ -159,8 +159,10 @@ void xtech_lua_bindAll()
         [
             def("mem", (double(*)(size_t,FIELDTYPE))&GetMem),
             def("mem", (void(*)(size_t,FIELDTYPE,double))&SetMem),
-            def("readmem", (double(*)(size_t,FIELDTYPE))&GetMem),
-            def("writemem", (void(*)(size_t,FIELDTYPE,double))&SetMem),
+            
+            //def("mem", (void(*)(size_t, FIELDTYPE_LUNALUA, luabind::object &, lua_State*))&xtech_lua_mem_mem),
+            //def("mem", (luabind::object(*)(size_t, FIELDTYPE_LUNALUA, lua_State*))&xtech_lua_mem_mem),
+            
             namespace_("Native")[
                 def("getSMBXPath", (std::string(*)())&AppPath),
                 def("isOverworld", (bool(*)())&isOverworld)
@@ -297,6 +299,7 @@ void xtech_lua_bindAll()
                 def("isPausedByLua", (bool(*)())&xtech_lua_misc_isPausedByLua),
                 
                 def("episodePath", (std::string(*)())&xtech_lua_episodePath),
+                def("episodeName", (std::string(*)())&xtech_lua_episodeName),
                 
                 def("getScreenWidth", (int(*)())&xtech_lua_misc_getWindowWidth),
                 def("getScreenHeight", (int(*)())&xtech_lua_misc_getWindowHeight),

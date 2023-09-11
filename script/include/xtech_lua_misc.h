@@ -41,4 +41,6 @@ extern void xtech_lua_level_exit(int winType);
 
 extern bool xtech_lua_misc_inEditor();
 
+extern std::string xtech_lua_episodeName();
+
 #endif // LUA_MISC_HHH

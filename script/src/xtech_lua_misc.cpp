@@ -202,3 +202,11 @@ bool xtech_lua_misc_inEditor()
     
     return false;
 }
+
+std::string xtech_lua_episodeName()
+{
+    if(WorldName != "")
+        return WorldName;
+    else
+        return "SMBX2";
+}
