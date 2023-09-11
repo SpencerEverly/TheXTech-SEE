@@ -267,6 +267,26 @@ bool OpenLevelData(LevelData &lvl, const std::string FilePath)
             CustomMusic[B].clear();
         else
             CustomMusic[B] = g_dirEpisode.resolveFileCase(s.music_file);
+        
+        /*if(s.music_file2.empty())
+            CustomMusic2[B].clear();
+        else
+            CustomMusic2[B] = g_dirEpisode.resolveFileCase(s.music_file2);
+        
+        if(s.music_file3.empty())
+            CustomMusic3[B].clear();
+        else
+            CustomMusic3[B] = g_dirEpisode.resolveFileCase(s.music_file3);
+        
+        if(s.music_file4.empty())
+            CustomMusic4[B].clear();
+        else
+            CustomMusic4[B] = g_dirEpisode.resolveFileCase(s.music_file4);
+        
+        if(s.music_file5.empty())
+            CustomMusic5[B].clear();
+        else
+            CustomMusic5[B] = g_dirEpisode.resolveFileCase(s.music_file5);*/
 
 #if defined(THEXTECH_BUILD_GL_MODERN) && defined(THEXTECH_WIP_FEATURES)
         // FIXME: allow sections to specify shaders by name

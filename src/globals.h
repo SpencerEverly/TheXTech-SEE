@@ -1321,6 +1321,14 @@ extern int numTiles;
 extern int numScenes;
 //Public CustomMusic(0 To maxSections) As String 'section's custom music
 extern RangeArr<std::string, 0, maxSections> CustomMusic;
+//Public CustomMusic(0 To maxSections) As String 'section's custom music 2
+extern RangeArr<std::string, 0, maxSections> CustomMusic2;
+//Public CustomMusic(0 To maxSections) As String 'section's custom music 3
+extern RangeArr<std::string, 0, maxSections> CustomMusic3;
+//Public CustomMusic(0 To maxSections) As String 'section's custom music 4
+extern RangeArr<std::string, 0, maxSections> CustomMusic4;
+//Public CustomMusic(0 To maxSections) As String 'section's custom music 5
+extern RangeArr<std::string, 0, maxSections> CustomMusic5;
 //EXTRA: Max count of used sections
 extern int numSections;
 //Public level(0 To maxSections) As Location 'sections

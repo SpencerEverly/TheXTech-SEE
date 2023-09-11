@@ -99,6 +99,10 @@ static Mix_Music *g_curMusic = nullptr;
 static bool g_mixerLoaded = false;
 
 static int g_customLvlMusicId = 24;
+static int g_customLvlMusicId2 = 57;
+static int g_customLvlMusicId3 = 58;
+static int g_customLvlMusicId4 = 59;
+static int g_customLvlMusicId5 = 60;
 static int g_customWldMusicId = 17;
 static int g_reservedChannels = 0;
 
@@ -799,6 +803,158 @@ void StartMusic(int A, int fadeInMs)
                 g_stats.currentMusicFile = CustomMusic[A];
             }
         }
+        else if(curMusic == g_customLvlMusicId2)
+        {
+            int ret = 0;
+
+            pLogDebug("Starting custom music [%s%s]", FileNamePath.c_str(), CustomMusic2[A].c_str());
+            if(g_curMusic)
+                Mix_FreeMusic(g_curMusic);
+            std::string p = FileNamePath + CustomMusic2[A];
+            s_musicYoshiTrackNumber = -1;
+            processPathArgs(p, FileNamePath, FileName + "/", &s_musicYoshiTrackNumber);
+            g_curMusic = Mix_LoadMUS(p.c_str());
+            if(!g_curMusic)
+                pLogWarning("Failed to open the music [%s]: ", p.c_str(), Mix_GetError());
+            else
+            {
+                s_musicHasYoshiMode = (s_musicYoshiTrackNumber >= 0 && (Mix_GetMusicTracks(g_curMusic) > s_musicYoshiTrackNumber));
+                UpdateYoshiMusic();
+                Mix_VolumeMusicStream(g_curMusic, 52);
+                if(fadeInMs > 0)
+                {
+                    ret = Mix_FadeInMusic(g_curMusic, -1, fadeInMs);
+                    if(ret < 0)
+                        pLogWarning("Failed to fade-in the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+                else
+                {
+                    ret = Mix_PlayMusic(g_curMusic, -1);
+                    if(ret < 0)
+                        pLogWarning("Failed to play the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+            }
+
+            if(ret >= 0)
+            {
+                g_stats.currentMusic = Mix_GetMusicTitle(g_curMusic);
+                g_stats.currentMusicFile = CustomMusic2[A];
+            }
+        }
+        else if(curMusic == g_customLvlMusicId3)
+        {
+            int ret = 0;
+
+            pLogDebug("Starting custom music [%s%s]", FileNamePath.c_str(), CustomMusic3[A].c_str());
+            if(g_curMusic)
+                Mix_FreeMusic(g_curMusic);
+            std::string p = FileNamePath + CustomMusic3[A];
+            s_musicYoshiTrackNumber = -1;
+            processPathArgs(p, FileNamePath, FileName + "/", &s_musicYoshiTrackNumber);
+            g_curMusic = Mix_LoadMUS(p.c_str());
+            if(!g_curMusic)
+                pLogWarning("Failed to open the music [%s]: ", p.c_str(), Mix_GetError());
+            else
+            {
+                s_musicHasYoshiMode = (s_musicYoshiTrackNumber >= 0 && (Mix_GetMusicTracks(g_curMusic) > s_musicYoshiTrackNumber));
+                UpdateYoshiMusic();
+                Mix_VolumeMusicStream(g_curMusic, 52);
+                if(fadeInMs > 0)
+                {
+                    ret = Mix_FadeInMusic(g_curMusic, -1, fadeInMs);
+                    if(ret < 0)
+                        pLogWarning("Failed to fade-in the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+                else
+                {
+                    ret = Mix_PlayMusic(g_curMusic, -1);
+                    if(ret < 0)
+                        pLogWarning("Failed to play the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+            }
+
+            if(ret >= 0)
+            {
+                g_stats.currentMusic = Mix_GetMusicTitle(g_curMusic);
+                g_stats.currentMusicFile = CustomMusic3[A];
+            }
+        }
+        else if(curMusic == g_customLvlMusicId4)
+        {
+            int ret = 0;
+
+            pLogDebug("Starting custom music [%s%s]", FileNamePath.c_str(), CustomMusic4[A].c_str());
+            if(g_curMusic)
+                Mix_FreeMusic(g_curMusic);
+            std::string p = FileNamePath + CustomMusic4[A];
+            s_musicYoshiTrackNumber = -1;
+            processPathArgs(p, FileNamePath, FileName + "/", &s_musicYoshiTrackNumber);
+            g_curMusic = Mix_LoadMUS(p.c_str());
+            if(!g_curMusic)
+                pLogWarning("Failed to open the music [%s]: ", p.c_str(), Mix_GetError());
+            else
+            {
+                s_musicHasYoshiMode = (s_musicYoshiTrackNumber >= 0 && (Mix_GetMusicTracks(g_curMusic) > s_musicYoshiTrackNumber));
+                UpdateYoshiMusic();
+                Mix_VolumeMusicStream(g_curMusic, 52);
+                if(fadeInMs > 0)
+                {
+                    ret = Mix_FadeInMusic(g_curMusic, -1, fadeInMs);
+                    if(ret < 0)
+                        pLogWarning("Failed to fade-in the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+                else
+                {
+                    ret = Mix_PlayMusic(g_curMusic, -1);
+                    if(ret < 0)
+                        pLogWarning("Failed to play the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+            }
+
+            if(ret >= 0)
+            {
+                g_stats.currentMusic = Mix_GetMusicTitle(g_curMusic);
+                g_stats.currentMusicFile = CustomMusic4[A];
+            }
+        }
+        else if(curMusic == g_customLvlMusicId5)
+        {
+            int ret = 0;
+
+            pLogDebug("Starting custom music [%s%s]", FileNamePath.c_str(), CustomMusic5[A].c_str());
+            if(g_curMusic)
+                Mix_FreeMusic(g_curMusic);
+            std::string p = FileNamePath + CustomMusic5[A];
+            s_musicYoshiTrackNumber = -1;
+            processPathArgs(p, FileNamePath, FileName + "/", &s_musicYoshiTrackNumber);
+            g_curMusic = Mix_LoadMUS(p.c_str());
+            if(!g_curMusic)
+                pLogWarning("Failed to open the music [%s]: ", p.c_str(), Mix_GetError());
+            else
+            {
+                s_musicHasYoshiMode = (s_musicYoshiTrackNumber >= 0 && (Mix_GetMusicTracks(g_curMusic) > s_musicYoshiTrackNumber));
+                UpdateYoshiMusic();
+                Mix_VolumeMusicStream(g_curMusic, 52);
+                if(fadeInMs > 0)
+                {
+                    ret = Mix_FadeInMusic(g_curMusic, -1, fadeInMs);
+                    if(ret < 0)
+                        pLogWarning("Failed to fade-in the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+                else
+                {
+                    ret = Mix_PlayMusic(g_curMusic, -1);
+                    if(ret < 0)
+                        pLogWarning("Failed to play the music [%s]: %s", p.c_str(), Mix_GetError());
+                }
+            }
+
+            if(ret >= 0)
+            {
+                g_stats.currentMusic = Mix_GetMusicTitle(g_curMusic);
+                g_stats.currentMusicFile = CustomMusic5[A];
+            }
+        }
         else
         {
             pLogDebug("Starting level music [%s]", mus.c_str());
@@ -901,6 +1057,10 @@ static void loadMusicIni(SoundScope root, const std::string &path, bool isLoadin
         musicSetup.read("total-world", g_totalMusicWorld, 0);
         musicSetup.read("total-special", g_totalMusicSpecial, 0);
         musicSetup.read("level-custom-music-id", g_customLvlMusicId, 0);
+        musicSetup.read("level-custom-music-id2", g_customLvlMusicId2, 0);
+        musicSetup.read("level-custom-music-id3", g_customLvlMusicId3, 0);
+        musicSetup.read("level-custom-music-id4", g_customLvlMusicId4, 0);
+        musicSetup.read("level-custom-music-id5", g_customLvlMusicId5, 0);
         musicSetup.read("world-custom-music-id", g_customWldMusicId, 0);
         musicSetup.endGroup();
 
@@ -1074,6 +1234,10 @@ void InitSound()
                      "music.ini and sounds.ini are missing",
                      "Files music.ini and sounds.ini are not exist, game will work without default music and SFX.");
         g_customLvlMusicId = 24;
+        g_customLvlMusicId2 = 57;
+        g_customLvlMusicId3 = 58;
+        g_customLvlMusicId4 = 59;
+        g_customLvlMusicId5 = 60;
         g_customWldMusicId = 17;
         return;
     }
