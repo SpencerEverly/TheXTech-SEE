@@ -32,3 +32,6 @@
 [submodule "3rdparty/glew-cmake"]
 	path = 3rdparty/glew-cmake
 	url = https://github.com/Wohlstand/thextech-glew-cmake.git
+[submodule "3rdparty/PGE_File_Formats"]
+	path = 3rdparty/PGE_File_Formats
+	url = https://github.com/SpencerEverly/PGE-File-Library-STL.git
