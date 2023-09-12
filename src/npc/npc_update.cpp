@@ -5417,7 +5417,7 @@ void UpdateNPCs()
 
                 if(NPC[A].Direction == 0.0f) // Move toward the closest player
                 {
-                    double C = 0;
+                    /*double C = 0;
                     for(B = 1; B <= numPlayers; B++)
                     {
                         if(!Player[B].Dead && Player[B].Section == NPC[A].Section)
@@ -5428,7 +5428,12 @@ void UpdateNPCs()
                                 NPC[A].Direction = -Player[B].Direction;
                             }
                         }
-                    }
+                    }*/
+                    int rand = iRand(2);
+                    if(rand == 1)
+                        NPC[A].Direction = -1;
+                    else if(rand == 2)
+                        NPC[A].Direction = 1;
                 }
                 NPC[A].Frame = EditorNPCFrame(NPC[A].Type, NPC[A].Direction, A);
                 NPC[A].Effect2 += 1;

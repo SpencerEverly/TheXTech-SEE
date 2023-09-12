@@ -725,6 +725,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
                     nn.Effect = 0;
                     nn.Location.Height = 32;
                     nn.Location.Y = b.Location.Y - 32;
+                    PlaySound(SFX_ItemEmerge);
                 }
                 else if(nn.Type == NPCID_LEAF_POWER)
                 {
@@ -732,7 +733,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
                     nn.Location.Y = b.Location.Y - 32;
                     nn.Location.SpeedY = -6;
                     nn.Location.Height = NPCHeight[C];
-                    // PlaySound(SFX_ItemEmerge); // Don't play mushroom sound on leaf, like in original SMB3
+                    PlaySound(SFX_ItemEmerge);
                 }
                 else
                 {
