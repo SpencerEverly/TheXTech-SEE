@@ -2530,7 +2530,7 @@ void UpdateNPCs()
                                                         if(BlockIsSizable[Block[B].Type] && HitSpot != 1)
                                                             HitSpot = 0;
 
-                                                        if(BlockIsSizable[Block[B].Type] || BlockOnlyHitspot1[Block[B].Type] && BlockSlope[Block[B].Type] == 0)
+                                                        if(BlockIsSizable[Block[B].Type] || (BlockOnlyHitspot1[Block[B].Type] && BlockSlope[Block[B].Type] == 0))
                                                         {
                                                             if(HitSpot != 1 || (NPCIsAParaTroopa[NPC[A].Type] && NPC[A].Special != 1))
                                                                 HitSpot = 0;
@@ -2708,6 +2708,9 @@ void UpdateNPCs()
                                                         if(BlockSlope[Block[B].Type] != 0 && HitSpot > 0)
                                                         {
                                                             HitSpot = 0;
+                                                            
+                                                            
+                                                            
                                                             if(NPC[A].Location.Y + NPC[A].Location.Height <= Block[B].Location.Y + Block[B].Location.Height + NPC[A].Location.SpeedY + 4)
                                                             {
                                                                 if(NPC[A].Location.X < Block[B].Location.X + Block[B].Location.Width && NPC[A].Location.X + NPC[A].Location.Width > Block[B].Location.X)
@@ -2759,8 +2762,6 @@ void UpdateNPCs()
                                                                         }
                                                                         else
                                                                         {
-
-
                                                                             NPC[A].Location.Y = Block[B].Location.Y + (Block[B].Location.Height * Slope) - NPC[A].Location.Height - 0.1;
                                                                             if(NPCIsCheep[NPC[A].Type])
                                                                                 NPC[A].TurnAround = true;

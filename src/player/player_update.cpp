@@ -2572,12 +2572,12 @@ void UpdatePlayer()
                                                 if(!(Player[A].Mount == 1 && Player[A].MountType == 2))
                                                 {
                                                     PlayerDead(A);
-                                                    break;
+                                                    //break;
                                                 }
                                                 else if(HitSpot != 1 && BlockSlope[Block[B].Type] == 0)
                                                 {
                                                     PlayerDead(A);
-                                                    break;
+                                                    //break;
                                                 }
                                                 else
                                                 {
