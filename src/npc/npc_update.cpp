@@ -40,6 +40,8 @@
 #include "../eff_id.h"
 #include "../layers.h"
 
+#include "../core/msgbox.h"
+
 #include "npc/npc_queues.h"
 
 #include <Utils/maths.h>
@@ -2705,7 +2707,7 @@ void UpdateNPCs()
 
 
 
-                                                        if(BlockSlope[Block[B].Type] != 0 && HitSpot > 0)
+                                                        if(BlockSlope[Block[B].Type] != 0 && HitSpot > 0)// && !BlockOnlyHitspot1[Block[B].Type])
                                                         {
                                                             HitSpot = 0;
                                                             
@@ -2752,7 +2754,7 @@ void UpdateNPCs()
                                                                             NPC[A].Special2 = -NPC[A].Special2;
                                                                         }
 
-                                                                        if(NPC[A].Type == NPCID_BULLET || NPC[A].Type == NPCID_SPIT_BOSS_BALL) // Bullet bills crash on slopes
+                                                                        if(NPC[A].Type == NPCID_BULLET || NPC[A].Type == NPCID_SPIT_BOSS_BALL) // Snifit bullets get destroyed on slopes
                                                                         {
                                                                             NPC[A].Slope = 1;
                                                                             if(NPC[A].Location.SpeedX < 0)
@@ -2793,6 +2795,25 @@ void UpdateNPCs()
                                                                 }
                                                             }
                                                         }
+                                                        /*else if(BlockSlope[Block[B].Type] != 0 && HitSpot > 0 && BlockOnlyHitspot1[Block[B].Type])
+                                                        {
+                                                            HitSpot = 0;
+                                                            
+                                                            double lineCollision = NPC[A].Location.X - Block[B].Location.X;
+                                                            
+                                                            if(BlockSlope[Block[B].Type] >= 1)
+                                                            {
+                                                                HitSpot = 1;
+                                                                NPC[A].Slope = B;
+                                                                NPC[A].Location.Y = Block[B].Location.Y + Block[B].Location.Height * (lineCollision / Block[B].Location.Width) - NPC[A].Location.Height;
+                                                            }
+                                                            else if(BlockSlope[Block[B].Type] <= -1)
+                                                            {
+                                                                HitSpot = 1;
+                                                                NPC[A].Slope = B;
+                                                                NPC[A].Location.Y = Block[B].Location.Y - Block[B].Location.Height * (lineCollision / Block[B].Location.Width) - NPC[A].Location.Height;
+                                                            }
+                                                        }*/
 
 
 
