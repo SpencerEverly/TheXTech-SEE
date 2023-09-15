@@ -2348,6 +2348,8 @@ extern bool isPlayerEndCancelled;
 //Public Const maxLives As Integer
 extern int maxLives;
 
+extern int maxStarmanTime;
+
 //EXTRA: Language
 extern std::string CurrentLanguage;
 extern std::string CurrentLangDialect;

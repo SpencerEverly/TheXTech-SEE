@@ -226,10 +226,10 @@ void DrawPlayer(Player_t &p, const int Z)
                 {
                     RenderTexturePlayer(Z, vScreen[Z].X + p.Location.X - 5,
                                           vScreen[Z].Y + p.Location.Y - 2,
-                                          32, 32,
+                                          NPCWidth[254], NPCHeight[254],
                                           GFXNPC[254],
                                           0,
-                                          (SpecialFrame[9] + (p.Direction > 0 ? 1 : 3)) * 32,
+                                          (SpecialFrame[9] + (p.Direction > 0 ? 1 : 3)) * NPCHeight[254],
                                           s, s, s);
 //                    if(p.Direction == 1)
 //                    {

@@ -161,32 +161,6 @@ void UpdatePlayer()
 //                nPlay.Player[A - 1].Controls = blankControls;
 //        }
         
-        if(Player[A].Starman)
-        {
-            if(Player[A].StarmanLength > 0)
-            {
-                if(Player[A].StarmanLength == 769)
-                {
-                    StopMusic();
-                    StartMusic(-2);
-                }
-                Player[A].StarmanLength--;
-            }
-            
-            //if(Player[A].StarmanLength == 167)
-                //PlayExtSoundNoMenu(AppPath + "sound/starman/starman-running-out.ogg");
-            
-            if(Player[A].StarmanLength == 64)
-            {
-                FadeOutMusic(1100);
-            }
-            if(Player[A].StarmanLength <= 1)
-            {
-                StartMusic(Player[A].Section);
-                Player[A].Starman = false;
-            }
-        }
-        
         // reset variables from the previous player
         DontResetGrabTime = false;
 //        oldGrab = Player[A].HoldingNPC; // SET BUT NOT UNUSED
@@ -337,10 +311,51 @@ void UpdatePlayer()
             oldLoc = Player[A].Location;
             if(Player[A].SlideCounter > 0) // for making the slide Effect
                 Player[A].SlideCounter -= 1;
-
+            
+            
+            //Starman updating
+            if(Player[A].Starman)
+            {
+                if(Player[A].StarmanLength > 0)
+                {
+                    if(Player[A].StarmanLength == maxStarmanTime)
+                    {
+                        StopMusic();
+                        StartMusic(-2);
+                    }
+                    Player[A].StarmanLength--;
+                    
+                    if(iRand(4) == 0)
+                    {
+                        NewEffect(EFFID_SPARKLE,
+                                  newLoc(Player[A].Location.X - 8 + dRand() * (Player[A].Location.Width + 16) - 4,
+                                                  Player[A].Location.Y - 8 + dRand() * (Player[A].Location.Height + 16)),
+                                                  1, 0, ShadowMode);
+                        Effect[numEffects].Location.SpeedX = (dRand() * 0.5) - 0.25;
+                        Effect[numEffects].Location.SpeedY = (dRand() * 0.5) - 0.25;
+                    }
+                }
+                
+                if(Player[A].StarmanLength == 167)
+                    PlaySound(SFX_CoinSwitchTimeout);
+                
+                if(Player[A].StarmanLength == 64)
+                {
+                    FadeOutMusic(1100);
+                }
+                if(Player[A].StarmanLength <= 1)
+                {
+                    StartMusic(Player[A].Section);
+                    Player[A].Starman = false;
+                }
+            }
+            
+            
+            
             // for the purple yoshi ground pound
             if(Player[A].Effect == 0)
             {
+                
                 if(Player[A].Location.SpeedY != 0 && Player[A].StandingOnNPC == 0 && Player[A].Slope == 0)
                 {
                     if(Player[A].Mount == 3 && Player[A].MountType == 6) // Purple Yoshi Pound

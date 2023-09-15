@@ -463,7 +463,7 @@ void PlayerHurt(const int A)
     Location_t tempLocation;
     int B = 0;
 
-    if(p.Dead || p.TimeToLive > 0 || p.Stoned || p.Immune > 0 || p.Effect > 0)
+    if(p.Dead || p.TimeToLive > 0 || p.Stoned || p.Immune > 0 || p.Effect > 0 || p.Starman)
         return;
 
 //    if(nPlay.Online) // netplay stuffs

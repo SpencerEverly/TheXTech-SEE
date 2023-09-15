@@ -598,6 +598,24 @@ void TouchBonus(int A, int B)
                 MoreScore(1, NPC[B].Location);
             NewEffect(EFFID_COIN_COLLECT, NPC[B].Location);
         }
+        else if(NPC[B].Type == NPCID_STARMAN_SMW || NPC[B].Type == NPCID_STARMAN_SMB3) // Bonus is a Starman
+        {
+            Player[A].StateNPC = NPC[B].Type;
+            if(Player[A].Character == 5)
+                PlaySound(SFX_HeroHeart);
+            else
+            {
+                PlaySound(SFX_PlayerGrow);
+            }
+            if(NPC[B].Type == NPCID_STARMAN_SMW)
+                chosenStarman = true;
+            else
+                chosenStarman = false;
+            Player[A].Starman = true;
+            Player[A].StarmanLength = maxStarmanTime;
+            if(NPC[B].Effect != 2)
+                s_PowerupScore(B);
+        }
         else if(NPCIsAnExit[NPC[B].Type] && LevelMacro == LEVELMACRO_OFF) // Level exit
         {
             if(NPC[B].Type != NPCID_STAR_COLLECT)

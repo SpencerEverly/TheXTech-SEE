@@ -556,6 +556,8 @@ bool isPlayerEndCancelled = false;
 
 //The max lives for all episodes
 int maxLives = 999;
+//The beginning Starman time for all players
+int maxStarmanTime = 769;
 
 //void DoEvents()
 //{

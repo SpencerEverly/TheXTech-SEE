@@ -2116,10 +2116,17 @@ void SetupVars()
     
     
     //SMBX+ NPCs go below
-    //*STARMAN (SMW)*
+    //293 - *STARMAN (SMW)*
+    NPCIsABonus[293] = true;
+    NPCNoIceBall[293] = true;
+    NPCNoBubbleTransform[293] = true;
     
+    //294 - *STARMAN (SMB3)*
+    NPCIsABonus[294] = true;
+    NPCNoIceBall[293] = true;
+    NPCNoBubbleTransform[293] = true;
     
-    //*BUBBLE PROJECTILE*
+    //295 - *BUBBLE PROJECTILE*
     NPCWidth[295] = 48;
     NPCHeight[295] = 48;
     NPCWidthGFX[295] = 64;
@@ -2130,7 +2137,7 @@ void SetupVars()
     NPCNoIceBall[295] = true;
     NPCNoClipping[295] = true;
     
-    //*BUBBLE FLOWER*
+    //296 - *BUBBLE FLOWER*
     NPCWidth[296] = 32;
     NPCHeight[296] = 32;
     NPCFrameOffsetY[296] = 2;

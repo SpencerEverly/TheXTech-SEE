@@ -253,7 +253,7 @@ void UpdateNPCs()
 
     if(CoinMode) // this is a cheat code
     {
-        if(Lives >= 99 && Coins >= 99)
+        if(Lives >= maxLives && Coins >= 99)
             CoinMode = false;
         else
         {
@@ -1235,9 +1235,6 @@ void UpdateNPCs()
             NPC[A].TimeLeft -= 1;
             if(NPC[A].Effect == 0)
             {
-
-
-
                 // this code is for NPCs that are being held by a player
 
                 if(NPC[A].HoldingPlayer > 0) // NPC is held
@@ -1638,6 +1635,16 @@ void UpdateNPCs()
                             if(NPC[A].Location.SpeedX >= -0.3 && NPC[A].Location.SpeedX <= 0.3)
                                 NPC[A].Location.SpeedX = 0;
                         }
+                    }
+                    //**STARMAN NPCs**
+                    else if(NPC[B].Type == NPCID_STARMAN_SMW || NPC[B].Type == NPCID_STARMAN_SMB3)
+                    {
+                        NPC[B].Location.SpeedX = 1.5 * NPC[A].Direction;
+                        
+                        if(HitSpot == 3)
+                            NPC[B].Location.SpeedY = -8;
+                        else if(HitSpot == 1)
+                            NPC[B].Location.SpeedY = 2;
                     }
                     else if(NPC[A].Type == NPCID_TANK_TREADS)
                     {
