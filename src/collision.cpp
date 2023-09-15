@@ -833,3 +833,28 @@ bool SectionCollision(const int section, const Location_t &loc)
 
     return true;
 }
+
+// Slope collision based on the one-pixel side rule
+bool IsCollidingSlope(const Location_t &Loc1, const Location_t &Loc2)
+{
+    double pixelCalculation = 1.0;
+    
+    if(Loc1.X + pixelCalculation > Loc2.Y + Loc2.Height - 0.1)
+    {
+        return true; //Top left collision, top location
+    }
+    else if((Loc1.X + Loc1.Width) - pixelCalculation > Loc2.Y + Loc2.Height - 0.1)
+    {
+        return true; //Top right collision, top location
+    }
+    else if(Loc1.X + pixelCalculation <= Loc2.X)
+    {
+        return true; //Top left collision, left location
+    }
+    else if((Loc1.X + Loc1.Width) - pixelCalculation <= Loc2.X + Loc2.Width)
+    {
+        return true; //Top right collision, right location
+    }
+    
+    return false;
+}

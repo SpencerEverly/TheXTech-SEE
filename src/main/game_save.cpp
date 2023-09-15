@@ -348,8 +348,8 @@ void LoadGame()
     WorldPlayer[1].Location.X = double(sav.worldPosX);
     WorldPlayer[1].Location.Y = double(sav.worldPosY);
 
-    if(Lives > 99)
-        Lives = 99;
+    if(Lives > maxLives)
+        Lives = maxLives;
     if(Coins > 99)
         Coins = 0;
     if(Score > 9999990)

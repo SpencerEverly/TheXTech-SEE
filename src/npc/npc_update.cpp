@@ -261,7 +261,7 @@ void UpdateNPCs()
             Coins += 1;
             if(Coins >= 100)
             {
-                if(Lives < 99)
+                if(Lives < maxLives)
                 {
                     Lives += 1;
                     PlaySound(SFX_1up);
@@ -1195,7 +1195,7 @@ void UpdateNPCs()
                 {
                     NPC[A].CantHurt = 10000;
                     if(NPC[A].Type == NPCID_BIG_BULLET)
-                        NPC[A].Location.SpeedX = 4 * NPC[A].Direction;
+                        NPC[A].Location.SpeedX = 2.8 * NPC[A].Direction;
                 }
                 if(NPC[A].TimeLeft > 3 && !BattleMode)
                     NPC[A].TimeLeft = 3;
@@ -1417,7 +1417,7 @@ void UpdateNPCs()
                         if(NPC[A].Type == NPCID_BULLET)
                         {
                             PlaySound(SFX_Bullet);
-                            NPC[A].Location.SpeedX = 5 * NPC[A].Direction;
+                            NPC[A].Location.SpeedX = 3.5 * NPC[A].Direction;
                             NPC[A].Projectile = true;
                             NPC[A].CantHurt = 1000;
                             NPC[A].CantHurtPlayer = NPC[A].HoldingPlayer;
@@ -1826,7 +1826,7 @@ void UpdateNPCs()
                     else if(NPC[A].Type == NPCID_BULLET || NPC[A].Type == NPCID_BIG_BULLET)
                     {
                         if(NPC[A].CantHurt < 1000)
-                            NPC[A].Location.SpeedX = 4 * NPC[A].Direction;
+                            NPC[A].Location.SpeedX = 2.8 * NPC[A].Direction;
                     }
                     else if(NPC[A].Type == NPCID_GHOST_FAST)
                         NPC[A].Location.SpeedX = 2 * double(NPC[A].Direction);
@@ -2754,7 +2754,7 @@ void UpdateNPCs()
                                                                             NPC[A].Special2 = -NPC[A].Special2;
                                                                         }
 
-                                                                        if(NPC[A].Type == NPCID_BULLET || NPC[A].Type == NPCID_SPIT_BOSS_BALL) // Snifit bullets get destroyed on slopes
+                                                                        if(NPC[A].Type == NPCID_BULLET || NPC[A].Type == NPCID_SPIT_BOSS_BALL) // Bullet bills get hit on slopes
                                                                         {
                                                                             NPC[A].Slope = 1;
                                                                             if(NPC[A].Location.SpeedX < 0)

@@ -374,7 +374,7 @@ void TurnNPCsIntoCoins()
                     Coins += 1;
                     if(Coins >= 100)
                     {
-                        if(Lives < 99)
+                        if(Lives < maxLives)
                         {
                             Lives += 1;
                             PlaySound(SFX_1up);
@@ -3712,7 +3712,7 @@ void SpecialNPC(int A)
                         NPC[numNPCs].Location.Y = NPC[A].Location.Y;
                     }
 
-                    NPC[numNPCs].Location.SpeedX = double(3.f * NPC[numNPCs].Direction);
+                    NPC[numNPCs].Location.SpeedX = double(1.5f * NPC[numNPCs].Direction);
                     C = float(NPC[numNPCs].Location.X + NPC[numNPCs].Location.Width / 2.0) -
                         float(Player[NPC[A].Special4].Location.X + Player[NPC[A].Special4].Location.Width / 2.0);
                     D = float(NPC[numNPCs].Location.Y + NPC[numNPCs].Location.Height / 2.0) -

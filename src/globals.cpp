@@ -554,6 +554,9 @@ bool chosenStarman = true;
 bool isOverworld = false;
 bool isPlayerEndCancelled = false;
 
+//The max lives for all episodes
+int maxLives = 999;
+
 //void DoEvents()
 //{
 //    g_events->doEvents();

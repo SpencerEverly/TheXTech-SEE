@@ -1028,8 +1028,8 @@ void UpdateGraphics(bool skipRepaint)
     if(Score > 9999990)
         Score = 9999990;
 
-    if(Lives > 99)
-        Lives = 99;
+    if(Lives > maxLives)
+        Lives = maxLives;
 
 //    If TakeScreen = True Then // Useless
 //        If LevelEditor = True Or MagicHand = True Then

@@ -123,4 +123,7 @@ void CompareNpcWalkBlock(int &tempHitBlock, int &tempHitOldBlock,
 
 bool SectionCollision(const int section, const Location_t &loc);
 
+// Slope collision based on the one-pixel side rule
+bool IsCollidingSlope(const Location_t &Loc1, const Location_t &Loc2);
+
 #endif // COLLISION_H

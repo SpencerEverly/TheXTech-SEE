@@ -411,7 +411,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
                 Coins += 1;
                 if(Coins >= 100)
                 {
-                    if(Lives < 99)
+                    if(Lives < maxLives)
                     {
                         Lives += 1;
                         PlaySound(SFX_1up);
@@ -486,7 +486,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
                 Coins += 1;
                 if(Coins >= 100)
                 {
-                    if(Lives < 99)
+                    if(Lives < maxLives)
                     {
                         Lives += 1;
                         PlaySound(SFX_1up);
@@ -508,7 +508,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
             Coins += 1;
             if(Coins >= 100)
             {
-                if(Lives < 99)
+                if(Lives < maxLives)
                 {
                     Lives++;
                     PlaySound(SFX_1up);

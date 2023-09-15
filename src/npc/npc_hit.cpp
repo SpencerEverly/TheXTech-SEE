@@ -2121,7 +2121,7 @@ void NPCHit(int A, int B, int C)
                 Coins += 1;
             if(Coins >= 100)
             {
-                if(Lives < 99)
+                if(Lives < maxLives)
                 {
                     Lives += 1;
                     PlaySound(SFX_1up);

@@ -2345,6 +2345,8 @@ const int curRelease = 64;
 extern bool chosenStarman;
 //Public isPlayerEndCancelled As Bool
 extern bool isPlayerEndCancelled;
+//Public Const maxLives As Integer
+extern int maxLives;
 
 //EXTRA: Language
 extern std::string CurrentLanguage;
