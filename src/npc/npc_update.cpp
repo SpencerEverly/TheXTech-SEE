@@ -5107,7 +5107,7 @@ void UpdateNPCs()
                             NPC[A].Special += shootStep;
                     }
 
-                    if(NPC[A].Special >= 200)
+                    if(NPC[A].Special >= 380)
                     {
                         double C = 0;
 
