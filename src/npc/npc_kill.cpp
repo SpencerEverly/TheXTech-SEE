@@ -52,7 +52,16 @@ void KillNPC(int A, int B)
     bool tempBool = false;
     NPC_t blankNPC;
     int C = 0;
+    int D = 0;
     Location_t tempLocation;
+    
+    for(D = 1; D <= numPlayers; D++)
+    {
+        if(B == 8 && Player[D].SpinJump && (Player[D].Controls.Jump || Player[D].Controls.AltJump))
+        {
+            Player[D].Jump = Physics.PlayerNPCJumpHeight;
+        }
+    }
 
     // don't need to worry about updating NPC A's tree because that will certainly happen in either the syncLayersNPC or the Deactivate call at the end of the procedure
 

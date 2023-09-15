@@ -62,6 +62,12 @@ void NPCHit(int A, int B, int C)
     // B = 10     Link stab
     // B = 11     Bubble projectile collision
     // Frost Bolt check
+    
+    if(B == 8 && Player[C].SpinJump && (Player[C].Controls.Jump || Player[C].Controls.AltJump))
+    {
+        Player[C].Jump = Physics.PlayerNPCJumpHeight;
+    }
+    
     if(B == 3 && NPC[A].Type != NPCID_ICE_CUBE && NPC[A].Type != NPCID_PLR_ICEBALL)
     {
         if(NPC[C].Type == NPCID_PLR_ICEBALL && NPC[A].Location.Width > 8 && NPC[A].Location.Height > 8)
