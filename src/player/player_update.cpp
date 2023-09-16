@@ -3360,6 +3360,16 @@ void UpdatePlayer()
                 {
                     if(NPC[B].Active && NPC[B].Killed == 0 && NPC[B].Effect != 5 && NPC[B].Effect != 6)
                     {
+                        //Starman stuff
+                        if(Player[A].Starman)
+                        {
+                            if(CheckCollision(Player[A].Location, NPC[B].Location)) //Check the location of any NPC
+                            {
+                                NPCHit(B, 3, B);
+                            }
+                        }
+                        
+                        
                         // If Not (NPC(B).Type = 17 And NPC(B).CantHurt > 0) And Not (.Mount = 2 And NPC(B).Type = 56) And Not NPC(B).standingOnPlayer = A And Not NPC(B).Type = 197 And Not NPC(B).Type = 237 Then
                         if(!(Player[A].Mount == 2 && NPC[B].Type == NPCID_VEHICLE) &&
                             NPC[B].standingOnPlayer != A &&

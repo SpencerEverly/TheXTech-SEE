@@ -1636,16 +1636,6 @@ void UpdateNPCs()
                                 NPC[A].Location.SpeedX = 0;
                         }
                     }
-                    //**STARMAN NPCs**
-                    else if(NPC[B].Type == NPCID_STARMAN_SMW || NPC[B].Type == NPCID_STARMAN_SMB3)
-                    {
-                        NPC[B].Location.SpeedX = 1.5 * NPC[A].Direction;
-                        
-                        if(HitSpot == 3)
-                            NPC[B].Location.SpeedY = -8;
-                        else if(HitSpot == 1)
-                            NPC[B].Location.SpeedY = 2;
-                    }
                     else if(NPC[A].Type == NPCID_TANK_TREADS)
                     {
                         NPC[A].Projectile = true;
@@ -4031,6 +4021,20 @@ void UpdateNPCs()
                                 }
                             }
                         }
+                        
+                        //**STARMAN NPCs (SMBX+)**
+                        if(NPC[A].Type == NPCID_STARMAN_SMW || NPC[A].Type == NPCID_STARMAN_SMB3 || NPC[A].Type == NPCID_STARMAN_SMB1)
+                        {
+                            if(abs(NPC[A].Location.SpeedX) < 1.5 * 1)
+                                NPC[A].Location.SpeedX = 1.5 * NPC[A].Direction * 1;
+                            else
+                                NPC[A].Location.SpeedX = (NPC[A].Direction * 0.99);
+                            
+                            if(HitSpot == 3)
+                                NPC[A].Location.SpeedY = -8;
+                            else if(HitSpot == 1)
+                                NPC[A].Location.SpeedY = 2;
+                        }
 
                         if(NPC[A].WallDeath > 0)
                         {
@@ -4366,6 +4370,11 @@ void UpdateNPCs()
                                         NPC[A].Special = 0;
                                     }
                                 }
+                                //**STARMAN NPCs (SMBX+)**
+                                if(NPC[A].Type == NPCID_STARMAN_SMW || NPC[A].Type == NPCID_STARMAN_SMB3 || NPC[A].Type == NPCID_STARMAN_SMB1)
+                                {
+                                    //NPC[A].Location.SpeedY = -8;
+                                }
                                 if(NPC[A].Type == NPCID_KNIGHT)
                                 {
                                     NPC[A].FrameCount += 1;
@@ -4377,7 +4386,6 @@ void UpdateNPCs()
                                     NPC[A].Location.SpeedY = tempSpeedA;
                                 if(NPC[A].Type == NPCID_SAW)
                                     NPC[A].Special = NPC[A].Location.SpeedY;
-
                             }
                             if(NPC[A].Slope == 0)
                                 NPC[A].Location.Y = tempHit;

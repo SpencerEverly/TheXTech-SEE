@@ -7005,6 +7005,8 @@ void PlayerEffects(const int A)
 
             p.Location.X = warp_exit.X + warp_exit.Width / 2.0 - p.Location.Width / 2.0;
             p.Location.Y = warp_exit.Y + warp_exit.Height - p.Location.Height;
+            
+            PlaySound(SFX_DoorClose);
 
             int last_section = p.Section;
 

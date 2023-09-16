@@ -598,7 +598,7 @@ void TouchBonus(int A, int B)
                 MoreScore(1, NPC[B].Location);
             NewEffect(EFFID_COIN_COLLECT, NPC[B].Location);
         }
-        else if(NPC[B].Type == NPCID_STARMAN_SMW || NPC[B].Type == NPCID_STARMAN_SMB3) // Bonus is a Starman
+        else if(NPC[B].Type == NPCID_STARMAN_SMW || NPC[B].Type == NPCID_STARMAN_SMB3 || NPC[B].Type == NPCID_STARMAN_SMB2 || NPC[B].Type == NPCID_STARMAN_SMB1) // Bonus is a Starman
         {
             Player[A].StateNPC = NPC[B].Type;
             if(Player[A].Character == 5)
