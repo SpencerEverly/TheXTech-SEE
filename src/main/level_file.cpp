@@ -191,6 +191,11 @@ bool OpenLevelData(LevelData &lvl, const std::string FilePath)
     bool compatModern = (CompatGetLevel() == COMPAT_MODERN);
     bool isSmbx64 = (lvl.meta.RecentFormat == LevelData::SMBX64);
     int  fVersion = lvl.meta.RecentFormatVersion;
+    
+    if(lvl.quickDeathToggle <= 0)
+        CanQuickDie = false;
+    else
+        CanQuickDie = true;
 
     if(!FilePath.empty())
     {

@@ -824,8 +824,10 @@ void PlayerDead(int A)
             else
                 PlaySound(SFX_PlayerDied);
         }
-        else
+        else if(!CanQuickDie)
             PlaySound(SFX_PlayerDied);
+        else
+            PlaySound(SFX_PlayerDied2);
     }
 
     if(p.YoshiNPC > 0 || p.YoshiPlayer > 0)
@@ -884,6 +886,8 @@ void PlayerDead(int A)
     {
         StopMusic();
         FreezeNPCs = false;
+        if(CanQuickDie)
+            p.TimeToLive2 = 1;
     }
 
     if(A == SingleCoop)

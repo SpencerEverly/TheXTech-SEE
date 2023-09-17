@@ -301,6 +301,7 @@ float Lives = 0.0f;
 bool EndIntro = false;
 bool ExitMenu = false;
 bool LevelSelect = false;
+bool CanQuickDie = false;
 bool LevelRestartRequested = false;
 RangeArr<WorldPlayer_t, 0, 1> WorldPlayer;
 int LevelBeatCode = 0;

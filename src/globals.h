@@ -656,6 +656,8 @@ struct Player_t
     bool Dead = false;
 //    TimeToLive As Integer 'for returning to the other play after dying
     int TimeToLive = 0;
+//    TimeToLive2 As Integer 'for quick death, setting a timer
+    int TimeToLive2 = 0;
 //    Immune As Integer 'greater then 0 if immune, this is a counter
     int Immune = 0;
 //    Immune2 As Boolean 'makes the player blink
@@ -1734,6 +1736,8 @@ extern bool EndIntro;
 extern bool ExitMenu;
 //Public LevelSelect As Boolean 'true if game should load the world map
 extern bool LevelSelect;
+//Public CanQuickDie As Boolean 'True if quick death is supported on a level
+extern bool CanQuickDie;
 
 extern bool LevelRestartRequested;
 //Public WorldPlayer(1) As WorldPlayer

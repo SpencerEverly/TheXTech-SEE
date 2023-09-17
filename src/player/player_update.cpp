@@ -22,6 +22,7 @@
 
 #include <Logger/logger.h>
 #include <Utils/maths.h>
+#include <fmt_format_ne.h>
 
 #include "../globals.h"
 #include "../config.h"
@@ -42,6 +43,13 @@
 #include "../controls.h"
 #include "../script/msg_preprocessor.h"
 #include "../math_functions.h"
+#include "../gfx.h"
+#include "../graphics.h"
+#include "../core/render.h"
+#include "../main/level_file.h"
+#include "../core/events.h"
+#include "../main/game_globals.h"
+#include "../main/menu_main.h"
 
 #include "npc_id.h"
 #include "eff_id.h"
@@ -206,7 +214,7 @@ void UpdatePlayer()
 //        else
 //            Player[A].DropRelease = true;
         // Handle the death effecs
-        if(Player[A].TimeToLive > 0)
+        if(Player[A].TimeToLive > 0 && !CanQuickDie)
         {
             Player[A].TimeToLive += 1;
             if(Player[A].TimeToLive >= 200 || ScreenType != 5)
@@ -279,6 +287,106 @@ void UpdatePlayer()
                 {
                     KillPlayer(A); // Time to die
                 }
+            }
+        }
+        else if(Player[A].TimeToLive2 > 0 && CanQuickDie && CheckLiving() == 0)
+        {
+            Player[A].TimeToLive2 += 1;
+            
+            if(Player[A].TimeToLive2 == 1)
+            {
+                g_levelScreenFader.setupFader(3, 0, 65, ScreenFader::S_FADE);
+            }
+            if(Player[A].TimeToLive2 == 25)
+            {
+                Lives--;
+                if(Lives >= 0.f)
+                {
+                    XRender::setTargetTexture();
+                    XRender::clearBuffer();
+                    XRender::repaint();
+                    LevelBeatCode = 0;
+                    
+                    ClearLevel();
+                    ReturnWarp = 0;
+                    
+                    if(Checkpoint.empty())
+                        StartWarp = 0;
+                    
+                    if(!OpenLevel(FullFileName))
+                    {
+                        MessageText = fmt::format_ne("ERROR: Can't open \"{0}\": file doesn't exist or corrupted.", FullFileName);
+                        PauseGame(PauseCode::Message);
+                        ErrorQuit = true;
+                    }
+                    SetupScreens();
+                    LevelSelect = false;
+                    LevelRestartRequested = true;
+                    EndLevel = false;
+                    SetupPlayers();
+                    //StartMusic(0);
+                    
+                    Player[A].TimeToLive = 0;
+                    Player[A].TimeToLive2 = 0;
+                    
+                    g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
+                }
+                else // no more lives
+                {
+                    if((LevelEditor || WorldEditor) || TestLevel)
+                    {
+                        Lives = 3;
+                        
+                        XRender::setTargetTexture();
+                        XRender::clearBuffer();
+                        XRender::repaint();
+                        LevelBeatCode = 0;
+
+                        ClearLevel();
+                        ReturnWarp = 0;
+                        
+                        if(Checkpoint.empty())
+                            StartWarp = 0;
+                        
+                        if(!OpenLevel(FullFileName))
+                        {
+                            MessageText = fmt::format_ne("ERROR: Can't open \"{0}\": file doesn't exist or corrupted.", FullFileName);
+                            PauseGame(PauseCode::Message);
+                            ErrorQuit = true;
+                        }
+                        SetupScreens();
+                        LevelSelect = false;
+                        LevelRestartRequested = true;
+                        EndLevel = false;
+                        SetupPlayers();
+                        //StartMusic(0);
+                        
+                        Player[A].TimeToLive = 0;
+                        Player[A].TimeToLive2 = 0;
+                        
+                        g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
+                    }
+                    else
+                    {
+                        // GAME OVER
+                        Lives = 3;
+                        Coins = 0;
+                        Score = 0;
+                        SaveGame();
+                        LevelMacro = LEVELMACRO_OFF;
+                        LevelMacroCounter = 0;
+                        ResetSoundFX();
+                        ClearLevel();
+                        LevelSelect = true;
+                        GameMenu = true;
+                        MenuMode = MENU_MAIN;
+                        MenuCursor = 0;
+                        
+                        Player[A].TimeToLive = 0;
+                        Player[A].TimeToLive2 = 0;
+                    }
+                }
+                XEvents::doEvents();
             }
         }
         else if(Player[A].Dead)
