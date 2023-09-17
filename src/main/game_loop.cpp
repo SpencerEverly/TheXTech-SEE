@@ -53,8 +53,8 @@
 #include "script/luna/luna.h"
 
 #ifdef ENABLE_XTECH_LUA
-#include "xtech_lua_main.h"
-#include "eventproxy/xtech_lua_eventproxy.h"
+#include "../script/lunalua/xtech_lua_main.h"
+#include "../script/lunalua/eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 #include "../pseudo_vb.h"

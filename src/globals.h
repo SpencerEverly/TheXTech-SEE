@@ -1111,7 +1111,7 @@ struct WorldPlayer_t
     int Frame = 0;
 //    Frame2 As Integer
     int Frame2 = 0;
-//    Move As Integer
+//    Move As Integer 'The speed of the player when moving on the map?
     int Move = 0;
 //    Move2 As Integer
     int Move2 = 0;
@@ -1121,6 +1121,8 @@ struct WorldPlayer_t
     int LastMove = 0;
 //    LevelName As String
     std::string LevelName;
+//    MoveSpeed As Integer
+    int MoveSpeed = 6;
 //End Type
 
     struct StarsState_t

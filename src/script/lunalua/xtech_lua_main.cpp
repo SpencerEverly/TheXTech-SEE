@@ -7,14 +7,14 @@
 
 #include "eventproxy/xtech_lua_eventproxy.h"
 
-#include "../../src/player.h"
-#include "../../src/npc.h"
-#include "../../src/globals.h"
-#include "../../src/global_dirs.h"
-#include "../../src/sound.h"
-#include "../../src/main/cheat_code.h"
-#include "../../src/game_main.h"
-#include "../../src/script/luna/mememu.h"
+#include "../../player.h"
+#include "../../npc.h"
+#include "../../globals.h"
+#include "../../global_dirs.h"
+#include "../../sound.h"
+#include "../../main/cheat_code.h"
+#include "../../game_main.h"
+#include "../../script/luna/mememu.h"
 
 #include <utility>
 #include <string>
@@ -23,7 +23,7 @@
 #include <fstream>
 #include <filesystem>
 
-#include "../../src/core/msgbox.h"
+#include "../../core/msgbox.h"
 
 lua_State* L;
 
@@ -310,8 +310,12 @@ void xtech_lua_bindAll()
                 def("folderPath", (std::string(*)())&xtech_lua_levelFolderPath),
                 def("filename", (std::string(*)())&xtech_lua_levelFilename),
                 def("name", (std::string(*)())&xtech_lua_levelName),
+                
                 def("exit", (void(*)())&xtech_lua_level_exit),
-                def("exit", (void(*)(int))&xtech_lua_level_exit)
+                def("exit", (void(*)(int))&xtech_lua_level_exit),
+                
+                def("load", (void(*)(std::string,int))&xtech_lua_level_load),
+                def("load", (void(*)(std::string))&xtech_lua_level_load)
             ],
             namespace_("World")[
                 def("filename", (std::string(*)())&xtech_lua_worldFilename)

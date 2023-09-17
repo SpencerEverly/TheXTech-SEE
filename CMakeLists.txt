@@ -707,6 +707,19 @@ list(APPEND THEXTECH_SRC
     src/script/luna/lunacounter_record.cpp
 )
 
+if(THEXTECH_ENABLE_LUA)
+    add_definitions(-DTHEXTECH_ENABLE_LUA)
+    list(APPEND THEXTECH_SRC
+        src/script/lunalua/xtech_lua_main.cpp
+        src/script/lunalua/xtech_lua_sounds.cpp
+        src/script/lunalua/xtech_lua_graphics.cpp
+        src/script/lunalua/xtech_lua_misc.cpp
+        src/script/lunalua/xtech_lua_mem.cpp
+        src/script/lunalua/xtech_lua_player.cpp
+        src/script/lunalua/eventproxy/xtech_lua_eventproxy.cpp
+    )
+endif()
+
 if(THEXTECH_ENABLE_LUNA_AUTOCODE)
     add_definitions(-DTHEXTECH_ENABLE_LUNA_AUTOCODE)
     list(APPEND THEXTECH_SRC

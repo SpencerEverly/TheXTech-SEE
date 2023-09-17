@@ -3,20 +3,20 @@
 #include "sdl_proxy/sdl_stdinc.h"
 #include "sdl_proxy/sdl_types.h"
 
-#include "../../src/core/msgbox.h"
+#include "../../core/msgbox.h"
 
-#include "../../src/graphics.h"
-#include "../../src/gfx.h"
-#include "../../src/load_gfx.h"
+#include "../../graphics.h"
+#include "../../gfx.h"
+#include "../../load_gfx.h"
 
-#include "../../src/globals.h"
-#include "../../src/global_constants.h"
-#include "../../src/global_dirs.h"
+#include "../../globals.h"
+#include "../../global_constants.h"
+#include "../../global_dirs.h"
 
-#include "../../src/core/render.h"
-#include "../../src/core/events.h"
-#include "../../src/std_picture.h"
-#include "../../src/load_gfx.h"
+#include "../../core/render.h"
+#include "../../core/events.h"
+#include "../../std_picture.h"
+#include "../../load_gfx.h"
 
 #include <Utils/files.h>
 #include <Utils/dir_list_ci.h>

@@ -20,13 +20,7 @@ include(../cmake/build_props.cmake)
 pge_cxx_standard(11)
 
 set(LIB_XTECHLUA_SRCS
-    src/xtech_lua_main.cpp
-    src/xtech_lua_sounds.cpp
-    src/xtech_lua_graphics.cpp
-    src/xtech_lua_misc.cpp
-    src/xtech_lua_mem.cpp
-    src/xtech_lua_player.cpp
-    src/eventproxy/xtech_lua_eventproxy.cpp
+    src/main.cpp
 )
 
 add_library(XTechLua STATIC

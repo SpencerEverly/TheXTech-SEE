@@ -1,5 +1,5 @@
 #include "xtech_lua_mem.h"
-#include "../../src/script/luna/mememu.h"
+#include "../../script/luna/mememu.h"
 
 #include "sdl_proxy/sdl_stdinc.h"
 #include "sdl_proxy/sdl_assert.h"

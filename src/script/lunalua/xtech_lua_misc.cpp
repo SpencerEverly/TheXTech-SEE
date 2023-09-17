@@ -1,19 +1,26 @@
-#include "../../src/core/msgbox.h"
+#include "../../core/msgbox.h"
 
-#include "../../src/player.h"
-#include "../../src/npc.h"
-#include "../../src/globals.h"
-#include "../../src/global_dirs.h"
-#include "../../src/global_constants.h"
-#include "../../src/global_strings.h"
-#include "../../src/sound.h"
-#include "../../src/main/cheat_code.h"
-#include "../../src/game_main.h"
-#include "../../src/main/world_file.h"
-#include "../../src/main/menu_main.h"
-#include "../../src/controls.h"
-#include "../../src/main/screen_connect.h"
-#include "../../src/main/screen_quickreconnect.h"
+#include "../../player.h"
+#include "../../npc.h"
+#include "../../globals.h"
+#include "../../global_dirs.h"
+#include "../../global_constants.h"
+#include "../../global_strings.h"
+#include "../../sound.h"
+#include "../../main/cheat_code.h"
+#include "../../game_main.h"
+#include "../../main/world_file.h"
+#include "../../main/menu_main.h"
+#include "../../controls.h"
+#include "../../main/screen_connect.h"
+#include "../../main/screen_quickreconnect.h"
+#include "../../graphics.h"
+#include "../../main/level_file.h"
+#include "../../main/speedrunner.h"
+#include "../../main/game_strings.h"
+
+#include <fmt_time_ne.h>
+#include <fmt_format_ne.h>
 
 bool xtech_lua_pausedByLua = false;
 
@@ -209,4 +216,49 @@ std::string xtech_lua_episodeName()
         return WorldName;
     else
         return "SMBX2";
+}
+
+void xtech_lua_level_load(std::string levelFile, int startWarp)
+{
+    std::string levelFile2 = FileNamePath + levelFile;
+    if(!levelFile2.empty() && levelFile2 != ".lvl" && levelFile2 != ".lvlx")
+    {
+        addMissingLvlSuffix(levelFile2);
+        std::string levelPath = g_dirEpisode.resolveFileCaseExistsAbs(levelFile2);
+
+        if(!levelPath.empty())
+        {
+            // save which characters were present at level start
+            if(SwapCharAllowed())
+            {
+                ConnectScreen::SaveChars();
+            }
+
+            StartWarp = startWarp;
+            StopMusic();
+            PlaySound(SFX_LevelSelect);
+            
+            if(LevelSelect)
+                LevelSelect = false;
+
+            delayedMusicReset(); // Reset delayed music to prevent unexpected behaviour at loaded level
+
+            ClearLevel();
+
+            if(!OpenLevel(levelPath))
+            {
+                delayedMusicStart(); // Allow music being started
+                MessageText = fmt::format_ne(g_gameStrings.errorOpenFileFailed, levelFile2);
+                PauseGame(PauseCode::Message);
+                ErrorQuit = true;
+            }
+
+            GameThing(1000, 3);
+        }
+    }
+}
+
+void xtech_lua_level_load(std::string levelFile)
+{
+    xtech_lua_level_load(levelFile, 0);
 }

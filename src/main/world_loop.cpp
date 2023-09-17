@@ -45,8 +45,8 @@
 #include "global_dirs.h"
 
 #ifdef ENABLE_XTECH_LUA
-#include "xtech_lua_main.h"
-#include "eventproxy/xtech_lua_eventproxy.h"
+#include "../script/lunalua/xtech_lua_main.h"
+#include "../script/lunalua/eventproxy/xtech_lua_eventproxy.h"
 #endif
 
 //! Holds the screen overlay for the world map
@@ -706,16 +706,16 @@ void WorldLoop()
     }
     else if(WorldPlayer[1].Move == 1)
     {
-        WorldPlayer[1].Move2 += 2;
-        WorldPlayer[1].Location.Y -= 2;
+        WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+        WorldPlayer[1].Location.Y -= WorldPlayer[1].MoveSpeed;
 
         if(WalkAnywhere || allowFastMove)
         {
-            WorldPlayer[1].Move2 += 2;
-            WorldPlayer[1].Location.Y -= 2;
+            WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+            WorldPlayer[1].Location.Y -= WorldPlayer[1].MoveSpeed;
         }
 
-        if(WorldPlayer[1].Move2 >= 32)
+        if(WorldPlayer[1].Move2 >= WorldPlayer[1].MoveSpeed * 16)
         {
             WorldPlayer[1].LastMove = WorldPlayer[1].Move;
             WorldPlayer[1].Move2 = 0;
@@ -725,16 +725,16 @@ void WorldLoop()
     }
     else if(WorldPlayer[1].Move == 2)
     {
-        WorldPlayer[1].Move2 += 2;
-        WorldPlayer[1].Location.X -= 2;
+        WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+        WorldPlayer[1].Location.X -= WorldPlayer[1].MoveSpeed;
 
         if(WalkAnywhere || allowFastMove)
         {
-            WorldPlayer[1].Move2 += 2;
-            WorldPlayer[1].Location.X -= 2;
+            WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+            WorldPlayer[1].Location.X -= WorldPlayer[1].MoveSpeed;
         }
 
-        if(WorldPlayer[1].Move2 >= 32)
+        if(WorldPlayer[1].Move2 >= WorldPlayer[1].MoveSpeed * 16)
         {
             WorldPlayer[1].LastMove = WorldPlayer[1].Move;
             WorldPlayer[1].Move2 = 0;
@@ -744,16 +744,16 @@ void WorldLoop()
     }
     else if(WorldPlayer[1].Move == 3)
     {
-        WorldPlayer[1].Move2 += 2;
-        WorldPlayer[1].Location.Y += 2;
+        WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+        WorldPlayer[1].Location.Y += WorldPlayer[1].MoveSpeed;
 
         if(WalkAnywhere || allowFastMove)
         {
-            WorldPlayer[1].Move2 += 2;
-            WorldPlayer[1].Location.Y += 2;
+            WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+            WorldPlayer[1].Location.Y += WorldPlayer[1].MoveSpeed;
         }
 
-        if(WorldPlayer[1].Move2 >= 32)
+        if(WorldPlayer[1].Move2 >= WorldPlayer[1].MoveSpeed * 16)
         {
             WorldPlayer[1].LastMove = WorldPlayer[1].Move;
             WorldPlayer[1].Move2 = 0;
@@ -763,16 +763,16 @@ void WorldLoop()
     }
     else if(WorldPlayer[1].Move == 4)
     {
-        WorldPlayer[1].Move2 += 2;
-        WorldPlayer[1].Location.X += 2;
+        WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+        WorldPlayer[1].Location.X += WorldPlayer[1].MoveSpeed;
 
         if(WalkAnywhere || allowFastMove)
         {
-            WorldPlayer[1].Move2 += 2;
-            WorldPlayer[1].Location.X += 2;
+            WorldPlayer[1].Move2 += WorldPlayer[1].MoveSpeed;
+            WorldPlayer[1].Location.X += WorldPlayer[1].MoveSpeed;
         }
 
-        if(WorldPlayer[1].Move2 >= 32)
+        if(WorldPlayer[1].Move2 >= WorldPlayer[1].MoveSpeed * 16)
         {
             WorldPlayer[1].LastMove = WorldPlayer[1].Move;
             WorldPlayer[1].Move2 = 0;

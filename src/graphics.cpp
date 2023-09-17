@@ -29,7 +29,7 @@
 #include "core/events.h"
 
 #ifdef ENABLE_XTECH_LUA
-#include "xtech_lua_main.h"
+#include "script/lunalua/xtech_lua_main.h"
 #endif
 
 #include "pseudo_vb.h"

@@ -1,7 +1,7 @@
-#include "../../src/sound.h"
-#include "../../src/globals.h"
-#include "../../src/global_dirs.h"
-#include "../../src/game_main.h"
+#include "../../sound.h"
+#include "../../globals.h"
+#include "../../global_dirs.h"
+#include "../../game_main.h"
 
 #include "sdl_proxy/sdl_stdinc.h"
 #include "sdl_proxy/sdl_atomic.h"

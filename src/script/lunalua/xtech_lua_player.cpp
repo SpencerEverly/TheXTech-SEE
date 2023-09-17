@@ -1,13 +1,13 @@
 #include "xtech_lua_player.h"
 
-#include "../../src/player.h"
-#include "../../src/npc.h"
-#include "../../src/globals.h"
-#include "../../src/global_dirs.h"
-#include "../../src/sound.h"
-#include "../../src/main/cheat_code.h"
-#include "../../src/game_main.h"
-#include "../../src/location.h"
+#include "../../player.h"
+#include "../../npc.h"
+#include "../../globals.h"
+#include "../../global_dirs.h"
+#include "../../sound.h"
+#include "../../main/cheat_code.h"
+#include "../../game_main.h"
+#include "../../location.h"
 
 
 

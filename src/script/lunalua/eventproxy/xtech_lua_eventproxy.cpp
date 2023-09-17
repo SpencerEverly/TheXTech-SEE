@@ -1,4 +1,4 @@
-#include "eventproxy/xtech_lua_eventproxy.h"
+#include "xtech_lua_eventproxy.h"
 
 Event::Event(std::string eventName, bool cancellable) : 
     m_directEventName(""),
