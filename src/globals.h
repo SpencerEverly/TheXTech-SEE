@@ -1124,7 +1124,7 @@ struct WorldPlayer_t
 //    LevelName As String
     std::string LevelName;
 //    MoveSpeed As Integer
-    int MoveSpeed = 6;
+    int MoveSpeed = 2;
 //End Type
 
     struct StarsState_t
