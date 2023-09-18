@@ -43,7 +43,7 @@ extern bool xtech_lua_misc_inEditor();
 
 extern std::string xtech_lua_episodeName();
 
-extern void xtech_lua_level_load(std::string levelFile);
+extern void xtech_lua_level_load(std::string levelFile, int startWarp);
 extern void xtech_lua_level_load(std::string levelFile);
 
 #endif // LUA_MISC_HHH
