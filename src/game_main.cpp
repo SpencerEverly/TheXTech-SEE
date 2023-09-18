@@ -2147,3 +2147,40 @@ void StartBattleMode()
     xtech_lua_callLuaEvent(onStartEvent5);
 #endif
 }
+
+void ReloadLevel()
+{
+    XRender::setTargetTexture();
+    XRender::clearBuffer();
+    XRender::repaint();
+    LevelBeatCode = 0;
+    
+    StopMusic();
+    
+    ClearLevel();
+    ReturnWarp = 0;
+    
+    if(Checkpoint.empty())
+        StartWarp = 0;
+    
+    if(!OpenLevel(FullFileName))
+    {
+        MessageText = fmt::format_ne("ERROR: Can't open \"{0}\": file doesn't exist or corrupted.", FullFileName);
+        PauseGame(PauseCode::Message);
+        ErrorQuit = true;
+    }
+    
+    SetupScreens();
+    LevelSelect = false;
+    LevelRestartRequested = true;
+    EndLevel = false;
+    SetupPlayers();
+    StartMusic(0);
+    
+    ProcEvent(EVENT_LEVEL_START, 0, true);
+    for(int A = 2; A <= maxEvents; ++A)
+    {
+        if(Events[A].AutoStart)
+            ProcEvent(A, 0, true);
+    }
+}

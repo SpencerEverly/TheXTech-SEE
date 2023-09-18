@@ -302,41 +302,12 @@ void UpdatePlayer()
                 Lives--;
                 if(Lives >= 0.f)
                 {
-                    XRender::setTargetTexture();
-                    XRender::clearBuffer();
-                    XRender::repaint();
-                    LevelBeatCode = 0;
-                    
-                    ClearLevel();
-                    ReturnWarp = 0;
-                    
-                    if(Checkpoint.empty())
-                        StartWarp = 0;
-                    
-                    if(!OpenLevel(FullFileName))
-                    {
-                        MessageText = fmt::format_ne("ERROR: Can't open \"{0}\": file doesn't exist or corrupted.", FullFileName);
-                        PauseGame(PauseCode::Message);
-                        ErrorQuit = true;
-                    }
-                    SetupScreens();
-                    LevelSelect = false;
-                    LevelRestartRequested = true;
-                    EndLevel = false;
-                    SetupPlayers();
-                    //StartMusic(0);
+                    ReloadLevel();
                     
                     Player[A].TimeToLive = 0;
                     Player[A].TimeToLive2 = 0;
                     
-                    ProcEvent(EVENT_LEVEL_START, 0, true);
-                    for(int A = 2; A <= maxEvents; ++A)
-                    {
-                        if(Events[A].AutoStart)
-                            ProcEvent(A, 0, true);
-                    }
-                    
-                    g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
+                    g_levelScreenFader.setupFader(3, 35, 0, ScreenFader::S_FADE);
                 }
                 else // no more lives
                 {
@@ -344,39 +315,10 @@ void UpdatePlayer()
                     {
                         Lives = 3;
                         
-                        XRender::setTargetTexture();
-                        XRender::clearBuffer();
-                        XRender::repaint();
-                        LevelBeatCode = 0;
-
-                        ClearLevel();
-                        ReturnWarp = 0;
-                        
-                        if(Checkpoint.empty())
-                            StartWarp = 0;
-                        
-                        if(!OpenLevel(FullFileName))
-                        {
-                            MessageText = fmt::format_ne("ERROR: Can't open \"{0}\": file doesn't exist or corrupted.", FullFileName);
-                            PauseGame(PauseCode::Message);
-                            ErrorQuit = true;
-                        }
-                        SetupScreens();
-                        LevelSelect = false;
-                        LevelRestartRequested = true;
-                        EndLevel = false;
-                        SetupPlayers();
-                        //StartMusic(0);
+                        ReloadLevel();
                         
                         Player[A].TimeToLive = 0;
                         Player[A].TimeToLive2 = 0;
-                        
-                        ProcEvent(EVENT_LEVEL_START, 0, true);
-                        for(int A = 2; A <= maxEvents; ++A)
-                        {
-                            if(Events[A].AutoStart)
-                                ProcEvent(A, 0, true);
-                        }
                         
                         g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
                     }

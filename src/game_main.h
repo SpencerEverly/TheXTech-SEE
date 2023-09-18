@@ -122,6 +122,8 @@ void SetupPlayerFrames();
 void StartEpisode();
 void StartBattleMode();
 
+void ReloadLevel();
+
 // std::string FixComma(std::string newStr); // USELESS
 
 #endif // MAIN_H
