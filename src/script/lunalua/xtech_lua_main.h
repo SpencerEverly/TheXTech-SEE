@@ -28,6 +28,7 @@ extern bool xtech_lua_is_function(lua_State *luaState, const char *fname);
 
 extern std::string xtech_lua_replaceStringValue(std::string in, std::string from, std::string to);
 bool xtech_lua_readFile(std::string content, std::string path, std::string errMsg);
+std::string xtech_lua_io_readFile(std::string path);
 extern std::string xtech_lua_readScriptFile();
 
 extern bool xtech_lua_init();

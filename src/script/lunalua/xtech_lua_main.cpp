@@ -69,6 +69,18 @@ bool xtech_lua_readFile(std::string content, std::string path, std::string errMs
     return true;
 }
 
+std::string xtech_lua_io_readFile(std::string path)
+{
+    // Opens the script.
+    std::ifstream theFile(path, std::ios::binary| std::ios::in);
+    if(!theFile.is_open()){
+        theFile.close();
+        return "";
+    }
+    
+    return std::string((std::istreambuf_iterator<char>(theFile)), std::istreambuf_iterator<char>());
+}
+
 std::string xtech_lua_readScriptFile()
 {
     // Opens the script.
@@ -163,13 +175,21 @@ void xtech_lua_bindAll()
             //def("mem", (void(*)(size_t, FIELDTYPE_LUNALUA, luabind::object &, lua_State*))&xtech_lua_mem_mem),
             //def("mem", (luabind::object(*)(size_t, FIELDTYPE_LUNALUA, lua_State*))&xtech_lua_mem_mem),
             
+            def("getSMBXPath", (std::string(*)())&AppPath),
+            
+            namespace_("io")[
+                def("readFile", (std::string(*)(std::string))&xtech_lua_io_readFile)
+            ],
+            
             namespace_("Native")[
                 def("getSMBXPath", (std::string(*)())&AppPath),
                 def("isOverworld", (bool(*)())&isOverworld)
             ],
             namespace_("Text")[
                 def("print", (void(*)(const std::string&, float, float))&xtech_lua_textPrint),
+                def("print", (void(*)(const std::string&, float, float, float))&xtech_lua_textPrint),
                 def("printWP", (void(*)(const std::string&, float, float, float))&xtech_lua_textPrintWP),
+                def("printWP", (void(*)(const std::string&, float, float, float, float))&xtech_lua_textPrintWP),
                 def("windowDebug", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("windowDebugSimple", (void(*)(std::string))&xtech_lua_showMessageBox),
                 def("showMessageBox", (void(*)(std::string))&xtech_lua_showMessageBoxInGame)
