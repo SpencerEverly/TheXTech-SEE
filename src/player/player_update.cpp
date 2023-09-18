@@ -329,6 +329,13 @@ void UpdatePlayer()
                     Player[A].TimeToLive = 0;
                     Player[A].TimeToLive2 = 0;
                     
+                    ProcEvent(EVENT_LEVEL_START, 0, true);
+                    for(int A = 2; A <= maxEvents; ++A)
+                    {
+                        if(Events[A].AutoStart)
+                            ProcEvent(A, 0, true);
+                    }
+                    
                     g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
                 }
                 else // no more lives
@@ -363,6 +370,13 @@ void UpdatePlayer()
                         
                         Player[A].TimeToLive = 0;
                         Player[A].TimeToLive2 = 0;
+                        
+                        ProcEvent(EVENT_LEVEL_START, 0, true);
+                        for(int A = 2; A <= maxEvents; ++A)
+                        {
+                            if(Events[A].AutoStart)
+                                ProcEvent(A, 0, true);
+                        }
                         
                         g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
                     }
