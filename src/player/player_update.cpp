@@ -295,7 +295,7 @@ void UpdatePlayer()
             
             if(Player[A].TimeToLive2 == 1)
             {
-                g_levelScreenFader.setupFader(3, 0, 65, ScreenFader::S_FADE);
+                g_levelScreenFader.setupFader(6, 0, 25, ScreenFader::S_FADE);
             }
             if(Player[A].TimeToLive2 == 25)
             {
@@ -307,7 +307,7 @@ void UpdatePlayer()
                     Player[A].TimeToLive = 0;
                     Player[A].TimeToLive2 = 0;
                     
-                    g_levelScreenFader.setupFader(3, 35, 0, ScreenFader::S_FADE);
+                    g_levelScreenFader.setupFader(1, 30, 0, ScreenFader::S_FADE);
                 }
                 else // no more lives
                 {
@@ -320,7 +320,7 @@ void UpdatePlayer()
                         Player[A].TimeToLive = 0;
                         Player[A].TimeToLive2 = 0;
                         
-                        g_levelScreenFader.setupFader(65, 3, 0, ScreenFader::S_FADE);
+                        g_levelScreenFader.setupFader(1, 30, 0, ScreenFader::S_FADE);
                     }
                     else
                     {
