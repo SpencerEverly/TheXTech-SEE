@@ -235,6 +235,7 @@ bool OpenLevelData(LevelData &lvl, const std::string FilePath)
     LoadCustomCompat();
     FindCustomPlayers();
     FindCustomNPCs();
+    FindCustomBGOs();
     LoadCustomGFX();
     LoadCustomSound();
     FontManager::loadCustomFonts();
@@ -1015,6 +1016,7 @@ void ClearLevel()
     SetupPhysics();
     LoadNPCDefaults();
     LoadPlayerDefaults();
+    LoadBGODefaults();
     noUpdate = true;
     BlocksSorted = true;
     qScreen = false;

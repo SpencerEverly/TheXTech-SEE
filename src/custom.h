@@ -30,17 +30,24 @@ void LoadPlayerDefaults();
 
 // Public Sub SaveNPCDefaults()
 void SaveNPCDefaults();
-
 // Public Sub LoadNPCDefaults()
 void LoadNPCDefaults();
+
+// Public Sub SaveBGODefaults()
+void SaveBGODefaults();
+// Public Sub LoadBGODefaults()
+void LoadBGODefaults();
 
 
 void FindCustomPlayers();
 // Public Sub FindCustomNPCs(Optional cFilePath As String = "")
 //void FindCustomNPCs(std::string cFilePath = "");
 void FindCustomNPCs();
+//void FindCustomBGOs(std::string cFilePath = "");
+void FindCustomBGOs();
+
 
 // Private Sub LoadCustomNPC(A As Integer, cFileName As String)
-
+void LoadCustomBGO(int A, std::string cFileName);
 
 #endif // CUSTOM_H

@@ -236,7 +236,7 @@ void xtech_lua_bindAll()
             .property("loopable", &Event::getLoopable, &Event::setLoopable)
             .property("directEventName", &Event::getDirectEventName, &Event::setDirectEventName),
             
-            namespace_("Player")[
+            namespace_("PlayerLua")[
                 def("harm", (void(*)(int))&xtech_lua_player_harm),
                 def("kill", (void(*)(int))&xtech_lua_player_kill),
                 def("idx", (int(*)(int))&xtech_lua_player_getIdx),

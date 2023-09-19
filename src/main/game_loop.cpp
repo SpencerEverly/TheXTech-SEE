@@ -451,7 +451,7 @@ int PauseGame(PauseCode code, int plr)
         std::shared_ptr<Event> onPauseEvent = std::make_shared<Event>("onPause", true);
         onPauseEvent->setLoopable(false);
         onPauseEvent->setDirectEventName("onPause");
-        xtech_lua_callLuaEvent(onPauseEvent);
+        xtech_lua_callLuaEvent(onPauseEvent, plr);
         
         isCancelled = onPauseEvent->native_cancelled();
         
@@ -500,6 +500,17 @@ int PauseGame(PauseCode code, int plr)
     {
         if(canProceedFrame())
         {
+#ifdef ENABLE_XTECH_LUA
+            std::shared_ptr<Event> onDrawPaintPauseEvent = std::make_shared<Event>("onDrawPaint", false);
+            onDrawPaintPauseEvent->setLoopable(false);
+            onDrawPaintPauseEvent->setDirectEventName("onDrawPaint");
+            xtech_lua_callLuaEvent(onDrawPaintPauseEvent);
+            
+            std::shared_ptr<Event> onDrawPauseEvent = std::make_shared<Event>("onDraw", false);
+            onDrawPauseEvent->setLoopable(false);
+            onDrawPauseEvent->setDirectEventName("onDraw");
+            xtech_lua_callLuaEvent(onDrawPauseEvent);
+#endif
             computeFrameTime1();
             computeFrameTime2();
 
@@ -582,17 +593,7 @@ int PauseGame(PauseCode code, int plr)
             }
             else if(GamePaused == PauseCode::Misc)
             {
-#ifdef ENABLE_XTECH_LUA
-                std::shared_ptr<Event> onDrawPaintPauseEvent = std::make_shared<Event>("onDrawPaint", false);
-                onDrawPaintPauseEvent->setLoopable(false);
-                onDrawPaintPauseEvent->setDirectEventName("onDrawPaint");
-                xtech_lua_callLuaEvent(onDrawPaintPauseEvent);
                 
-                std::shared_ptr<Event> onDrawPauseEvent = std::make_shared<Event>("onDraw", false);
-                onDrawPauseEvent->setLoopable(false);
-                onDrawPauseEvent->setDirectEventName("onDraw");
-                xtech_lua_callLuaEvent(onDrawPauseEvent);
-#endif
             }
             else if(GamePaused == PauseCode::None)
             {

@@ -33,6 +33,11 @@
 #include "../config.h"
 #include "../layers.h"
 
+#ifdef ENABLE_XTECH_LUA
+#include "../script/lunalua/xtech_lua_main.h"
+#include "../script/lunalua/eventproxy/xtech_lua_eventproxy.h"
+#endif
+
 #include "npc/npc_queues.h"
 
 #include "../controls.h"
@@ -301,6 +306,13 @@ void TouchBonus(int A, int B)
             cp.id = Maths::iRound(NPC[B].Special);
             CheckpointsList.push_back(cp);
             pLogDebug("Added checkpoint ID %d", cp.id);
+
+#ifdef ENABLE_XTECH_LUA
+            std::shared_ptr<Event> checkpointEvent = std::make_shared<Event>("onCheckpoint", false);
+            checkpointEvent->setLoopable(false);
+            checkpointEvent->setDirectEventName("onCheckpoint");
+            xtech_lua_callLuaEvent(checkpointEvent, cp.id, A);
+#endif
             return;
         }
         if(NPC[B].Type == NPCID_3_LIFE) // player touched the 3up moon

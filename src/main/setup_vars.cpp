@@ -2935,4 +2935,5 @@ void SetupVars()
     }
     SaveNPCDefaults();
     SavePlayerDefaults();
+    SaveBGODefaults();
 }

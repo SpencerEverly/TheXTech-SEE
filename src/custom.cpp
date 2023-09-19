@@ -113,6 +113,16 @@ static struct NPCDefaults_t
 } s_NPCDefaults;
 
 
+
+static struct BGODefaults_t
+{
+    RangeArrI<int, 0, maxNPCType, 0> BGOWidth;
+    RangeArrI<int, 0, maxNPCType, 0> BGOHeight;
+    RangeArrI<bool, 0, maxNPCType, false> BGOForeground;
+//End Type
+} s_BGODefaults;
+
+
 void LoadCustomNPC(int A, std::string cFileName);
 void LoadCustomPlayer(int character, int state, std::string cFileName);
 
@@ -319,6 +329,40 @@ void LoadNPCDefaults()
     loadNpcSetupFixes();
 }
 
+void SaveBGODefaults()
+{
+    DirListCI NPCDir = DirListCI(AppPath + "graphics/background/");
+    std::string npcPathRes;
+
+    for(int A = 1; A <= maxBackgroundType; A++)
+    {
+        // Global override of NPC setup
+        npcPathRes = NPCDir.resolveFileCaseExistsAbs(fmt::format_ne("background-{0}.txt", A));
+
+        if(!npcPathRes.empty())
+            LoadCustomBGO(A, npcPathRes);
+
+        s_BGODefaults.BGOWidth[A] = BackgroundWidth[A];
+        s_BGODefaults.BGOHeight[A] = BackgroundHeight[A];
+
+        s_BGODefaults.BGOForeground[A] = Foreground[A];
+    }
+}
+
+void LoadBGODefaults()
+{
+    int A = 0;
+    for(A = 1; A <= maxBackgroundType; A++)
+    {
+        BackgroundWidth[A] = s_BGODefaults.BGOWidth[A];
+        BackgroundHeight[A] = s_BGODefaults.BGOHeight[A];
+
+        Foreground[A] = s_BGODefaults.BGOForeground[A];
+    }
+
+    loadNpcSetupFixes();
+}
+
 void FindCustomPlayers()
 {
     pLogDebug("Trying to load custom Player configs...");
@@ -463,6 +507,44 @@ void FindCustomNPCs(/*std::string cFilePath*/)
     }
 }
 
+void FindCustomBGOs(/*std::string cFilePath*/)
+{
+    pLogDebug("Trying to load custom BGO configs...");
+
+    //const std::string GfxRoot = AppPath + "graphics/";
+    std::string /*npcPathG,*/ npcPath, npcPathC;
+    // DirMan searchDir(FileNamePath);
+//    std::set<std::string> existingFiles;
+//    std::vector<std::string> files;
+//    searchDir.getListOfFiles(files, {".txt"});
+//    for(auto &p : files)
+//        existingFiles.insert(FileNamePath + p);
+
+    g_dirEpisode.setCurDir(FileNamePath);
+    g_dirCustom.setCurDir(FileNamePath + FileName);
+
+//    if(DirMan::exists(FileNamePath + FileName))
+//    {
+//        DirMan searchDataDir(FileNamePath + FileName);
+//        searchDataDir.getListOfFiles(files, {".png", ".gif"});
+//        for(auto &p : files)
+//            existingFiles.insert(FileNamePath + FileName  + "/"+ p);
+//    }
+
+    for(int A = 1; A < maxBackgroundType; ++A)
+    {
+        // Episode-wide custom NPC setup
+        npcPath = g_dirEpisode.resolveFileCaseExistsAbs(fmt::format_ne("background-{0}.txt", A));
+        // Level-wide custom NPC setup
+        npcPathC = g_dirCustom.resolveFileCaseExistsAbs(fmt::format_ne("background-{0}.txt", A));
+
+        if(!npcPath.empty())
+            LoadCustomBGO(A, npcPath);
+        if(!npcPathC.empty())
+            LoadCustomBGO(A, npcPathC);
+    }
+}
+
 void LoadCustomNPC(int A, std::string cFileName)
 {
     NPCConfigFile npc;
@@ -520,4 +602,17 @@ void LoadCustomNPC(int A, std::string cFileName)
         NPCFrameSpeed[A] = int(npc.framespeed);
     if(npc.en_framestyle)
         NPCFrameStyle[A] = int(npc.framestyle);
+}
+
+void LoadCustomBGO(int A, std::string cFileName)
+{
+    NPCConfigFile npc;
+    FileFormats::ReadNpcTXTFileF(std::move(cFileName), npc, true);
+
+    if(npc.en_width)
+        BackgroundWidth[A] = int(npc.width);
+    if(npc.en_height)
+        BackgroundHeight[A] = int(npc.height);
+    if(npc.en_foreground)
+        Foreground[A] = npc.foreground;
 }
