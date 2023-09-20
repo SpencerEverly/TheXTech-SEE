@@ -1211,7 +1211,7 @@ void CheckSection(const int A)
                                 {
                                     if(oldSection >= 0)
                                     {
-                                        if(CustomMusic[oldSection] != CustomMusic[p.Section] || CustomMusic2[oldSection] != CustomMusic2[p.Section] || CustomMusic3[oldSection] != CustomMusic3[p.Section] || CustomMusic4[oldSection] != CustomMusic4[p.Section] || CustomMusic5[oldSection] != CustomMusic5[p.Section])
+                                        if(CustomMusic[oldSection] != CustomMusic[p.Section])
                                         {
                                             StartMusic(B);
                                         }
@@ -1261,7 +1261,7 @@ void CheckSection(const int A)
                                     }
                                     else if(bgMusic[B] == 24)
                                     {
-                                        if(CustomMusic[B] != CustomMusic[p.Section] || CustomMusic2[B] != CustomMusic2[p.Section] || CustomMusic3[B] != CustomMusic3[p.Section] || CustomMusic4[B] != CustomMusic4[p.Section] || CustomMusic5[B] != CustomMusic5[p.Section])
+                                        if(CustomMusic[B] != CustomMusic[p.Section])
                                         {
                                             StartMusic(B);
                                         }
