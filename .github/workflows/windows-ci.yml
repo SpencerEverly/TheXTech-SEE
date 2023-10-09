@@ -145,7 +145,7 @@ jobs:
       shell: bash
       run: |
         7z x ninja.zip -o"${{ matrix.config.ninja_install_dir }}"
-        cd matrix.config.ninja_install_dir
+        cd ${{ matrix.config.ninja_install_dir }}
         pacman --noconfirm --needed -S mingw-w64-x86_64-lua51
         cd ../..
 
