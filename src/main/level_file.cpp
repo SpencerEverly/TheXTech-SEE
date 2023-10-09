@@ -51,6 +51,7 @@
 #include <Utils/dir_list_ci.h>
 #include <Logger/logger.h>
 #include <PGE_File_Formats/file_formats.h>
+#include <json/json.hpp>
 
 #include "global_dirs.h"
 #include "screen_fader.h"
@@ -63,6 +64,12 @@
 #    include "core/opengl/gl_program_bank.h"
 #endif
 
+#ifdef ENABLE_XTECH_LUA
+#include "../script/lunalua/xtech_lua_main.h"
+#include "../script/lunalua/eventproxy/xtech_lua_eventproxy.h"
+#endif
+
+using json = nlohmann::json;
 
 void bgoApplyZMode(Background_t *bgo, int smbx64sp)
 {
