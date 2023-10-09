@@ -6,6 +6,7 @@ on:
       - main
       - devel
       - versus-ci
+      - smbxplus
   pull_request:
     branches:
       - main
@@ -204,6 +205,7 @@ jobs:
         if [[ "${{ secrets.DISCORD_APP_ID }}" != '' ]]; then
           LOCAL_EXTRA_SETUP="-DTHEXTECH_ENABLE_DISCORD_RPC=ON -DTHEXTECH_DISCORD_APPID=\"${{ secrets.DISCORD_APP_ID }}\""
         fi
+        pacman --noconfirm --needed -S mingw-w64-x86_64-lua51
         cmake -B build -G "${{ matrix.config.generator }}" -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} ${{ matrix.config.extra_options }} ${LOCAL_EXTRA_SETUP} .
 
     - name: Build
