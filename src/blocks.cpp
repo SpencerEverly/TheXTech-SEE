@@ -564,7 +564,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
         if(NPCIsABonus[C] && C != 169 && C != 170) // check to see if it should spawn a dead player
         {
             tempPlayer = CheckDead();
-            if(numPlayers > 2 /*&& nPlay.Online == false*/)
+            if(g_ClonedPlayerMode)
             {
                 tempPlayer = 0;
             }
@@ -587,7 +587,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
                 nn.Type = 96;
                 nn.Special = C;
             }
-            else if(numPlayers > 2)
+            else if(g_ClonedPlayerMode)
             {
                 nn.Type = C;
             }
@@ -823,7 +823,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
 
         tempPlayer = CheckDead();
 
-        if(numPlayers > 2 /*&& nPlay.Online == false*/)
+        if(g_ClonedPlayerMode)
         {
             tempPlayer = 0;
         }
@@ -913,7 +913,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
 
         tempPlayer = CheckDead();
 
-        if(numPlayers > 2 /*&& nPlay.Online == false*/)
+        if(g_ClonedPlayerMode)
         {
             tempPlayer = 0;
         }
@@ -1019,7 +1019,7 @@ void BlockHit(int A, bool HitDown, int whatPlayer)
 
         tempPlayer = CheckDead();
 
-        if(numPlayers > 2/*&& nPlay.Online == false*/)
+        if(g_ClonedPlayerMode)
         {
             tempPlayer = 0;
         }
