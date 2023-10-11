@@ -947,7 +947,6 @@ file(GLOB THEXTECH_HEADS_SRC
     lib/tclap/*.h
     lib/fmt/*.h
     lib/json/*.hpp
-    lib/lua5.1/*.hpp
     src/*.h
     src/*.hpp
     src/script/*.h
