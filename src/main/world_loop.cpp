@@ -187,7 +187,7 @@ void WorldLoop()
     Location_t tempLocation;
     int A = 0;
     int B = 0;
-    bool allowFastMove = (g_config.worldMapFastMove || g_config.worldMapFastMove) && g_speedRunnerMode < SPEEDRUN_MODE_2;
+    bool allowFastMove = (g_config.worldMapFastMove || g_compatibility.world_map_fast_move) && CompatGetLevel() == COMPAT_MODERN;
     
     if((LevelSelect || WorldEditor) && !GameMenu && !GameOutro) // music on the world map
         isOverworld = true;
