@@ -532,7 +532,15 @@ public:
         */
         
         insert(0x00423D00, &NullString); // A null string value. Should just be "". GM_STR_NULL
-        
+
+        insert(0x008BD869, &WindowTitle); // The window title of the game. This will only be set on platforms that support it (Like Windows, Linux, macOS). GM_GAMETITLE_1
+        insert(0x008BE25A, &WindowTitle); // Duplicate of window title setting, for compatibility reasons. GM_GAMETITLE_2
+        insert(0x0096AF26, &WindowTitle); // Duplicate of window title setting, for compatibility reasons. GM_GAMETITLE_3
+
+        insert(0x009DBD9A, &RupeeIDHit1); // The npc id for Link's main coin when hitting a block. (Default would be the green rupee, 251). N/A
+        insert(0x009DBDFF, &RupeeIDHit2); // The npc id for Link's secondary coin when hitting the block (chance 20:3). (Default would be the blue rupee, 252). N/A
+        insert(0x009DBE64, &RupeeIDHit3); // The npc id for Link's tertiary coin when hitting the block (chance 60:3). (Default would be the red rupee, 253). N/A
+
         insert(0x00A262B7, &CoinValue20); // How much a coin NPC is worth as coins. It will affect every coin NPC which has a 20-coin value. N/A
         insert(0x00A262BD, &CoinValue1); // How much a coin NPC is worth as coins. It will affect every coin NPC which has a 1-coin value. N/A
         insert(0x00A262C9, &CoinValue5); // How much a coin NPC is worth as coins. It will affect every coin NPC which has a 5-coin value. N/A
@@ -600,6 +608,8 @@ public:
 
         insert(0x00B2B9E4, &qScreen); // If the camera is camera controlling due to an event scrolling the camera itself. GM_UNK_B2B9E4
 
+        //insert(0x00B2C59C, &); // GM_CLEAR_LEVEL_CHECKPOINT
+
         insert(0x00B2C59E, &LevelMacro); // The level exit animation state (Level end state). If greater than 0, the victory animation depending on the value plays. Once the animation concludes, the level will exit. GM_WINNING
 
         insert(0x00B2C5A8, &Coins); // HUD coins count. GM_COINS
@@ -632,8 +642,8 @@ public:
         insert(0x00B2C6F4, &Physics.PlayerTerminalVelocity); // Terminal velocity. GM_GRAVITY
         insert(0x00B2C6F8, &Physics.PlayerGravity); // Gravity. N/A
 
-        //insert(0x00B2C8EA, &); // Universal time until NPCs despawn. N/A
-        //insert(0x00B2C8EC, &); // Harm cooldown for NPCs. N/A
+        insert(0x00B2C8EA, &Physics.NPCTimeOffScreen); // Universal time until NPCs despawn. N/A
+        insert(0x00B2C8EC, &Physics.NPCCanHurtWait); // Harm cooldown for NPCs. N/A
 
         insert(0x00B2C860, &Physics.NPCShellSpeed); //The shell speed for all Koopas. N/A
         insert(0x00B2C864, &Physics.NPCShellSpeedY); // Determines the Y speed of kicked shells. N/A
@@ -648,7 +658,6 @@ public:
         insert(0x00B2C882, &MenuMode); // Current menu mode. GM_CUR_MENUTYPE
 
         // insert(0x00B2C884, ???}; // Key released. GM_KEYRELEASED
-        // insert(0x00B2C894, &BlocksSorted); // removed by block quadtree
         insert(0x00B2C894, // The blocks that are sorted. GM_BLOCKS_SORTED
             [](FIELDTYPE ftype)->double
             {
@@ -724,14 +733,6 @@ public:
 
         insert(0x00B2D760, &BattleIntro); // If greater than 0, the Battle Mode Text "Mario VS Luigi" is displayed. GM_MARIO_VS_LUIGI_T
         insert(0x00B2D762, &BattleOutro); // If greater than 0, the Battle Mode Text "Wins!" is displayed. GM_WINS_T
-
-        insert(0x008BD869, &WindowTitle); // The window title of the game. This will only be set on platforms that support it (Like Windows, Linux, macOS). GM_GAMETITLE_1
-        insert(0x008BE25A, &WindowTitle); // Duplicate of window title setting, for compatibility reasons. GM_GAMETITLE_2
-        insert(0x0096AF26, &WindowTitle); // Duplicate of window title setting, for compatibility reasons. GM_GAMETITLE_3
-
-        insert(0x009DBD9A, &RupeeIDHit1); // The npc id for Link's main coin when hitting a block. (Default would be the green rupee, 251). N/A
-        insert(0x009DBDFF, &RupeeIDHit2); // The npc id for Link's secondary coin when hitting the block (chance 20:3). (Default would be the blue rupee, 252). N/A
-        insert(0x009DBE64, &RupeeIDHit3); // The npc id for Link's tertiary coin when hitting the block (chance 60:3). (Default would be the red rupee, 253). N/A
     }
 
     double getValue(size_t address, FIELDTYPE ftype)
