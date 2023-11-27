@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.6)
 
 if(POLICY CMP0069) # Allow CMAKE_INTERPROCEDURAL_OPTIMIZATION (lto) to be set
     cmake_policy(SET CMP0069 NEW)
@@ -420,6 +420,10 @@ endif()
 if(THEXTECH_ENABLE_LUA)
     list(APPEND A2XT_DEPS LuaBind_Local)
     list(APPEND A2XT_INCS script/include)
+    list(APPEND A2XT_INCS 3rdparty/LuaJIT/src)
+
+    list(APPEND A2XT_LIBS PGE_LuaJIT)
+    list(APPEND A2XT_LIBS PGE_LuaBind)
 endif()
 
 include(cmake/library_glew.cmake)
@@ -926,17 +930,6 @@ else()
     add_definitions(-DTHEXTECH_DISABLE_SDL_LOCALE)
     list(APPEND THEXTECH_SRC src/core/language/language_dummy.cpp)
 endif()
-
-if(THEXTECH_ENABLE_LUA)
-    if(NOT LUA_FOUND AND NOT LUA51_FOUND)
-        find_package(Lua51 REQUIRED)
-        set(LUA_INCLUDE_DIRS "${LUA_INCLUDE_DIR}")
-    endif()
-endif()
-
-include_directories(
-    ${LUA_INCLUDE_DIRS}
-)
 
 # Add heads into the list
 file(GLOB THEXTECH_HEADS_SRC
